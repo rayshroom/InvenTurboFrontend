@@ -28,19 +28,19 @@ export class LoginComponent {
     });
   }
 
-  tryFacebookLogin(){
-    this.authService.doFacebookLogin()
-    .then(res => {
-      this.router.navigate(['/user']);
-    })
-  }
+  // tryFacebookLogin(){
+  //   this.authService.doFacebookLogin()
+  //   .then(res => {
+  //     this.router.navigate(['/user']);
+  //   })
+  // }
 
-  tryTwitterLogin(){
-    this.authService.doTwitterLogin()
-    .then(res => {
-      this.router.navigate(['/user']);
-    })
-  }
+  // tryTwitterLogin(){
+  //   this.authService.doTwitterLogin()
+  //   .then(res => {
+  //     this.router.navigate(['/user']);
+  //   })
+  // }
 
   tryGoogleLogin(){
     this.authService.doGoogleLogin()
