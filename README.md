@@ -12,7 +12,7 @@ Shared styles are in `src/styles/main.scss`, such as the theme color ![#BF202F](
 
 Data services are under `src/services`, currently there's an auth guard implemented using Firebase.auth to keep track of logged-in user as auth guard
 
-
+Please add firebase connection config into `environment.ts`, also the routes + backend url that are used
 
 
 
