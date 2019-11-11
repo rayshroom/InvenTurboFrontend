@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from "@angular/common/http";
 import { AppRoutingModule } from './app-routing.module';
+import { ReactiveFormsModule } from '@angular/forms';
 import { environment } from 'src/environments/environment';
 
 import { AppComponent } from './app.component';
@@ -17,6 +18,10 @@ import { SampleProtectedViewComponent } from './components/views/sample-protecte
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireModule } from '@angular/fire';
+import { AuthService } from './services/auth/auth.service';
+import { UserService } from './services/auth/user.service';
+import { AuthGuard } from './services/auth/auth.guard';
+import { uamService } from './services/auth/uam.service';
 
 
 @NgModule({
@@ -33,13 +38,14 @@ import { AngularFireModule } from '@angular/fire';
   ],
   imports: [
     BrowserModule,
+    ReactiveFormsModule,
     AppRoutingModule,
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     AngularFireAuthModule,
   ],
-  providers: [],
+  providers: [AuthService, UserService, AuthGuard, uamService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

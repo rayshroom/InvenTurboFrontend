@@ -14,7 +14,7 @@ const routes: Routes = [
   {path: 'login', component: LoginPageComponent, pathMatch: 'full'},
   {path: 'register', component: RegistrationPageComponent, pathMatch: 'full'},
   {path: 'forget', component: ForgetPasswordPageComponent, pathMatch: 'full'},
-  {path: 'protectedSample', component: SampleProtectedViewComponent, canActivate: [AuthGuard]}, // illustrate AuthGuard
+  {path: 'protectedSample', component: SampleProtectedViewComponent, canActivate: [AuthGuard]},
   {path: '**', component: DoesNotExistPageComponent},
 ];
 
