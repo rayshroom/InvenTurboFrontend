@@ -3,21 +3,21 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "inventurbo": {
+    "InvenTurboFrontend": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
       "prefix": "app",
       "schematics": {
         "@schematics/angular:component": {
-          "style": "scss"
+          "style": "sass"
         }
       },
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/inventurbo",
+            "outputPath": "dist/InvenTurboFrontend",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -62,18 +62,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "inventurbo:build"
+            "browserTarget": "InvenTurboFrontend:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "inventurbo:build:production"
+              "browserTarget": "InvenTurboFrontend:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "inventurbo:build"
+            "browserTarget": "InvenTurboFrontend:build"
           }
         },
         "test": {
@@ -107,7 +107,7 @@
         }
       }
     },
-    "inventurbo-e2e": {
+    "InvenTurboFrontend-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "prefix": "",
@@ -116,11 +116,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "inventurbo:serve"
+            "devServerTarget": "InvenTurboFrontend:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "inventurbo:serve:production"
+              "devServerTarget": "InvenTurboFrontend:serve:production"
             }
           }
         },
@@ -136,5 +136,5 @@
       }
     }
   },
-  "defaultProject": "inventurbo"
+  "defaultProject": "InvenTurboFrontend"
 }
