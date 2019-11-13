@@ -1,26 +1,41 @@
-<nav class="navbar navbar-default">
-  <div class="navbar-header">
-    <a routerLink="/" class="navbar-brand">
-      <img style="margin-top: -10px; margin-left: 50px; height: 40px" src="../../../../assets/logo.png"/>
-    </a>
-  </div>
-  <div class="collapse navbar-collapse right">
-    <ul class="nav navbar-nav" style="font-family: Montserrat; font-weight: 600">
-      <li>
-        <a routerLink="/login">Solutions</a>
-      </li>
-      <li>
-        <a routerLink="/login">Pricing</a>
-      </li>
-      <li style="margin-right: 25vw">
-          <a routerLink="/login">About</a>
-      </li>
-      <li>
-          <a routerLink="/login">Login</a>
-      </li>
-      <li>
-        <a routerLink="/register">Get Started</a>
-      </li>
-    </ul>
-  </div>
+<nav class="navbar navbar-expand shadow-sm bg-white rounded">
+    <div class="navbar-header">
+        <a routerLink="/" class="navbar-brand">
+            <img class="logo" src="../../../../assets/logo.png" />
+        </a>
+    </div>
+    <div class="collapse navbar-collapse">
+        <ul class="navbar-nav nav mx-auto center-nav">
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/solutions">Solutions</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/pricing">Pricing</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/about">About</a>
+            </li>
+        </ul>
+        <ul class="navbar-nav nav justify-content-end ml-auto right-nav" style="margin: 0 !important;">
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/login">Login</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link btn btn-danger register" routerLink="/register">Get Started</a>
+            </li>
+        </ul>
+        <!-- <div class="collapse navbar-collapse ml-auto">
+            <ul
+                class="nav navbar-nav"
+                style="font-family: Montserrat; font-weight: 600"
+            >
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/login">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/register">Get Started</a>
+                </li>
+            </ul>
+        </div> -->
+    </div>
 </nav>

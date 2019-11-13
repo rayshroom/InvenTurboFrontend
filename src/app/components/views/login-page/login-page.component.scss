@@ -1,0 +1,44 @@
+.logo {
+    height: 5em;
+    margin-top: -3em;
+    margin-bottom: 0.5em;
+
+}
+
+.title {
+    margin-bottom: 0.5em;
+}
+
+#loginForm {
+    padding: 1.5em 2em;
+    background-color: #f0f0f0;
+    width: 35%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 7.5vh;
+    margin-bottom: 1em;
+}
+
+.form-group {
+    margin-top: 1em;
+    margin-bottom: 0em;
+}
+
+.submitBtn {
+    float: right;
+}
+
+a {
+    text-decoration: underline;
+    color: #BF202F;
+}
+
+#forgetPwd {
+    display: block;
+    padding-top: 0.5em;
+}
+
+.error {
+    display: block;
+    margin-bottom: 0.5em;;
+}

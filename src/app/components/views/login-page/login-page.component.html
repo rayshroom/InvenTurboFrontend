@@ -1,26 +1,30 @@
-<div style="font-family: Montserrat; font-weight: 600;">
-  <img style="position: relative; margin-bottom: -40px; height: 70px; display: block; margin-left: auto; margin-right: auto;" src="../../../../assets/logo.png"/>
-  <form [formGroup]="loginForm" style="padding: 20px; background-color: #f0f0f0; max-width: 40vw; display: block; margin-left: auto; margin-right: auto;">
-    <h1 style="padding-bottom: 10px; display: block; margin-left: auto; margin-right: auto; width: max-content">Sign into InvenTurbo</h1>
-    <div class="form-group">
-      <label>Email address</label>
-      <input type="email" formControlName="email" class="form-control">
+<form id="loginForm" [formGroup]="loginForm" class="shadow bg-white rounded">
+    <div class="text-center">
+        <img class="logo" src="../../../../assets/logo.png" />
+        <h1 class="title">Sign into InvenTurbo</h1>
     </div>
     <div class="form-group">
-      <label>Password</label>
-      <input type="password" class="form-control" formControlName="password">
-      <label class="error">{{errorMessage}}</label>
-      <br/>
-      <button type="submit" (click)="tryLogin(loginForm.value)" class="btn btn-default">Login</button>
-      <!-- The login with Google button -->
-      <button style="float: right; width: max-content;" type="button" class="btn btn-danger btn-block" (click)="tryGoogleLogin()">Login with Google</button>
-      
+        <input type="email" formControlName="email" class="form-control" placeholder="Email Address" />
     </div>
-    <div style="padding-top: 10px; display: block; margin-left: auto; margin-right: auto; width: max-content">
-        <a routerLink="/forget" style="text-decoration: underline; color: #BF202F;">Forgot your password?</a>
-    </div>    
-  </form>
-  <div style="padding-top: 10px; display: block; margin-left: auto; margin-right: auto; width: max-content">
-    <a href="" style="text-decoration: underline; color: #BF202F">Create an account</a>
-  </div>
+    <div class="form-group">
+        <input type="password" formControlName="password" class="form-control" placeholder="Password" />
+    </div>
+    <span class="error">{{ errorMessage.length > 0 ? errorMessage : '&nbsp;' }}</span>
+    <button type="submit" (click)="tryLogin(loginForm.value)" class="btn btn-danger submitBtn">Login</button>
+    <!-- The login with Google button
+    <button
+        style="float: right; width: max-content;"
+        type="button"
+        class="btn btn-danger btn-block"
+        (click)="tryGoogleLogin()"
+    >
+        Login with Google
+    </button> -->
+    <a id="forgetPwd" routerLink="/forget">Forgot your password?</a>
+</form>
+<div
+    style="padding-top: 10px; display: block; margin-left: auto; margin-right: auto; width: max-content"
+>
+    <a href="/register">Create an account</a
+    >
 </div>
