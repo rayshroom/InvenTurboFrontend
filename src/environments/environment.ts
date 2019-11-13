@@ -5,12 +5,13 @@
 export const environment = {
   production: false,
   firebase: {
-    apiKey: "YOUR_API_KEY",
-    authDomain: "YOUR_AUTH_DOMAIN",
-    databaseURL: "YOUR_DATABASE_URL",
-    projectId: "YOUR_PROJECT_ID",
-    storageBucket: "YOUR_STORAGE_BUCKET",
-    messagingSenderId: "YOUR_SENDER_ID"
+    apiKey: "AIzaSyAJT1qKhwTCrjd_uWC4t4UWJoXf6S_dK2w",
+    authDomain: "inventurbo-f0eca.firebaseapp.com",
+    databaseURL: "https://inventurbo-f0eca.firebaseio.com",
+    projectId: "inventurbo-f0eca",
+    storageBucket: "inventurbo-f0eca.appspot.com",
+    messagingSenderId: "216500507265",
+    appId: "1:216500507265:web:d8d15c63b08b0ecd55f380"
   },
   baseUrl: 'http://localhost:8080/api',
   routes: {
