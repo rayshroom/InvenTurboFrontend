@@ -1,4 +1,4 @@
-<form id="loginForm" [formGroup]="loginForm" class="shadow bg-white rounded">
+<form [formGroup]="loginForm" class="shadow bg-white rounded login-form">
     <div class="text-center">
         <img class="logo" src="../../../../assets/logo.png" />
         <h1 class="title">Sign into InvenTurbo</h1>
@@ -22,9 +22,4 @@
     </button> -->
     <a id="forgetPwd" routerLink="/forget">Forgot your password?</a>
 </form>
-<div
-    style="padding-top: 10px; display: block; margin-left: auto; margin-right: auto; width: max-content"
->
-    <a href="/register">Create an account</a
-    >
-</div>
+<a id="createAcc" class="text-center" href="/register">Create an account</a>

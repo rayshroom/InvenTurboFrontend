@@ -1,80 +1,73 @@
+<h1 class="main-title text-center">Signup for InvenTurbo</h1>
+<div class="line-wrapper">
+    <div class="vertical-line"></div>
+    <div class="text-wrapper">
+        <div class="vertical-line-text">or</div>
+    </div>
+</div>
 <div class="row">
-    <form
-    [formGroup]="registerForm"
-    class="col-md-7"
-    style="padding: 0em 3em 2em 3em; background-color: #f0f0f0; min-width: max-content;"
-    >
-        <h1>Personal</h1>
-        <div class="form-group">
-            <div class="form-group">
-                <label>Display Name</label>
-                <input
-                    type="text"
-                    formControlName="displayedName"
-                    class="form-control"
-                />
+    <div class="form-wrapper col-md-6">
+        <form [formGroup]="registerForm" class="shadow bg-white rounded register-form">
+            <h2 class="title text-center">Personal</h2>
+            <div class="row form-group">
+                <div class="col-md-3 left-inline-input">
+                    <select class="form-control custom-select">
+                        <option value="" selected>Title</option>
+                        <option>Mr.</option>
+                        <option>Mrs.</option>
+                        <option>Ms.</option>
+                        <option>N/A</option>
+                    </select>
+                </div>
+                <div class="col-md-4 middle-inline-input">
+                    <input type="text" formControlName="firstName" class="form-control" placeholder="First Name" />
+                </div>
+                <div class="col-md-5 right-inline-input">
+                    <input type="text" formControlName="lastName" class="form-control" placeholder="Last Name" />
+                </div>
             </div>
-            <label>Email address</label>
-            <input type="email" formControlName="email" class="form-control" />
-        </div>
-        <div class="form-group">
-            <label>Password</label>
-            <input
-                type="password"
-                class="form-control"
-                formControlName="password"
-            />
-            <label class="error">{{ errorMessage }}</label>
-            <label class="success">{{ successMessage }}</label>
-        </div>
-        <div class="form-group">
-            <label>Password Confirm</label>
-            <input
-                type="password"
-                class="form-control"
-                formControlName="passwordConfirm"
-            />
-            <label class="error">{{ errorMessage }}</label>
-            <label class="success">{{ successMessage }}</label>
-        </div>
-        <div class="form-group">
-            <label>Phone (optional)</label>
-            <input type="text" formControlName="phone" class="form-control" />
-        </div>
-        <button
-            type="submit"
-            (click)="tryRegister(registerForm.value)"
-            class="btn btn-default"
-        >
-            Register
-        </button>
-        <button
-            style="margin-left: 20px; float: right; width: max-content;"
-            type="button"
-            class="btn btn-danger btn-block"
-            (click)="tryGoogleLogin()"
-        >
-            Register with Google
-        </button>
-    </form>
-
-    <form
-        [formGroup]="registerForm2"
-        class="col-md-5"
-        style="padding: 0em 3em 2em 3em; background-color: #f0f0f0; min-width: max-content;"
-    >
-        <h1>Organization</h1>
-        <div class="form-group">
-            <label>Organization Activation Code</label>
-            <input type="email" formControlName="email" class="form-control" />
-            <button
-                style="margin-top: 20px"
-                type="submit"
-                (click)="tryRegister2(registerForm2.value)"
-                class="btn btn-default"
+            <div class="row form-group">
+                <div class="col-md-8 left-inline-input">
+                    <input type="email" formControlName="email" class="form-control" placeholder="Email Address" />
+                </div>
+                <div class="col-md-4 right-inline-input">
+                    <input type="text" formControlName="phone" class="form-control" placeholder="Phone (optional)" />
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-md-6 left-inline-input">
+                    <input type="password" formControlName="password" class="form-control" placeholder="Password"/>
+                    <span class="error">{{ errorMessage }}</span>
+                    <span class="success">{{ successMessage }}</span>
+                </div>
+                <div class="col-md-6 right-inline-input">
+                    <input type="password" formControlName="passwordConfirm" class="form-control" placeholder="Confirm Password" />
+                    <span class="error">{{ errorMessage }}</span>
+                    <span class="success">{{ successMessage }}</span>
+                </div>
+            </div>
+            <div class="text-right">
+                <button type="submit" (click)="tryRegister(registerForm.value)" class="btn btn-danger">Register</button>
+            </div>
+            <!-- <button
+                style="margin-left: 20px; float: right; width: max-content;"
+                type="button"
+                class="btn btn-danger btn-block"
+                (click)="tryGoogleLogin()"
             >
-                Activate
-            </button>
-        </div>
-    </form>
+                Register with Google
+            </button> -->
+        </form>
+    </div>
+    <div class="form-wrapper organization-form-wrapper col-md-6">
+        <form [formGroup]="registerForm2" class="shadow bg-white rounded register-form">
+            <h2 class="title text-center">Organization</h2>
+            <div class="form-group">
+                <input type="text" formControlName="text" class="form-control" placeholder="Organization Activation Code" />
+            </div>
+            <div class="text-center">
+                <button type="submit" (click)="tryRegister2(registerForm2.value)" class="btn btn-danger">Activate</button>
+            </div>
+        </form>
+    </div>
 </div>

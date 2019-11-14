@@ -32,7 +32,8 @@ export class RegistrationPageComponent implements OnInit {
             email: ['', Validators.required],
             password: ['', Validators.required],
             passwordConfirm: ['', Validators.required],
-            displayedName: [''],
+            firstName: [''],
+            lastName: [''],
             phone: ['']
         });
     }
