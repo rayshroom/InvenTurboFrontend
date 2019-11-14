@@ -4,10 +4,17 @@ body {
     font-family: Montserrat;
     font-weight: 600;
     background-color: #F9F8F7;
-    overflow-x: hidden;
 }
 
 .btn {
     border-radius: 2.5cm;
 }
 
+p {
+    color: #707070;
+}
+
+.container-fluid {
+    margin-left: -15px;
+    margin-right: -15px;
+}
