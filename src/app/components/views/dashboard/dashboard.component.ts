@@ -7,7 +7,7 @@ import { AuthService } from 'src/app/services/auth/auth.service';
     styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-    user: object;
+    user: {displayName: string, email: string};
 
     constructor(public auth: AuthService) {
         this.user = auth.getCurrentUser();

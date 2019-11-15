@@ -20,4 +20,8 @@ export class ForgetPasswordPageComponent implements OnInit {
             email: ['', [Validators.required, Validators.email]],
         });
     }
+
+    onResetPassword() {
+        
+    }
 }
