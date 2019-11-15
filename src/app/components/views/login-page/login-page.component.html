@@ -1,4 +1,4 @@
-<form id="loginForm" [formGroup]="loginForm" class="shadow bg-white rounded">
+<form [formGroup]="loginForm" (ngSubmit)="onSignIn()" class="shadow bg-white rounded login-form">
     <div class="text-center">
         <img class="logo" src="../../../../assets/logo.png" />
         <h1 class="title">Sign into InvenTurbo</h1>
@@ -10,21 +10,7 @@
         <input type="password" formControlName="password" class="form-control" placeholder="Password" />
     </div>
     <span class="error">{{ errorMessage.length > 0 ? errorMessage : '&nbsp;' }}</span>
-    <button type="submit" (click)="tryLogin(loginForm.value)" class="btn btn-danger submitBtn">Login</button>
-    <!-- The login with Google button
-    <button
-        style="float: right; width: max-content;"
-        type="button"
-        class="btn btn-danger btn-block"
-        (click)="tryGoogleLogin()"
-    >
-        Login with Google
-    </button> -->
+    <button type="submit" class="btn btn-danger submitBtn">Login</button>
     <a id="forgetPwd" routerLink="/forget">Forgot your password?</a>
 </form>
-<div
-    style="padding-top: 10px; display: block; margin-left: auto; margin-right: auto; width: max-content"
->
-    <a href="/register">Create an account</a
-    >
-</div>
+<a id="createAcc" class="text-center" routerLink="/register">Create an account</a>

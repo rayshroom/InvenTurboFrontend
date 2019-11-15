@@ -2,14 +2,14 @@
     height: 5em;
     margin-top: -3em;
     margin-bottom: 0.5em;
-
 }
 
 .title {
     margin-bottom: 0.5em;
+    font-weight: bolder;
 }
 
-#loginForm {
+.login-form {
     padding: 1.5em 2em;
     background-color: #f0f0f0;
     width: 35%;
@@ -26,6 +26,7 @@
 
 .submitBtn {
     float: right;
+    width: 6em;
 }
 
 a {
@@ -38,7 +39,14 @@ a {
     padding-top: 0.5em;
 }
 
+#createAcc {
+    display: block;
+    padding-top: 0.5em;
+}
+
 .error {
     display: block;
-    margin-bottom: 0.5em;;
+    margin-top: 0.25em;
+    margin-bottom: 0.75em;;
+    margin-left: 0.75em;
 }

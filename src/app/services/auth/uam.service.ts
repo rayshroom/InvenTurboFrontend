@@ -1,31 +1,31 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
-import { NewUser } from './uam.model';
+import { User } from './uam.model';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
+export class UserManagementService {
+    currentUser: User;
 
-export class uamService {
+    private httpOptions = {
+        headers: new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*'
+        })
+    };
 
-  user: NewUser;
-  env: any;
+    constructor(private http: HttpClient) {}
 
-  constructor(private http: HttpClient) {
-    this.env = environment;
-  }
-
-  private httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': '*',
-    })
-  };
-
-  RegisterUser(val: object): Observable<any> {
-    return this.http.post<NewUser>(`${this.env.baseUrl}${this.env.routes.uam.register}`, val, this.httpOptions);
-  }
+    doRegister(values: User): Observable<any> {
+        values.displayName = `${values.title} ${values.firstName} ${values.lastName}`.trim();
+        return this.http.post<User>(
+            `${environment.api}${environment.routes.register}`,
+            values,
+            this.httpOptions
+        );
+    }
 }

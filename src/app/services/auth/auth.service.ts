@@ -1,95 +1,47 @@
 import { Injectable } from '@angular/core';
-import 'rxjs/add/operator/toPromise';
 import { AngularFireAuth } from '@angular/fire/auth';
 import * as firebase from 'firebase/app';
+import { Credential } from './auth.model';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class AuthService {
-    constructor(public afAuth: AngularFireAuth) {}
+    private currentUser: firebase.User;
 
-    /*
-  doFacebookLogin(){
-    return new Promise<any>((resolve, reject) => {
-      let provider = new firebase.auth.FacebookAuthProvider();
-      this.afAuth.auth
-      .signInWithPopup(provider)
-      .then(res => {
-        resolve(res);
-      }, err => {
-        console.log(err);
-        reject(err);
-      })
-    })
-  }
+    getCurrentUser() {
+        return this.currentUser;
+    }
 
-  doTwitterLogin(){
-    return new Promise<any>((resolve, reject) => {
-      let provider = new firebase.auth.TwitterAuthProvider();
-      this.afAuth.auth
-      .signInWithPopup(provider)
-      .then(res => {
-        resolve(res);
-      }, err => {
-        console.log(err);
-        reject(err);
-      })
-    })
-  }
-  */
+    constructor(private afAuth: AngularFireAuth, private router: Router) {
+        firebase.auth().onAuthStateChanged(user => {
+            if (user) {
+                this.currentUser = user;
+            } else {
+                this.currentUser = null;
+            }
+        });
+    }
 
-    doGoogleLogin() {
-        return new Promise<any>((resolve, reject) => {
+    async doGoogleLogin() {
+        try {
             const provider = new firebase.auth.GoogleAuthProvider();
             provider.addScope('profile');
             provider.addScope('email');
-            this.afAuth.auth.signInWithPopup(provider).then(
-                res => {
-                    resolve(res);
-                },
-                err => {
-                    console.log(err);
-                    reject(err);
-                }
-            );
-        });
+            return await this.afAuth.auth.signInWithPopup(provider);
+        } catch(err) {
+            return err;
+        }
     }
 
-    doRegister(value) {
-        return new Promise<any>((resolve, reject) => {
-            firebase
-                .auth()
-                .createUserWithEmailAndPassword(value.email, value.password)
-                .then(
-                    res => {
-                        resolve(res);
-                    },
-                    err => reject(err)
-                );
-        });
-    }
-
-    doLogin(value) {
-        return new Promise<any>((resolve, reject) => {
-            firebase
-                .auth()
-                .signInWithEmailAndPassword(value.email, value.password)
-                .then(
-                    res => {
-                        resolve(res);
-                    },
-                    err => reject(err)
-                );
-        });
+    async doLogin(value: Credential) {
+        try {
+            await firebase.auth().signInWithEmailAndPassword(value.email, value.password);
+        } catch(err) {
+            return err;
+        }
     }
 
     doLogout() {
-        return new Promise((resolve, reject) => {
-            if (firebase.auth().currentUser) {
-                this.afAuth.auth.signOut();
-                resolve();
-            } else {
-                reject();
-            }
-        });
+
     }
 }
