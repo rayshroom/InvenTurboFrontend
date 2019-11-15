@@ -44,17 +44,6 @@ export class RegistrationPageComponent implements OnInit {
     ngOnInit() {
     }
 
-    tryGoogleLogin() {
-        this.authService.doGoogleLogin().then(
-            _ => {
-                this.router.navigate(['/']);
-            },
-            err => {
-                this.errorMessage = err.message;
-            }
-        );
-    }
-
     onPersonalRegister() {
         this.uam.doRegister(this.registerFormPersonal.value).subscribe(
             _ => {

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth/auth.service';
-import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Location } from '@angular/common';
 
 @Component({
     selector: 'app-login-page',
@@ -12,10 +12,9 @@ export class LoginPageComponent implements OnInit {
     loginForm: FormGroup;
     errorMessage = '';
 
-    // Creates a form using angular Form builder on load
     constructor(
         public authService: AuthService,
-        private router: Router,
+        private loc: Location,
         private fb: FormBuilder
     ) {
         this.createForm();
@@ -30,18 +29,18 @@ export class LoginPageComponent implements OnInit {
         });
     }
 
-    // tryGoogleLogin() {
-    //     this.authService.doGoogleLogin().then(res => {
-    //         this.router.navigate(['/']);
-    //     });
-    // }
-
     async onSignIn() {
         try {
             await this.authService.doLogin(this.loginForm.value);
-            this.router.navigate(['/']);
+            this.loc.back();
         } catch (err) {
-            this.errorMessage = err.errorMessage;
+            switch (err.code) {
+            case 'auth/user-not-found':
+                this.errorMessage = 'User not found. Are you a new user?';
+                break;
+            default:
+                this.errorMessage = err.message;
+            }
         }
     }
 }
