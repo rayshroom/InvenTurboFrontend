@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
-import * as firebase from 'firebase/app';
 import { Credential } from './auth.model';
 import { Router } from '@angular/router';
 
@@ -12,36 +11,36 @@ export class AuthService {
         return this.currentUser;
     }
 
+    isAuthenticated() {
+        return this.currentUser ? true : false;
+    }
+
     constructor(private afAuth: AngularFireAuth, private router: Router) {
-        firebase.auth().onAuthStateChanged(user => {
+        this.currentUser = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null;
+        this.afAuth.authState.subscribe(user => {
             if (user) {
                 this.currentUser = user;
+                localStorage.setItem('user', JSON.stringify(user));
             } else {
                 this.currentUser = null;
+                localStorage.setItem('user', null);
             }
         });
     }
 
     async doGoogleLogin() {
-        try {
-            const provider = new firebase.auth.GoogleAuthProvider();
-            provider.addScope('profile');
-            provider.addScope('email');
-            return await this.afAuth.auth.signInWithPopup(provider);
-        } catch(err) {
-            return err;
-        }
+        // const provider = new firebase.auth.GoogleAuthProvider();
+        // provider.addScope('profile');
+        // provider.addScope('email');
+        // await this.afAuth.auth.signInWithPopup(provider);
     }
 
     async doLogin(value: Credential) {
-        try {
-            await firebase.auth().signInWithEmailAndPassword(value.email, value.password);
-        } catch(err) {
-            return err;
-        }
+        await this.afAuth.auth.signInWithEmailAndPassword(value.email, value.password);
     }
 
-    doLogout() {
-
+    async doLogout() {
+        await this.afAuth.auth.signOut();
+        this.router.navigate(['/']);
     }
 }
