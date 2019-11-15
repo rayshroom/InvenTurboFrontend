@@ -7,19 +7,16 @@
 </div>
 <div class="row">
     <div class="form-wrapper col-md-6">
-        <form [formGroup]="registerForm" class="shadow bg-white rounded register-form">
+        <form [formGroup]="registerFormPersonal" (ngSubmit)="onPersonalRegister()" class="shadow bg-white rounded register-form">
             <h2 class="title text-center">Personal</h2>
             <div class="row form-group">
                 <div class="col-md-3 left-inline-input">
-                    <select class="form-control custom-select">
-                        <option value="" selected>Title</option>
-                        <option>Mr.</option>
-                        <option>Mrs.</option>
-                        <option>Ms.</option>
-                        <option>N/A</option>
+                    <select class="form-control custom-select" formControlName="title">
+                        <option hidden [value]="null">Title</option>
+                        <option *ngFor="let title of titles" [value]="title">{{ title.length > 1 ? title : 'N/A' }}</option>
                     </select>
                 </div>
-                <div class="col-md-4 middle-inline-input">
+                <div class="col-md-4 middl  e-inline-input">
                     <input type="text" formControlName="firstName" class="form-control" placeholder="First Name" />
                 </div>
                 <div class="col-md-5 right-inline-input">
@@ -37,17 +34,14 @@
             <div class="row form-group">
                 <div class="col-md-6 left-inline-input">
                     <input type="password" formControlName="password" class="form-control" placeholder="Password"/>
-                    <span class="error">{{ errorMessage }}</span>
-                    <span class="success">{{ successMessage }}</span>
                 </div>
                 <div class="col-md-6 right-inline-input">
                     <input type="password" formControlName="passwordConfirm" class="form-control" placeholder="Confirm Password" />
-                    <span class="error">{{ errorMessage }}</span>
-                    <span class="success">{{ successMessage }}</span>
                 </div>
             </div>
+            <span class="error">{{ errorMessage.length > 0 ? errorMessage : '&nbsp;' }}</span>
             <div class="text-right">
-                <button type="submit" (click)="tryRegister(registerForm.value)" class="btn btn-danger">Register</button>
+                <button type="submit" [disabled]="!registerFormPersonal.valid" class="btn btn-danger">Register</button>
             </div>
             <!-- <button
                 style="margin-left: 20px; float: right; width: max-content;"
@@ -60,13 +54,13 @@
         </form>
     </div>
     <div class="form-wrapper organization-form-wrapper col-md-6">
-        <form [formGroup]="registerForm2" class="shadow bg-white rounded register-form">
+        <form [formGroup]="registerFormOrganization" (ngSubmit)="onOrganizationRegister()" class="shadow bg-white rounded register-form">
             <h2 class="title text-center">Organization</h2>
             <div class="form-group">
-                <input type="text" formControlName="text" class="form-control" placeholder="Organization Activation Code" />
+                <input type="text" formControlName="activationCode" class="form-control" placeholder="Organization Activation Code" />
             </div>
             <div class="text-center">
-                <button type="submit" (click)="tryRegister2(registerForm2.value)" class="btn btn-danger">Activate</button>
+                <button type="submit" [disabled]="!registerFormOrganization.valid" class="btn btn-danger">Activate</button>
             </div>
         </form>
     </div>

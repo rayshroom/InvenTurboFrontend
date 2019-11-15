@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth/auth.service';
-import { uamService } from 'src/app/services/auth/uam.service';
+import { UserManagementService } from 'src/app/services/auth/uam.service';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
     selector: 'app-registration-page',
@@ -10,78 +11,62 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
     styleUrls: ['./registration-page.component.scss']
 })
 export class RegistrationPageComponent implements OnInit {
-    registerForm: FormGroup;
+    registerFormPersonal: FormGroup;
+    registerFormOrganization: FormGroup;
     errorMessage = '';
-    successMessage = '';
 
-    // Uncomment "uamService" to use our backend registration instead of firebase registration
+    titles = [ 'Mr.', 'Mrs.', 'Ms.', ' ' ];
+
     constructor(
         public authService: AuthService,
+        public uam: UserManagementService,
         private router: Router,
         private fb: FormBuilder
-    ) // private dataService: uamService,
-    {
-        this.createForm();
+    ) {
+        this.createForms();
     }
 
-    ngOnInit() {}
-
-    // Please modify form values accordingly
-    createForm() {
-        this.registerForm = this.fb.group({
-            email: ['', Validators.required],
+    createForms() {
+        this.registerFormPersonal = this.fb.group({
+            title: [null, Validators.required],
+            firstName: ['', Validators.required],
+            lastName: ['', Validators.required],
+            email: ['', [Validators.required, Validators.email] ],
+            phone: [''],
             password: ['', Validators.required],
             passwordConfirm: ['', Validators.required],
-            firstName: [''],
-            lastName: [''],
-            phone: ['']
         });
+        this.registerFormOrganization = this.fb.group({
+            activationCode: ['', Validators.required]
+        });
+    }
+
+    ngOnInit() {
     }
 
     tryGoogleLogin() {
         this.authService.doGoogleLogin().then(
-            res => {
+            _ => {
                 this.router.navigate(['/']);
             },
-            err => console.log(err)
+            err => {
+                this.errorMessage = err.message;
+            }
         );
     }
 
-    tryRegister(value) {
-        // Register directly on Firebase
-        this.authService.doRegister(value).then(
-            res => {
-                console.log(res);
-                this.errorMessage = '';
-                this.successMessage = 'Your account has been created';
+    onPersonalRegister() {
+        this.uam.doRegister(this.registerFormPersonal.value).subscribe(
+            _ => {
+                this.router.navigate(['/']);
             },
-            err => {
-                console.log(err);
-                this.errorMessage = err.message;
-                this.successMessage = '';
+            (err: HttpErrorResponse) => {
+                this.errorMessage = err.error.message;
             }
         );
+    }
 
-        // Register through our own backend service
-        // TODO: create data service to connect to our own backend.
-        /*
-    this.dataService.RegisterUser(value).subscribe(
-      res => {
-       if (res.success) {
-         this.errorMessage = res.message;
-         this.successMessage = "";
-       } else {
-         this.errorMessage = "";
-         this.successMessage = "Your account has been created";
-       }
-       console.log(res);
-      },
-      err => {
-       console.log(err);
-       this.errorMessage = err.message;
-       this.successMessage = "";
-      }
-     );
-     */
+    onOrganizationRegister() {
+        console.log('Not Implemented');
     }
 }

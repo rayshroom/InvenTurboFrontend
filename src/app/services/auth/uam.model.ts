@@ -1,7 +1,10 @@
-export class NewUser {
-    // _id: string;
+export class User {
+    title?: string;
+    firstName: string;
+    lastName: string;
+    bio?: string;
     email: string;
-    phoneNumber: string;
+    phoneNumber?: string;
     password: string;
-    displayedName: string;
+    displayName: string;
 }

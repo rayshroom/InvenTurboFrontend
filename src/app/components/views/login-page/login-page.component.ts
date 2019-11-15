@@ -25,26 +25,23 @@ export class LoginPageComponent implements OnInit {
 
     createForm() {
         this.loginForm = this.fb.group({
-            email: ['', Validators.required],
+            email: ['', [Validators.required, Validators.email]],
             password: ['', Validators.required]
         });
     }
 
-    tryGoogleLogin() {
-        this.authService.doGoogleLogin().then(res => {
-            this.router.navigate(['/']);
-        });
-    }
+    // tryGoogleLogin() {
+    //     this.authService.doGoogleLogin().then(res => {
+    //         this.router.navigate(['/']);
+    //     });
+    // }
 
-    tryLogin(value) {
-        this.authService.doLogin(value).then(
-            res => {
-                this.router.navigate(['/']);
-            },
-            err => {
-                console.log(err);
-                this.errorMessage = err.message;
-            }
-        );
+    async onSignIn() {
+        try {
+            await this.authService.doLogin(this.loginForm.value);
+            this.router.navigate(['/']);
+        } catch (err) {
+            this.errorMessage = err.errorMessage;
+        }
     }
 }
