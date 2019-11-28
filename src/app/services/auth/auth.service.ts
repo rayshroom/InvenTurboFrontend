@@ -5,6 +5,8 @@ import { Router } from '@angular/router';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
+import { OrganizationLink } from '../organization-link.model'
+
 @Injectable()
 export class AuthService {
     getCurrentUser() {

@@ -1,0 +1,44 @@
+.dashboard-wrapper {
+    padding: 0.5em 1em;
+}
+
+.main-title {
+    font-weight: bolder;
+    color: #BF202F;
+}
+
+.profile-wrapper {
+    border-collapse: separate;
+    padding: 0.25em 0.75em;
+    // border-radius: 3mm !important;
+}
+
+.descriptive-subtext {
+    font-size: 15px;
+    font-style: italic;
+    color: var(--gray);
+    font-weight: 100;
+}
+
+.dashboard-icon {
+    height: 30px;
+    margin-top: 8px;
+    margin-left: 2px;
+    position: absolute;
+}
+
+.dashboard-header {
+    margin-left: -15px;
+    letter-spacing: 0.5px;
+}
+
+.bidirectional-arrow {
+    margin-top: 15px;
+    font-size: 3em;
+    color: var(--gray);
+}
+
+.organization-icon {
+    margin-left: -25px;
+    padding-right: 0px !important;
+}
