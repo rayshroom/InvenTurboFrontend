@@ -14,6 +14,7 @@ import { LoginPageComponent } from './components/views/login-page/login-page.com
 import { ForgetPasswordPageComponent } from './components/views/forget-password-page/forget-password-page.component';
 import { DoesNotExistPageComponent } from './components/views/does-not-exist-page/does-not-exist-page.component';
 import { DashboardComponent } from './components/views/dashboard/dashboard.component';
+import { OrganizationDashboardComponent } from './components/views/organization-dashboard/organization-dashboard.component';
 
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
@@ -33,7 +34,8 @@ import { UserManagementService } from './services/auth/uam.service';
         LoginPageComponent,
         ForgetPasswordPageComponent,
         DoesNotExistPageComponent,
-        DashboardComponent
+        DashboardComponent,
+        OrganizationDashboardComponent
     ],
     imports: [
         BrowserModule,
