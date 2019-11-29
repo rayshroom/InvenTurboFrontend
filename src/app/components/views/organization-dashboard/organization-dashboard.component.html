@@ -1,9 +1,9 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<div class="dashboard-wrapper text-left">
+<div class="dashboard-wrapper">
     <div class="row">
-        <div class="col-5 mx-auto">
-            <div class="row profile-wrapper shadow bg-white rounded-pill login-for mb-3">
-                <img class="organization-icon col-2 h-100 w-100" src="../../../../assets/default-avatar.png"/>
+        <div class="col-lg-5 col-md-5 col-sm-12 mx-auto">
+            <div class="row profile-wrapper shadow bg-white rounded-pill login-for mb-lg-3 mb-0">
+                <img class="organization-icon col-2 h-100 w-100" src="../../../../assets/default-org-avatar.png"/>
                 <span class="col-9">
                     <h2>
                         <span class="font-weight-bold">Your company inc.</span>
@@ -13,9 +13,9 @@
             </div>
         </div>
         
-        <i class="bidirectional-arrow fa fa-arrows-h"></i>
+        <i class="mx-auto bidirectional-arrow fa fa-arrows-h"></i>
         
-        <div class="col-5 mx-auto">
+        <div class="col-lg-5 col-md-5 col-sm-12 mx-auto">
             <div class="row profile-wrapper shadow bg-white rounded-pill login-for mb-3">
                 <img class="organization-icon col-2 h-100 w-100" src="../../../../assets/default-avatar.png"/>
                 <div class="col-9">
@@ -26,5 +26,54 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-5 col-md-5 col-sm-12 mx-auto">
+            <div routerLink="/" class="dashboard-button view-pending-orders-icon row profile-wrapper shadow bg-white rounded-pill login-for mb-3">
+                <h3 class="col-12 mx-auto text-center font-weight-bold">
+                    View pending orders
+                </h3>
+            </div>
+            <div routerLink="/" class="dashboard-button create-transaction-icon row profile-wrapper shadow bg-white rounded-pill login-for mb-3">
+                <h3 class="col-12 mx-auto text-center font-weight-bold">
+                    Create transaction
+                </h3>
+            </div>
+            <div routerLink="/" class="dashboard-button view-inventory-icon row profile-wrapper shadow bg-white rounded-pill login-for mb-3">
+                <h3 class="col-12 mx-auto text-center font-weight-bold">
+                    View inventory
+                </h3>
+            </div>
+            <div class="dashboard-button dashboard-button-disabled view-analytics-icon row profile-wrapper shadow bg-white rounded-pill login-for mb-3">
+                <h3 class="col-12 mx-auto text-center font-weight-bold">
+                    View analytics
+                </h3>
+            </div>
+            <div class="dashboard-button dashboard-button-disabled add-personnel-icon row profile-wrapper shadow bg-white rounded-pill login-for mb-3">
+                <h3 class="col-12 mx-auto text-center font-weight-bold">
+                    Add personnel
+                </h3>
+            </div>
+        </div>
+
+        <!-- offset -->
+        <span class="col-1"></span>
+
+        <div class="col-lg-5 col-md-5 col-sm-12 mx-auto">
+            <div class="row profile-wrapper shadow bg-white login-for mb-lg-3 mb-0">
+                <ul class="nav nav-pills">
+                    <li class="nav-item">
+                        <a class="nav-link active">Your transactions</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link">All transactions</a>
+                    </li>
+                </ul>
+                <hr style="width: 100%; color: black; height: 1px; background-color:black;" />
+            </div>
+
+        </div>
+        
+        
     </div>
 </div>

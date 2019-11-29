@@ -1,5 +1,26 @@
+h2 > span {
+    font-size: 0.5em;
+
+    @media (min-width: 992px) {
+        font-size: 1em;
+    }
+}
+
+h3 {
+    font-size: 1em;
+    top: 15px;
+
+    @media (min-width: 992px) {
+        top: 8px;
+        font-size: 1.5em;
+    }
+}
+
 .dashboard-wrapper {
     padding: 0.5em 1em;
+    text-overflow: unset !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
 }
 
 .main-title {
@@ -39,6 +60,73 @@
 }
 
 .organization-icon {
-    margin-left: -25px;
+    margin-left: -20px;
     padding-right: 0px !important;
+}
+
+.dashboard-button {
+    cursor: pointer;
+    height: 55px;
+}
+
+.dashboard-button::after {
+    content: '';
+    font-size: 33px;
+    text-align: center;
+    vertical-align: middle;
+    width: 55px;
+    height: 55px;
+    background: #BF202F;
+    -moz-border-radius: 50px;
+    -webkit-border-radius: 50px;
+    border-radius: 50px;
+    position: absolute;
+    right: 0px;
+    margin: -4px 0 -4px 0;
+}
+
+.dashboard-button-disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+.view-pending-orders-icon::after {
+    content: '🚚';
+}
+
+.create-transaction-icon::after {
+    content: '✏️';
+}
+
+.view-inventory-icon::after {
+    content: '📋';
+}
+
+.view-analytics-icon::after {
+    content: '📈';
+}
+
+.add-personnel-icon::after {
+    content: '👤';
+}
+
+.nav-pills {
+    color: var(--gray);
+}
+
+.nav-pills li a {
+    margin-bottom: -5px !important;
+    padding-bottom: 0px !important;
+}
+
+.nav-pills .active {
+    background-color: unset;
+    color: #BF202F;
+}
+
+hr {
+    width: 100%;
+    color: rgba(255, 255, 255, 0.1) !important;
+    height: 0.25px !important;
+    background-color: rgba(255, 255, 255, 0.1) !important;
 }
