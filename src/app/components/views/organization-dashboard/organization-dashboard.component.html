@@ -1,27 +1,30 @@
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+
 <div class="dashboard-wrapper">
     <div class="row">
         <div class="col-lg-5 col-md-5 col-sm-12 mx-auto">
             <div class="row profile-wrapper shadow bg-white rounded-pill login-for mb-lg-3 mb-0">
-                <img class="organization-icon col-2 h-100 w-100" src="../../../../assets/default-org-avatar.png"/>
+                <img class="organization-icon col-2 h-100 w-100" src="{{this.org.photoURL}}"/>
                 <span class="col-9">
                     <h2>
-                        <span class="font-weight-bold">Your company inc.</span>
-                        <div class="descriptive-subtext">Last transaction: </div>
+                        <span class="font-weight-bold">{{this.org.name}}</span>
+                        <div class="descriptive-subtext">Last transaction: {{this.lastTransactionTime | date: 'medium'}}</div>
                     </h2>
                 </span>
             </div>
         </div>
         
-        <i class="mx-auto bidirectional-arrow fa fa-arrows-h"></i>
+        <!-- <i class="mx-auto bidirectional-arrow fa fa-arrows-h"></i> -->
+        <i class="mx-auto bidirectional-arrow fas fa-arrows-alt-h"></i>
         
         <div class="col-lg-5 col-md-5 col-sm-12 mx-auto">
             <div class="row profile-wrapper shadow bg-white rounded-pill login-for mb-3">
-                <img class="organization-icon col-2 h-100 w-100" src="../../../../assets/default-avatar.png"/>
+                <img class="organization-icon col-2 h-100 w-100" src="{{this.user.photoURL}}"/>
                 <div class="col-9">
                     <h2>
-                        <span class="font-weight-bold">Sam</span>
-                        <div class="descriptive-subtext">Role: </div>
+                        <span class="font-weight-bold">{{this.user.displayName}}</span>
+                        <div class="descriptive-subtext">Role: {{this.ol.position}}</div>
                     </h2>
                 </div>
             </div>
@@ -70,10 +73,20 @@
                     </li>
                 </ul>
                 <hr style="width: 100%; color: black; height: 1px; background-color:black;" />
+                <div *ngFor="let transaction of transactions" class="transaction-list-item row profile-wrapper shadow bg-white rounded login-for mb-3 mx-auto w-100">
+                    <img class="transaction-icon col-2 d-inline align-middle" src="{{this.org.photoURL}}"/>
+                    <div class="transaction-item-details col-10 w-100">
+                        <span class="font-weight-bold">{{transaction.status}}&nbsp;</span>
+                        <span class="transaction-time font-italic">{{transaction.datetime | date: 'shortTime'}}</span>
+                        <span class="float-left text-left align-middle d-inline w-100">
+                            <span>Transaction&nbsp;</span>
+                            <a  routerLink="/" class="transaction-link">#{{transaction.tid}}</a>
+                            <i class="fas fa-external-link-square-alt"></i>
+                            <h4 routerLink="/" class="transaction-link-icon float-right text-right align-middle d-inline fas fa-external-link-alt"></h4 >
+                        </span>
+                    </div>
+                </div>  
             </div>
-
         </div>
-        
-        
     </div>
 </div>

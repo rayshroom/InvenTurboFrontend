@@ -3,18 +3,12 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { Credential } from './auth.model';
 import { Router } from '@angular/router';
 
-import { OrganizationLink } from '../organization-link.model'
-
 @Injectable()
 export class AuthService {
     private currentUser: firebase.User;
 
     getCurrentUser() {
         return this.currentUser;
-    }
-
-    getCurrentOrganizationLink() {
-        return new OrganizationLink;
     }
 
     isAuthenticated() {
