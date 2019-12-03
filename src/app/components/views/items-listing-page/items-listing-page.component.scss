@@ -28,7 +28,7 @@ h3 {
     margin-left: 10px;
 }
 
-.back-button {
+.pointer-button {
     cursor: pointer;
 }
 
@@ -130,4 +130,13 @@ h3 {
     margin-left: -25px;
     padding-top: 50%;
     padding-left: 50%;
+}
+
+.filter-icon {
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.correct {
+    color: #BF202F;
 }

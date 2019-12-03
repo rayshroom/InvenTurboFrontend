@@ -4,9 +4,9 @@
 
   <div class="row">
     <div class="col-1 back-button" (click)="goback()">
-      <svg xmlns="http://www.w3.org/2000/svg" width="21.583" height="37.7525" viewBox="0 0 43.166 75.505">
-        <path id="Icon_ionic-ios-arrow-back" data-name="Icon ionic-ios-arrow-back" d="M24.263,43.936,52.832,15.39A5.4,5.4,0,1,0,45.19,7.77L12.822,40.115a5.385,5.385,0,0,0-.157,7.44l32.5,32.57a5.4,5.4,0,0,0,7.642-7.62Z" transform="translate(-11.251 -6.194)" fill="#bf202f"/>
-      </svg>        
+        <svg xmlns="http://www.w3.org/2000/svg" width="21.583" height="37.7525" viewBox="0 -12 43.166 87.505">
+          <path id="Icon_ionic-ios-arrow-back" data-name="Icon ionic-ios-arrow-back" d="M24.263,43.936,52.832,15.39A5.4,5.4,0,1,0,45.19,7.77L12.822,40.115a5.385,5.385,0,0,0-.157,7.44l32.5,32.57a5.4,5.4,0,0,0,7.642-7.62Z" transform="translate(-11.251 -6.194)" fill="#bf202f"/>
+        </svg>      
       <span class="rotate-l-90">CANCEL</span>
     </div>
     <div class="col-5">
@@ -22,9 +22,9 @@
     
     <!-- <i class="mx-auto bidirectional-arrow fa fa-arrows-h"></i> -->
     <div class="col-1">
-      <i class="arrow-top fas fa-3x fa-long-arrow-alt-left" [ngClass]="{'correct-direction': fromCurrent}"></i>
+      <i class="arrow-top fas fa-3x fa-long-arrow-alt-left" [ngClass]="{'correct': fromCurrent}"></i>
       <br>
-      <i class="arrow-bottom fas fa-3x fa-long-arrow-alt-right" [ngClass]="{'correct-direction': !fromCurrent}"></i>
+      <i class="arrow-bottom fas fa-3x fa-long-arrow-alt-right" [ngClass]="{'correct': !fromCurrent}"></i>
     </div>
     
     
@@ -38,6 +38,31 @@
             </div>
         </div>
     </div>
+  </div>
+
+  <div class="row">
+      <ul class="col-12 mt-2" *ngFor="let item of items">
+        <li class="list-group-item d-flex justify-content-around" (click)="markSelected(item)">
+
+          <!-- <div *ngIf="item.isSelected" class="selected-item">
+            <div class="move-svg">
+              <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 100 100">
+                <g id="Group_268" data-name="Group 268" transform="translate(-66 -498)">
+                  <rect id="Rectangle_55" data-name="Rectangle 55" width="100" height="100" rx="15" transform="translate(66 498)" fill="#bf202f"/>
+                  <path id="Icon_awesome-check" data-name="Icon awesome-check" d="M25.473,59.407,1.1,35.032a3.75,3.75,0,0,1,0-5.3l5.3-5.3a3.75,3.75,0,0,1,5.3,0l16.42,16.42L63.3,5.676a3.75,3.75,0,0,1,5.3,0l5.3,5.3a3.75,3.75,0,0,1,0,5.3L30.777,59.407A3.75,3.75,0,0,1,25.473,59.407Z" transform="translate(78.6 515)" fill="#fff"/>
+                </g>
+              </svg>  
+            </div>       
+          </div> -->
+
+          
+          <div class="p-2">Name: {{item.displayName}}</div>
+          <div class="p-2">ID: {{item.productID}}</div>
+          <div class="p-2">Qty: <span class="correct">{{item.quantity}}</span></div>
+          <div class="p-2">Price: <span class="correct">{{item.unitPrice | currency}}</span></div>
+          
+        </li>
+      </ul>
   </div>
 
   <div class="row trans-body">

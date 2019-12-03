@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { AuthService } from 'src/app/services/auth/auth.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute, Params } from '@angular/router';
+import { Item } from 'src/app/services/item.model';
+import { ItemManagementService } from 'src/app/services/itemManagementService.service';
 
 @Component({
   selector: 'app-transaction-page',
@@ -13,22 +15,21 @@ export class TransactionPageComponent implements OnInit {
 
   orgCurrent: {orgName: string, photoURL?: string};
   orgOther: {orgName: string, photoURL?: string}[];
-  items: {productID: string, photoURL?: string, quantity: number, unitPrice: number}[];
+  items: Item[];
   taxRate = 0.13;
   fromCurrent = false;
 
   constructor(
     public auth: AuthService,
     private router: Router,
-    // public m: TransactionManagementService
+    private activatedRoute: ActivatedRoute,
+    public m: ItemManagementService
   ) { 
+    
+  }
 
-    if (this.viewType == "new") {
-
-    } else if (this.viewType == "view") {
-
-    }
-
+  ngOnInit() {
+    
     this.orgCurrent = {orgName: "The bar inc.", photoURL: "../../../../assets/default-org-avatar.png" };
 
     this.orgOther = [];
@@ -37,9 +38,13 @@ export class TransactionPageComponent implements OnInit {
     }
 
     this.items = [];
-  }
 
-  ngOnInit() {
+    this.activatedRoute.queryParams.subscribe(params => {
+      if (params.key == 'add') {
+        this.items = this.m.getItems(params.key);
+      }
+    });
+    
   }
 
   getTotalItems() {
@@ -61,7 +66,7 @@ export class TransactionPageComponent implements OnInit {
   }
 
   getTotalPrice() {
-    return this.taxRate * this.getSubtotal();
+    return (1 + this.taxRate) * this.getSubtotal();
   }
 
   goback() {
