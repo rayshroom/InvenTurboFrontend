@@ -1,14 +1,12 @@
-@import "node_modules/bootstrap/dist/css/bootstrap.min";
 @import url("https://fonts.googleapis.com/css?family=Montserrat:500,600,700");
 
 body {
-    font-family: Montserrat;
-    font-weight: 600;
-    background-color: #F9F8F7;
+    font-family: Montserrat !important;
+    font-weight: 600 !important;
 }
 
 .btn {
-    border-radius: 2.5cm;
+    border-radius: 2.5cm !important;
 }
 
 p {
@@ -16,8 +14,9 @@ p {
 }
 
 .container-fluid {
-    padding-left: 0px;
-    padding-right: 0px;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
     overflow-x: hidden;
-    height: 100vh;
+    height: 100vh !important;
+    background-color: #F9F8F7;
 }
