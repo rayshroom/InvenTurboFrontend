@@ -22,6 +22,8 @@ import { AuthService } from './services/auth/auth.service';
 import { AuthGuard } from './services/auth/auth.guard';
 import { InnerGuard } from './services/auth/inner.guard';
 import { UserManagementService } from './services/auth/uam.service';
+import { TransactionPageComponent } from './components/views/transaction-page/transaction-page.component';
+import { ItemsListingPageComponent } from './components/views/items-listing-page/items-listing-page.component';
 
 @NgModule({
     declarations: [
@@ -33,7 +35,9 @@ import { UserManagementService } from './services/auth/uam.service';
         LoginPageComponent,
         ForgetPasswordPageComponent,
         DoesNotExistPageComponent,
-        DashboardComponent
+        DashboardComponent,
+        TransactionPageComponent,
+        ItemsListingPageComponent
     ],
     imports: [
         BrowserModule,
