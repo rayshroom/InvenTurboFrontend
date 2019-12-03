@@ -40,10 +40,14 @@
     </div>
   </div>
 
-  <div class="row">
-      <ul class="col-12 mt-2" *ngFor="let item of items">
-        <li class="list-group-item d-flex justify-content-around" (click)="markSelected(item)">
 
+  <div class="row overflow-auto items-view mb-2 mt-2">
+    <div class="col-1"></div>
+    <div class="col-11">
+      <ul class="col-12 mt-2" *ngFor="let item of items">
+        <!-- <div class="col-1"></div> -->
+        <li class="list-group-item d-flex justify-content-around" (click)="markSelected(item)">
+  
           <!-- <div *ngIf="item.isSelected" class="selected-item">
             <div class="move-svg">
               <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 100 100">
@@ -54,7 +58,7 @@
               </svg>  
             </div>       
           </div> -->
-
+  
           
           <div class="p-2">Name: {{item.displayName}}</div>
           <div class="p-2">ID: {{item.productID}}</div>
@@ -63,9 +67,10 @@
           
         </li>
       </ul>
+    </div>
   </div>
 
-  <div class="row trans-body">
+  <div class="row" [ngClass]="{'trans-body': !items, 'trans-body-small': items}">
     <div class="col-1"></div>
     <div class="col-11 remove-left-right-padding">
       <div class="addTransactionBar" (click)="selectItems()">
@@ -78,7 +83,7 @@
     <!-- <div class="col-1"></div> -->
   </div>
 
-  <div class="row">
+  <div class="row mb-3">
     <div class="col-1"></div>
     <div class="col-11 remove-left-right-padding">
       <div class="submitTransactionBar shadow d-flex justify-content-between">

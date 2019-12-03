@@ -48,7 +48,7 @@ export class TransactionPageComponent implements OnInit {
   }
 
   getTotalItems() {
-    if (this.items.length > 0) {
+    if (this.items) {
       return this.items.map(function(a) {return a.quantity;})
               .reduce(function(a, b) {return a + b;});
     } else {
@@ -57,7 +57,7 @@ export class TransactionPageComponent implements OnInit {
   }
 
   getSubtotal() {
-    if (this.items.length > 0) {
+    if (this.items) {
       return this.items.map(function(a) {return a.quantity * a.unitPrice;})
               .reduce(function(a, b) {return a + b;});
     } else {

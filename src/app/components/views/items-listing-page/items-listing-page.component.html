@@ -41,7 +41,7 @@
       </div>
     </div>
 
-    <div class="row overflow-auto mt-3 items-grid">
+    <div class="row overflow-auto mt-3 items-view">
       <ng-container *ngIf="!viewModeList; else listView">
           <div class="col-2 mt-2" *ngFor="let item of items">
             <div class="card" (click)="markSelected(item)">
