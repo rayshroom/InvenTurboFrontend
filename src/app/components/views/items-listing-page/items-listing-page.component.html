@@ -2,7 +2,9 @@
 
 <div class="container">
     
+    <!-- COMPONENT: back button, submit button and title -->
     <div class="row">
+      <!-- COMPONENT: The back button -->
       <div class="col-1 pointer-button" (click)="goback()">
         <svg xmlns="http://www.w3.org/2000/svg" width="21.583" height="37.7525" viewBox="0 -12 43.166 87.505">
           <path id="Icon_ionic-ios-arrow-back" data-name="Icon ionic-ios-arrow-back" d="M24.263,43.936,52.832,15.39A5.4,5.4,0,1,0,45.19,7.77L12.822,40.115a5.385,5.385,0,0,0-.157,7.44l32.5,32.57a5.4,5.4,0,0,0,7.642-7.62Z" transform="translate(-11.251 -6.194)" fill="#bf202f"/>
@@ -10,6 +12,7 @@
         <span class="rotate-l-90">CANCEL</span>
       </div>
 
+      <!-- COMPONENT: The add items button -->
       <div class="col-6 text-center align-middle submitTransaction descriptive-sub pointer-button" (click)="submitItems()">
           <span class="descriptive-sub">Add items to transaction</span>
       </div>
@@ -22,7 +25,7 @@
       </div>
     </div>
 
-
+    <!-- COMPONENT: The search bar -->
     <div class="row mt-3">
       <div class="col-1"></div>
 
@@ -36,18 +39,19 @@
           </form>
       </div>
 
-      <div class="col-1">
-          
-      </div>
+      <div class="col-1"></div>
     </div>
 
+    <!-- COMPONENT: The item display grid / list views -->
     <div class="row overflow-auto mt-3 items-view">
+      <!-- COMPONENT: The grid view -->
       <ng-container *ngIf="!viewModeList; else listView">
           <div class="col-2 mt-2" *ngFor="let item of items">
             <div class="card" (click)="markSelected(item)">
               
               <img class="card-img-top"  src="{{item.photoURL}}" alt="item.productID">
     
+              <!-- COMPONENT: The selected checkmark overlay -->
               <div *ngIf="item.isSelected" class="selected-item">
                   <div class="move-svg">
                     <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 100 100">
@@ -67,6 +71,7 @@
           </div>
       </ng-container>
       
+      <!-- COMPONENT: the list view -->
       <ng-template #listView>
           <ul class="col-12 mt-2" *ngFor="let item of items">
             <li class="list-group-item d-flex justify-content-around" (click)="markSelected(item)">
