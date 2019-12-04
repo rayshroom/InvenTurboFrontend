@@ -1,10 +1,9 @@
-.dashboard-wrapper {
-    padding: 0.5em 1em;
+a {
+    color: #BF202F;
 }
 
-.main-title {
-    font-weight: bolder;
-    color: #BF202F;
+.dashboard-wrapper {
+    padding: 0.5em 1em;
 }
 
 .profile-wrapper {
@@ -18,13 +17,14 @@
 }
 
 .dashboard-icon {
-    height: 30px;
-    margin-top: 8px;
-    margin-left: 2px;
-    position: absolute;
+    height: 40px;
+    widows: 40px;
+    display: inline-block;
+    padding-bottom: 9px;
 }
 
-.dashboard-header {
-    margin-left: -15px;
+.dashboard-title {
+    font-weight: bolder;
+    color: #BF202F;
     letter-spacing: 0.5px;
 }

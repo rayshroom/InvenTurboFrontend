@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DatePipe } from '@angular/common';
 import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
@@ -7,11 +8,14 @@ import { AuthService } from 'src/app/services/auth/auth.service';
     styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-    user: {displayName: string, email: string, photoURL?: string};
+    public user: firebase.User;
 
     constructor(public auth: AuthService) {
-        this.user = auth.getCurrentUser();
+        this.auth.getCurrentUser().subscribe(user => {
+            this.user = user;
+        });
     }
 
-    ngOnInit() {}
+    ngOnInit() {
+    }
 }
