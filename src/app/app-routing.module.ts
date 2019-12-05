@@ -7,6 +7,7 @@ import { ForgetPasswordPageComponent } from './components/views/forget-password-
 import { DoesNotExistPageComponent } from './components/views/does-not-exist-page/does-not-exist-page.component';
 import { DashboardComponent } from './components/views/dashboard/dashboard.component';
 import { OrganizationDashboardComponent } from './components/views/organization-dashboard/organization-dashboard.component';
+import { InventoryPageComponent } from './components/views/inventory-page/inventory-page.component';
 
 import { AuthGuard } from './services/auth/auth.guard';
 import { InnerGuard } from './services/auth/inner.guard';
@@ -42,6 +43,12 @@ const routes: Routes = [
         component: OrganizationDashboardComponent,
         pathMatch: 'full',
         canActivate: [AuthGuard]
+    },
+    {
+        path: 'inventory',
+        component: InventoryPageComponent,
+        pathMatch: 'full'
+        //canActivate: [AuthGuard]
     },
     { path: '', redirectTo: '/landing', pathMatch: 'full' },
     { path: '**', component: DoesNotExistPageComponent }
