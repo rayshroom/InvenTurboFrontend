@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand shadow-sm bg-white rounded">
     <div class="navbar-header">
         <a routerLink="/" class="navbar-brand">
-            <img class="logo" src="../../../../assets/logo.png" />
+            <img class="logo" src="assets/logo.png" />
         </a>
     </div>
     <div class="collapse navbar-collapse">
@@ -16,7 +16,7 @@
                 <a class="nav-link" routerLink="/about">About</a>
             </li>
         </ul>
-        <ul class="navbar-nav nav justify-content-end ml-auto right-nav" [ngSwitch]="this.auth.isAuthenticated()">
+        <ul class="navbar-nav nav justify-content-end ml-auto right-nav" [ngSwitch]="this.isAuthenticated">
             <li class="nav-item" *ngSwitchCase="false">
                 <a class="nav-link log" routerLink="/login">Login</a>
             </li>

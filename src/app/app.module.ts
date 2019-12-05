@@ -3,6 +3,9 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFireModule } from '@angular/fire';
 import { environment } from 'src/environments/environment';
 
 import { AppComponent } from './app.component';
@@ -16,13 +19,11 @@ import { DoesNotExistPageComponent } from './components/views/does-not-exist-pag
 import { DashboardComponent } from './components/views/dashboard/dashboard.component';
 import { OrganizationDashboardComponent } from './components/views/organization-dashboard/organization-dashboard.component';
 
-import { AngularFirestoreModule } from '@angular/fire/firestore';
-import { AngularFireAuthModule } from '@angular/fire/auth';
-import { AngularFireModule } from '@angular/fire';
 import { AuthService } from './services/auth/auth.service';
 import { AuthGuard } from './services/auth/auth.guard';
 import { InnerGuard } from './services/auth/inner.guard';
 import { UserManagementService } from './services/auth/uam.service';
+import { UserOrganizationService } from './services/organization/user-organization.service';
 
 @NgModule({
     declarations: [
@@ -46,7 +47,13 @@ import { UserManagementService } from './services/auth/uam.service';
         AngularFirestoreModule,
         AngularFireAuthModule
     ],
-    providers: [AuthService, AuthGuard, InnerGuard, UserManagementService],
+    providers: [
+        AuthService,
+        AuthGuard,
+        InnerGuard,
+        UserManagementService,
+        UserOrganizationService
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule {}

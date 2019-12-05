@@ -17,9 +17,14 @@ export const environment = {
     api: 'http://localhost:8080/api',
     routes: {
         register: '/user/register',
+<<<<<<< HEAD
         TRANSAC: {
             GETALL: oid => `/organization/${oid}/transaction`,
         }
+=======
+        getUserOrganizations: uid => `/profile/${uid}/organization`,
+        getOrganizationTransactions: oid => `/organization/${oid}/transaction`
+>>>>>>> fcbb9f972ee72dd172d44c2b5f5491656238019c
     },
 };
 

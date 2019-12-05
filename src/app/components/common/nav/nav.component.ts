@@ -8,7 +8,11 @@ import { Router } from '@angular/router';
     styleUrls: ['./nav.component.scss']
 })
 export class NavComponent implements OnInit {
-    constructor(public auth: AuthService, private router: Router) {}
+    public isAuthenticated: boolean;
+
+    constructor(public auth: AuthService) {
+        this.auth.getCurrentUser().subscribe(user => this.isAuthenticated = user ? true : false);
+    }
 
     ngOnInit() {}
 

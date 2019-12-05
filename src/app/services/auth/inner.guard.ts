@@ -1,19 +1,23 @@
 import { Injectable } from '@angular/core';
-import { CanActivate } from '@angular/router';
+import { CanActivate, Router } from '@angular/router';
 import { AuthService } from './auth.service';
-import { Location } from '@angular/common';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root'
 })
 export class InnerGuard implements CanActivate {
-    constructor(public auth: AuthService, private loc: Location) {}
+    constructor(public auth: AuthService, private router: Router) {}
 
-    canActivate() {
-        if (this.auth.isAuthenticated()) {
-            this.loc.back();
-            return false;
-        }
-        return true;
+    canActivate(): Observable<boolean> {
+        return this.auth.getCurrentUser().pipe(map(user => {
+            if (!user) {
+                return true;
+            } else {
+                this.router.navigate(['/dashboard']);
+                return false;
+            }
+        }));
     }
 }

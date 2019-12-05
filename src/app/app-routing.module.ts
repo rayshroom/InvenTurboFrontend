@@ -38,10 +38,17 @@ const routes: Routes = [
         canActivate: [AuthGuard]
     },
     {
+<<<<<<< HEAD
         path: 'orgdashboard',
         component: OrganizationDashboardComponent,
         pathMatch: 'full',
         // canActivate: [AuthGuard]
+=======
+        path: 'organization',
+        component: OrganizationDashboardComponent,
+        pathMatch: 'full',
+        canActivate: [AuthGuard]
+>>>>>>> fcbb9f972ee72dd172d44c2b5f5491656238019c
     },
     { path: '', redirectTo: '/landing', pathMatch: 'full' },
     { path: '**', component: DoesNotExistPageComponent }
