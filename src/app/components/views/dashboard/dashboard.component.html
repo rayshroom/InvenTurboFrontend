@@ -31,18 +31,37 @@
             </div>
             <div class="profile-wrapper shadow bg-white rounded login-for mb-2">
                 <h2 class="font-weight-bold">Organizations</h2>
+                <div *ngIf="this.userOrgs && this.userOrgs.length > 0; else loadingIcon" class="orglink">
+                    <button
+                        *ngFor="let org of this.userOrgs"
+                        class="list-group-item list-group shadow-sm p-3 mb-5 bg-white rounded btn btn-link btn-block orglink-item"
+                        [ngStyle]="this.getOrglinkItemBackgroundCss(org.photoBackground)"
+                        (click)="onClickOrglinkItem(org)"
+                    >
+                        <div class="orglink-item-photo-wrapper">
+                            <img class="orglink-item-photo" src="{{ org.photoUrl }}"/>
+                        </div>
+                        <span class="orglink-item-name">{{ org.name }}</span>
+                    </button>
+                </div>
+                <ng-template #loadingIcon>
+                    <div class="text-center">
+                        <div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+                    </div>
+                </ng-template>
             </div>
-            <div>
-                <a routerLink="/" class="main-title float-right">Add an organization&nbsp;&nbsp;→</a>
-            </div>
+            <a routerLink="/" class="float-right red">Add an organization&nbsp;&nbsp;→</a>
         </div>
 
         <div class="col-lg-6 col-sm-12 mx-auto">
             <div class="profile-wrapper shadow bg-white rounded login-for mb-2">
                 <h2 class="font-weight-bold">Activity Feed</h2>
+                <div class="text-center">
+                    <div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+                </div>
             </div>
             <div>
-                <a routerLink="/" class="main-title float-right">See more activity&nbsp;&nbsp;→</a>
+                <a routerLink="/" class="float-right red">See more activity&nbsp;&nbsp;→</a>
             </div>
         </div>
     </div>
