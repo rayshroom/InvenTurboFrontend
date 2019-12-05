@@ -18,12 +18,14 @@ import { ForgetPasswordPageComponent } from './components/views/forget-password-
 import { DoesNotExistPageComponent } from './components/views/does-not-exist-page/does-not-exist-page.component';
 import { DashboardComponent } from './components/views/dashboard/dashboard.component';
 import { OrganizationDashboardComponent } from './components/views/organization-dashboard/organization-dashboard.component';
+import { InventoryPageComponent } from './components/views/inventory-page/inventory-page.component';
 
 import { AuthService } from './services/auth/auth.service';
 import { AuthGuard } from './services/auth/auth.guard';
 import { InnerGuard } from './services/auth/inner.guard';
 import { UserManagementService } from './services/auth/uam.service';
 import { UserOrganizationService } from './services/organization/user-organization.service';
+
 
 @NgModule({
     declarations: [
@@ -36,7 +38,8 @@ import { UserOrganizationService } from './services/organization/user-organizati
         ForgetPasswordPageComponent,
         DoesNotExistPageComponent,
         DashboardComponent,
-        OrganizationDashboardComponent
+        OrganizationDashboardComponent,
+        InventoryPageComponent
     ],
     imports: [
         BrowserModule,
