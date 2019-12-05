@@ -17,7 +17,8 @@ export const environment = {
     api: 'http://localhost:8080/api',
     routes: {
         register: '/user/register',
-        getUserOrganizations: uid => `/profile/${uid}/organization`
+        getUserOrganizations: uid => `/profile/${uid}/organization`,
+        getOrganizationTransactions: oid => `/organization/${oid}/transaction`
     },
 };
 

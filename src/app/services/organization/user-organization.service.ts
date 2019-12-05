@@ -21,10 +21,11 @@ export class UserOrganizationService {
 
     setCurrentOrganization(orglink: UserOrganization) {
         this.currentOrganization = orglink;
+        sessionStorage.setItem('user_organization', JSON.stringify(this.currentOrganization));
     }
 
     getCurrentOrganization() {
-        return this.currentOrganization;
+        return this.currentOrganization ? this.currentOrganization : JSON.parse(sessionStorage.getItem('user_organization'));
     }
 
     constructor(private http: HttpClient, private auth: AuthService) {

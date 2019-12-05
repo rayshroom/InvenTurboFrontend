@@ -22,9 +22,9 @@
                         </svg>
                     </div>
                     <div class="col-4">
-                        <img *ngIf="this.user.photoUrl; else defaultAvatar" class="w-100" src="this.user.photoUrl"/>
+                        <img *ngIf="this.user.photoURL; else defaultAvatar" class="w-100" src="this.user.photoURL"/>
                         <ng-template #defaultAvatar>
-                            <img class="w-100" src="../../../../assets/default-avatar.png"/>
+                            <img class="w-100" src="assets/default-avatar.png"/>
                         </ng-template>
                     </div>
                 </div>
@@ -39,7 +39,7 @@
                         (click)="onClickOrglinkItem(org)"
                     >
                         <div class="orglink-item-photo-wrapper">
-                            <img class="orglink-item-photo" src="{{ org.photoUrl }}"/>
+                            <img class="orglink-item-photo" src="{{ org.photoURL }}"/>
                         </div>
                         <span class="orglink-item-name">{{ org.name }}</span>
                     </button>
