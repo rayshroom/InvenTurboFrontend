@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { environment } from '../../../src/environments/environment';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
     providedIn: 'root'
@@ -20,7 +20,7 @@ export class TransactionManagementService {
 
     getAllOrganizationTransactions(oid: string): Observable<{tid: string, status: string, datetime: Date}[]> {
         return this.http.get<{tid: string, status: string, datetime: Date}[]>(
-            `${environment.api}${environment.routes.TRANSAC.GETALL(oid)}`,
+            `${environment.api}${environment.routes.getOrganizationTransactions(oid)}`,
             this.httpOptions
         );
     }

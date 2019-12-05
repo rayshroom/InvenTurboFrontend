@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-lg-5 col-md-5 col-sm-12 mx-auto">
             <div class="row profile-wrapper shadow bg-white rounded-pill login-for mb-lg-3 mb-0">
-                <img class="organization-icon col-2 h-100 w-100" src="{{this.org.photoURL}}"/>
+                <img class="organization-icon col-2 h-100 w-100" src="{{ this.org.photoURL }}"/>
                 <span class="col-9">
                     <h2>
                         <span class="font-weight-bold">{{this.org.name}}</span>
@@ -14,17 +14,20 @@
                 </span>
             </div>
         </div>
-        
+
         <!-- <i class="mx-auto bidirectional-arrow fa fa-arrows-h"></i> -->
         <i class="mx-auto bidirectional-arrow fas fa-arrows-alt-h"></i>
-        
+
         <div class="col-lg-5 col-md-5 col-sm-12 mx-auto">
             <div class="row profile-wrapper shadow bg-white rounded-pill login-for mb-3">
-                <img class="organization-icon col-2 h-100 w-100" src="{{this.user.photoURL}}"/>
+                <img *ngIf="this.user.photoURL; else defaultAvatar" class="organization-icon col-2 h-100 w-100" src="{{this.user.photoURL}}"/>
+                <ng-template #defaultAvatar>
+                    <img class="organization-icon col-2 h-100 w-100" src="assets/default-avatar.png">
+                </ng-template>
                 <div class="col-9">
                     <h2>
                         <span class="font-weight-bold">{{this.user.displayName}}</span>
-                        <div class="descriptive-subtext">Role: {{this.ol.position}}</div>
+                        <div class="descriptive-subtext">Role: {{this.org.position}}</div>
                     </h2>
                 </div>
             </div>
@@ -42,7 +45,7 @@
                     Create transaction
                 </h3>
             </div>
-            <div routerLink="/" class="dashboard-button view-inventory-icon row profile-wrapper shadow bg-white rounded-pill login-for mb-3">
+            <div routerLink="/organization/inventory" class="dashboard-button view-inventory-icon row profile-wrapper shadow bg-white rounded-pill login-for mb-3">
                 <h3 class="col-12 mx-auto text-center font-weight-bold">
                     View inventory
                 </h3>
@@ -73,7 +76,11 @@
                     </li>
                 </ul>
                 <hr style="width: 100%; color: black; height: 1px; background-color:black;" />
-                <div *ngFor="let transaction of transactions" class="transaction-list-item row profile-wrapper shadow bg-white rounded login-for mb-3 mx-auto w-100">
+                <div
+                    *ngFor="let transaction of transactions"
+                    class="transaction-list-item row profile-wrapper shadow bg-white rounded login-for mb-3 mx-auto w-100"
+                    [ngStyle]="this.getTransactionItemBackgroundCss(this.org.photoBackground)"
+                >
                     <img class="transaction-icon col-2 d-inline align-middle" src="{{this.org.photoURL}}"/>
                     <div class="transaction-item-details col-10 w-100">
                         <span class="font-weight-bold">{{transaction.status}}&nbsp;</span>
@@ -85,7 +92,7 @@
                             <h4 routerLink="/" class="transaction-link-icon float-right text-right align-middle d-inline fas fa-external-link-alt"></h4 >
                         </span>
                     </div>
-                </div>  
+                </div>
             </div>
         </div>
     </div>
