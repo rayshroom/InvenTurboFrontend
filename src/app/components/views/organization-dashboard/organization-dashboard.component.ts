@@ -13,7 +13,7 @@ import { UserOrganizationService } from 'src/app/services/organization/user-orga
 export class OrganizationDashboardComponent implements OnInit {
     user: firebase.User;
     org: UserOrganization;
-    transactions: {status: string, timeDate: Date, transactionType: string, oid_source: string, oid_dest: string}[];
+    transactions: {tid: string, status: string, timeDate: Date, transactionType: string, oid_source: string, oid_dest: string}[];
     lastTransactionTime: Date;
 
     getTransactionItemBackgroundCss(color) {
@@ -38,15 +38,14 @@ export class OrganizationDashboardComponent implements OnInit {
                 this.org.photoURL = 'assets/default-org-avatar.png';
             }
             this.tms.getAllOrganizationTransactions(this.org.oid).subscribe(transactions => {
-                    console.log(transactions)
                 transactions.forEach(transaction => {
+                    console.log(transaction);
                     let timestamp = Date.parse(transaction.stringTime);
                     let transactionDate = !isNaN(timestamp) ? new Date(timestamp) : new Date();
                    
                     let transactionType = (transaction.oid_dest == this.org.oid) ? "Incoming" : "Outgoing";
      
                     this.transactions.push({timeDate: transactionDate, transactionType, ...transaction});
-                    console.log(this.transactions);
                 });
                 this.lastTransactionTime = this.transactions[this.transactions.length - 1].timeDate;
             });

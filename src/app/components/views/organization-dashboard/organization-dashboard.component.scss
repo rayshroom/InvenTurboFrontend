@@ -120,6 +120,10 @@ h3 {
     cursor: pointer;
 }
 
+.cursor-pointer {
+    cursor: pointer;
+}
+
 .nav-pills .active {
     background-color: unset;
     color: #BF202F;
@@ -157,13 +161,11 @@ hr {
 .transaction-link {
     color: #BF202F;
     text-decoration: underline;
-    cursor: not-allowed;
     margin-right: 2px;
 }
 
 .transaction-link-icon {
-    // cursor: pointer;
-    cursor: not-allowed;
+    cursor: pointer;
     height: 0px;
     margin-top: -8px;
 }
