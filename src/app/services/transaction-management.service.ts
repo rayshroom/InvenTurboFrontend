@@ -7,7 +7,7 @@ import { environment } from '../../../src/environments/environment';
     providedIn: 'root'
 })
 export class TransactionManagementService {
-    transactions: {tid: string, status: string, datetime: Date}[];
+    transactions: {tid: string, status: string, timeString: string}[];
 
     private httpOptions = {
         headers: new HttpHeaders({
@@ -18,9 +18,9 @@ export class TransactionManagementService {
 
     constructor(private http: HttpClient) {}
 
-    getAllOrganizationTransactions(oid: string): Observable<{tid: string, status: string, datetime: Date}[]> {
-        return this.http.get<{tid: string, status: string, datetime: Date}[]>(
-            `${environment.api}${environment.routes.TRANSAC.GETALL(oid)}`,
+    getAllOrganizationTransactions(oid: string): Observable<{tid: string, status: string, timeString: string}[]> {
+        return this.http.get<{tid: string, status: string, timeString: string}[]>(
+            `${environment.api}${environment.routes.getOrganizationTransactions(oid)}`,
             this.httpOptions
         );
     }

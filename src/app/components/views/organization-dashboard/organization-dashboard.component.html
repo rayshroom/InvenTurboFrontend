@@ -82,7 +82,7 @@
                     <img class="transaction-icon col-2 d-inline align-middle" src="{{this.org.photoURL}}"/>
                     <div class="transaction-item-details col-10 w-100">
                         <span class="font-weight-bold">{{transaction.status}}&nbsp;</span>
-                        <span class="transaction-time font-italic">{{transaction.datetime | date: 'shortTime'}}</span>
+                        <span class="transaction-time font-italic">{{transaction.timeDate | date: 'shortTime'}}</span>
                         <span class="float-left text-left align-middle d-inline w-100">
                             <span>Transaction&nbsp;</span>
                             <a  routerLink="/org/{{org.oid}}/transaction/{{transaction.tid}}" class="transaction-link">#{{transaction.tid}}</a>
