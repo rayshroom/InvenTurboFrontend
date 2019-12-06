@@ -120,6 +120,10 @@ h3 {
     cursor: pointer;
 }
 
+.cursor-pointer {
+    cursor: pointer;
+}
+
 .nav-pills .active {
     background-color: unset;
     color: #BF202F;
@@ -138,14 +142,15 @@ hr {
     // background: -moz-linear-gradient(right, #BF202F 12.5%, #fff 12.5%) !important; /* For Firefox 3.6 to 15 */
     // background: linear-gradient(to right, #BF202F 12.5% , #fff 12.5%) !important; /* Standard syntax */
     border-collapse: separate;
-    padding: 0.25em 1.25em !important;
+    // padding: 0.25em 1.25em !important;
     margin-bottom: 10px !important;
+    padding: 5px 0;
 }
 
 .transaction-icon {
     height: 50px !important;
     max-width: 80px !important;
-    margin-left: -20px;
+    margin-left: -20%;
     border-radius: 50%;
 }
 
@@ -160,17 +165,26 @@ hr {
 .transaction-link {
     color: #BF202F;
     text-decoration: underline;
-    cursor: not-allowed;
     margin-right: 2px;
 }
 
 .transaction-link-icon {
-    // cursor: pointer;
-    cursor: not-allowed;
+    cursor: pointer;
     height: 0px;
     margin-top: -8px;
 }
 
 .transaction-time {
     font-size: 10px;
+}
+
+.orglink-item-photo-wrapper {
+    display: inline-block;
+    text-align: center;
+    padding: 0 !important
+}
+
+.orglink-item-photo {
+    height: 60px;
+    border-radius: 50%;
 }

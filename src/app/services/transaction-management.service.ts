@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { environment } from 'src/environments/environment';
+import { environment } from '../../../src/environments/environment';
 
 @Injectable({
     providedIn: 'root'
 })
 export class TransactionManagementService {
-    transactions: {tid: string, status: string, stringTime: string, oid_source: string, oid_dest: string}[];
+    transactions: {tid: string, status: string, timeString: string}[];
 
     private httpOptions = {
         headers: new HttpHeaders({
@@ -18,8 +18,8 @@ export class TransactionManagementService {
 
     constructor(private http: HttpClient) {}
 
-    getAllOrganizationTransactions(oid: string): Observable<{tid: string, status: string, stringTime: string, oid_source: string, oid_dest: string}[]> {
-        return this.http.get<{tid: string, status: string, stringTime: string, oid_source: string, oid_dest: string}[]>(
+    getAllOrganizationTransactions(oid: string): Observable<{tid: string, status: string, timeString: string}[]> {
+        return this.http.get<{tid: string, status: string, timeString: string}[]>(
             `${environment.api}${environment.routes.getOrganizationTransactions(oid)}`,
             this.httpOptions
         );

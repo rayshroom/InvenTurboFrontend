@@ -13,55 +13,41 @@ import { UserOrganizationService } from 'src/app/services/organization/user-orga
 export class OrganizationDashboardComponent implements OnInit {
     user: firebase.User;
     org: UserOrganization;
-    transactions: {tid: string, status: string, datetime: Date}[];
+    transactions: {tid: string, status: string, timeDate: Date, transactionType: string, oid_source: string, oid_dest: string}[];
     lastTransactionTime: Date;
 
     getTransactionItemBackgroundCss(color) {
         const col = color ? color : 'rgb(255,255,255)' ;
         return  {
-            background: `linear-gradient(90deg, ${col} 12.5%, rgba(255,255,255,0) 12.5%)`,
-            'padding-left': '3%'
-        };
+            background: `linear-gradient(90deg, ${col} 16.5%, rgba(255,255,255,0) 16.5%)`};
     }
 
     constructor(
         public auth: AuthService,
         public userOrg: UserOrganizationService,
-        public m: TransactionManagementService,
+        public tms: TransactionManagementService,
     ) {
-        this.auth.getCurrentUser().subscribe(user => {
+        this.auth.getCurrentUser().subscribe(async user => {
             this.user = user;
-            this.org = this.userOrg.getCurrentOrganization();
+            let org = this.userOrg.getCurrentOrganization();
+            this.org = org;
+            this.transactions = [];
             if (!this.org.photoURL) {
                 this.org.photoURL = 'assets/default-org-avatar.png';
             }
+            this.tms.getAllOrganizationTransactions(this.org.oid).subscribe(transactions => {
+                transactions.forEach(transaction => {
+                    console.log(transaction);
+                    let timestamp = Date.parse(transaction.stringTime);
+                    let transactionDate = !isNaN(timestamp) ? new Date(timestamp) : new Date();
+                   
+                    let transactionType = (transaction.oid_dest == this.org.oid) ? "Incoming" : "Outgoing";
+     
+                    this.transactions.push({timeDate: transactionDate, transactionType, ...transaction});
+                });
+                this.lastTransactionTime = this.transactions[this.transactions.length - 1].timeDate;
+            });
         });
-
-        // this.m.getAllOrganizationTransactions(this.org.oid).subscribe(transactions => this.transactions = transactions);
-        this.transactions = [
-            {
-                tid: '20020',
-                status: 'Order fulfilled',
-                datetime: new Date()
-            },
-            {
-                tid: '20021',
-                status: 'Order fulfilled',
-                datetime: new Date()
-            },
-            {
-                tid: '20022',
-                status: 'Order fulfilled',
-                datetime: new Date()
-            },
-            {
-                tid: '20023',
-                status: 'Order fulfilled',
-                datetime: new Date()
-            },
-        ];
-
-        this.lastTransactionTime = this.transactions[this.transactions.length - 1].datetime;
     }
 
     ngOnInit() {
