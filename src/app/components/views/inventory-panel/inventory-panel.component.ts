@@ -38,11 +38,11 @@ export class InventoryPanelComponent implements OnInit {
     }
 
     filterItems() {
-        const trimmed = this.search.get('searchBar').value.trim();
-        if (trimmed !== '') {
+        const pattern = this.search.get('searchBar').value.trim().toLowerCase();
+        if (pattern !== '') {
             this.filteredProducts = this.products.filter(prod =>
-                prod.name.includes(trimmed) ||
-                prod.description.includes(trimmed)
+                prod.name.toLowerCase().includes(pattern) ||
+                prod.description.toLowerCase().includes(pattern)
             );
         } else {
             this.filteredProducts = this.products;
