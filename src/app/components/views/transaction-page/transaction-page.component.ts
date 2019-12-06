@@ -48,17 +48,20 @@ export class TransactionPageComponent implements OnInit {
             if (params.key === 'add') {
                 this.items = this.m.getItems(params.key);
             }
+            else {
+                this.items = this.m.getItems(params.key || params.txid || this.orgCurrent.oid);
+                // this.activatedRoute.queryParams.subscribe(params => {
+                //     this.tms.getOneTransaction(params.tid).subscribe(transaction => {
+                //         // orgCurrent = getOrganization(transaction.oid_dest);
+                //         // orgOther = [getOrganization(transaction.oid_source)];
+                //         // items still need to be added to transaction, then items = transaction.item
+                //     })
+                // });
+            }
         });
     }
 
     ngOnInit() {
-        // this.activatedRoute.queryParams.subscribe(params => {
-        //     this.tms.getOneTransaction(params.tid).subscribe(transaction => {
-        //         // orgCurrent = getOrganization(transaction.oid_dest);
-        //         // orgOther = [getOrganization(transaction.oid_source)];
-        //         // items still need to be added to transaction, then items = transaction.item
-        //     })
-        // });
     }
 
     getTotalItems() {
@@ -80,10 +83,11 @@ export class TransactionPageComponent implements OnInit {
     submitItems() {
         this.tms.submitSimpleTransaction({
             status: "Submitted",
-            stringTime: new Date(),
+            stringTime: (new Date()).toString(),
             oid_source: this.orgOther[0].oid,
             oid_dest: this.orgCurrent.oid
-        }).subscribe(() => {
+        }).subscribe(ref => {
+            this.m.saveItems((ref.id || this.orgCurrent.oid), this.items);
             this.router.navigate(['/organization']);
         });
     }
