@@ -31,10 +31,10 @@
             </div>
             <div class="profile-wrapper shadow bg-white rounded login-for mb-2">
                 <h2 class="font-weight-bold">Organizations</h2>
-                <div *ngIf="this.userOrgs && this.userOrgs.length > 0; else loadingIcon" class="orglink">
+                <div *ngIf="this.userOrgs && this.userOrgs.length > 0; else loadingIcon" class="list-group orglink">
                     <button
                         *ngFor="let org of this.userOrgs"
-                        class="list-group-item list-group shadow-sm p-3 mb-5 bg-white rounded btn btn-link btn-block orglink-item"
+                        class="list-group-item shadow-sm p-3 mb-5 bg-white rounded btn btn-link btn-block orglink-item"
                         [ngStyle]="this.getOrglinkItemBackgroundCss(org.photoBackground)"
                         (click)="onClickOrglinkItem(org)"
                     >

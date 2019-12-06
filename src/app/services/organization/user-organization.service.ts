@@ -25,7 +25,11 @@ export class UserOrganizationService {
     }
 
     getCurrentOrganization() {
-        return this.currentOrganization ? this.currentOrganization : JSON.parse(sessionStorage.getItem('user_organization'));
+        const storedUser = sessionStorage.getItem('user_organization');
+        if (!this.currentOrganization && storedUser) {
+            this.currentOrganization = JSON.parse(storedUser);
+        }
+        return this.currentOrganization;
     }
 
     constructor(private http: HttpClient, private auth: AuthService) {
