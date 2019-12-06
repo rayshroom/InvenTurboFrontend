@@ -76,10 +76,12 @@
                 <hr style="width: 100%; color: black; height: 1px; background-color:black;" />
                 <div
                     *ngFor="let transaction of transactions"
-                    class="transaction-list-item row profile-wrapper shadow bg-white rounded login-for mb-3 mx-auto w-100"
+                    class="transaction-list-item row shadow bg-white rounded login-for mb-3 mx-auto w-100"
                     [ngStyle]="this.getTransactionItemBackgroundCss(this.org.photoBackground)"
                 >
-                    <img class="transaction-icon col-2 d-inline align-middle" src="{{this.org.photoURL}}"/>
+                    <div class="orglink-item-photo-wrapper col-2">
+                        <img class="orglink-item-photo" src="{{this.org.photoURL}}"/>
+                    </div>
                     <div class="transaction-item-details col-10 w-100">
                         <span class="font-weight-bold">{{transaction.status}}&nbsp;</span>
                         <span class="transaction-time font-italic">{{transaction.timeDate | date: 'shortTime'}}</span>

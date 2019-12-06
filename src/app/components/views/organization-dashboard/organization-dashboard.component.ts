@@ -19,9 +19,7 @@ export class OrganizationDashboardComponent implements OnInit {
     getTransactionItemBackgroundCss(color) {
         const col = color ? color : 'rgb(255,255,255)' ;
         return  {
-            background: `linear-gradient(90deg, ${col} 12.5%, rgba(255,255,255,0) 12.5%)`,
-            'padding-left': '3%'
-        };
+            background: `linear-gradient(90deg, ${col} 16.5%, rgba(255,255,255,0) 16.5%)`};
     }
 
     constructor(
