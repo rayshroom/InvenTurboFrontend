@@ -1,6 +1,4 @@
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
-
-<div class="container">
+<div *ngIf="this.orgCurrent && this.orgOther.length > 0" class="container">
 
   <!-- COMPONENT: The back button, self org name/avatar, back/forth arrow, other org name/avatar -->
   <div class="row">
@@ -8,7 +6,7 @@
     <div class="col-1 back-button" (click)="goback()">
         <svg xmlns="http://www.w3.org/2000/svg" width="21.583" height="37.7525" viewBox="0 -12 43.166 87.505">
           <path id="Icon_ionic-ios-arrow-back" data-name="Icon ionic-ios-arrow-back" d="M24.263,43.936,52.832,15.39A5.4,5.4,0,1,0,45.19,7.77L12.822,40.115a5.385,5.385,0,0,0-.157,7.44l32.5,32.57a5.4,5.4,0,0,0,7.642-7.62Z" transform="translate(-11.251 -6.194)" fill="#bf202f"/>
-        </svg>      
+        </svg>
       <span class="rotate-l-90">CANCEL</span>
     </div>
 
@@ -18,27 +16,29 @@
             <img class="organization-icon col-2 h-100 w-100" src="{{this.orgCurrent.photoURL}}"/>
             <span class="col-9">
                 <h2>
-                    <span class="font-weight-bold">{{this.orgCurrent.orgName}}</span>
+                    <span class="font-weight-bold">{{this.orgCurrent.name}}</span>
                 </h2>
             </span>
         </div>
     </div>
-    
+
     <!-- <i class="mx-auto bidirectional-arrow fa fa-arrows-h"></i> -->
     <!-- COMPONENT: The back and forth arrows -->
     <div class="col-1">
-      <i class="arrow-top fas fa-3x fa-long-arrow-alt-left" [ngClass]="{'correct': fromCurrent}"></i>
-      <br>
-      <i class="arrow-bottom fas fa-3x fa-long-arrow-alt-right" [ngClass]="{'correct': !fromCurrent}"></i>
+        <div class="arrow-wrapper">
+            <i class="arrow-top fas fa-3x fa-long-arrow-alt-left" [ngClass]="{'correct': fromCurrent}"></i>
+            <br>
+            <i class="arrow-bottom fas fa-3x fa-long-arrow-alt-right" [ngClass]="{'correct': !fromCurrent}"></i>
+        </div>
     </div>
-    
+
     <!-- COMPONENT: Other org name/avatar -->
     <div class="col-5">
         <div class="row profile-wrapper shadow bg-white rounded-pill login-for mb-3">
             <img class="organization-icon col-2 h-100 w-100" src="{{this.orgOther[1].photoURL}}"/>
             <div class="col-9">
                 <h2>
-                    <span class="font-weight-bold">{{this.orgOther[1].orgName}}</span>
+                    <span class="font-weight-bold">{{this.orgOther[1].name}}</span>
                 </h2>
             </div>
         </div>
@@ -56,7 +56,7 @@
           <div class="p-2">ID: {{item.productID}}</div>
           <div class="p-2">Qty: <span class="correct">{{item.quantity}}</span></div>
           <div class="p-2">Price: <span class="correct">{{item.unitPrice | currency}}</span></div>
-          
+
         </li>
       </ul>
     </div>

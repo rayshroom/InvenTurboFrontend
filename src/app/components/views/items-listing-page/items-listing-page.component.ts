@@ -6,82 +6,78 @@ import { Item } from 'src/app/services/item.model';
 import { ItemManagementService } from 'src/app/services/itemManagementService.service';
 
 @Component({
-  selector: 'app-items-listing-page',
-  templateUrl: './items-listing-page.component.html',
-  styleUrls: ['./items-listing-page.component.scss']
+    selector: 'app-items-listing-page',
+    templateUrl: './items-listing-page.component.html',
+    styleUrls: ['./items-listing-page.component.scss']
 })
 export class ItemsListingPageComponent implements OnInit {
+    search: FormGroup;
 
-  search: FormGroup;
+    items: Item[];
+    selectedItems: Item[];
+    allItems: Item[];
+    viewModeList = false;
 
-  items: Item[];
-  selectedItems: Item[];
-  allItems: Item[];
-  viewModeList = false;
+    constructor(
+        public auth: AuthService,
+        private router: Router,
+        public m: ItemManagementService
+    ) {
+        this.items = [];
+        for (let i = 0; i < 30; i++) {
+            this.items[i] = {
+                displayName: 'AABC' + i,
+                productID: 'JD' + i,
+                photoURL: 'assets/sample-product.png',
+                quantity: Math.floor(Math.random() * 20) + 1,
+                unitPrice: Math.random() * 2
+            };
+        }
 
-  constructor(
-    public auth: AuthService,
-    private router: Router,
-    public m: ItemManagementService
-  ) { 
+        this.allItems = this.items;
 
-    
-  }
+        this.selectedItems = [];
 
-  ngOnInit() {
-    this.items = [];
-    for(let i = 0; i < 30; i++) {
-      this.items[i] = {
-        displayName: 'AABC' + i,
-        productID: 'JD' + i,
-        photoURL: '../../../../assets/sample-product.png',
-        quantity: Math.floor(Math.random() * 20) + 1,
-        unitPrice: Math.random() * 2
-      };
+        this.search = new FormGroup({
+            search: new FormControl('')
+        });
     }
 
-    this.allItems = this.items;
+    ngOnInit() {}
 
-    this.selectedItems = [];
-
-    this.search = new FormGroup({
-      search: new FormControl('')
-    });
-  }
-
-  filterItems(partial: string) {
-    this.items = this.allItems.filter(function(a) {
-      return a.productID.includes(partial);
-    });
-  }
-
-  markSelected(item: Item) {
-    if(item.isSelected) {
-      item.isSelected = false;
-    } else {
-      item.isSelected = true;
-      this.selectedItems.push(item);
+    filterItems(partial: string) {
+        this.items = this.allItems.filter(function(a) {
+            return a.productID.includes(partial);
+        });
     }
-    
-  }
 
-  toggleListView() {
-    this.viewModeList = true;
-  }
+    markSelected(item: Item) {
+        if (item.isSelected) {
+            item.isSelected = false;
+        } else {
+            item.isSelected = true;
+            this.selectedItems.push(item);
+        }
+    }
 
-  toggleGridView() {
-    this.viewModeList = false;
-  }
+    toggleListView() {
+        this.viewModeList = true;
+    }
 
-  goback() {
-    this.router.navigate(['/org/3/transaction/new']);
-  }
+    toggleGridView() {
+        this.viewModeList = false;
+    }
 
-  submitItems() {
-    // keep current state
-    this.m.saveItems("add", this.selectedItems);
-    // console.log(this.selectedItems);
-    this.router.navigate(['/org/3/transaction/new'], {queryParams: {key: "add"}});
-  }
+    goback() {
+        this.router.navigate(['/organization/transaction/new']);
+    }
 
+    submitItems() {
+        // keep current state
+        this.m.saveItems('add', this.selectedItems);
+        // console.log(this.selectedItems);
+        this.router.navigate(['/organization/transaction/new'], {
+            queryParams: { key: 'add' }
+        });
+    }
 }

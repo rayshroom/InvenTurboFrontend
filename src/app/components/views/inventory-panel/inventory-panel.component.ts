@@ -25,7 +25,6 @@ export class InventoryPanelComponent implements OnInit {
         }
         this.prodStock.getAllOrganizationProductStock(this.org.oid).subscribe(prod => {
             this.products = prod;
-            console.log(this.products);
         });
     }
 

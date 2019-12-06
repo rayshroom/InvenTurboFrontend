@@ -1,84 +1,68 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { AuthService } from 'src/app/services/auth/auth.service';
-import { Router, ActivatedRoute, Params } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Item } from 'src/app/services/item.model';
 import { ItemManagementService } from 'src/app/services/itemManagementService.service';
+import { UserOrganization } from 'src/app/services/organization/user-organization.model';
+import { UserOrganizationService } from 'src/app/services/organization/user-organization.service';
 
 @Component({
-  selector: 'app-transaction-page',
-  templateUrl: './transaction-page.component.html',
-  styleUrls: ['./transaction-page.component.scss']
+    selector: 'app-transaction-page',
+    templateUrl: './transaction-page.component.html',
+    styleUrls: ['./transaction-page.component.scss']
 })
 export class TransactionPageComponent implements OnInit {
+    @Input() viewType: string;
 
-  @Input() viewType: string;
+    orgCurrent: UserOrganization;
+    orgOther: UserOrganization[] = [];
+    items: Item[] = [];
+    taxRate = 0.13;
+    fromCurrent = false;
 
-  orgCurrent: {orgName: string, photoURL?: string};
-  orgOther: {orgName: string, photoURL?: string}[];
-  items: Item[];
-  taxRate = 0.13;
-  fromCurrent = false;
-
-  constructor(
-    public auth: AuthService,
-    private router: Router,
-    private activatedRoute: ActivatedRoute,
-    public m: ItemManagementService
-  ) { 
-    
-  }
-
-  ngOnInit() {
-    
-    this.orgCurrent = {orgName: "The bar inc.", photoURL: "../../../../assets/default-org-avatar.png" };
-
-    this.orgOther = [];
-    for(let i = 0; i < 5; i++) {
-      this.orgOther[i] = {orgName: "Org " + i + " company", photoURL: "../../../../assets/default-org-avatar.png"};
+    constructor(
+        private router: Router,
+        private activatedRoute: ActivatedRoute,
+        public auth: AuthService,
+        public userOrg: UserOrganizationService,
+        public m: ItemManagementService
+    ) {
+        this.orgCurrent = this.userOrg.getCurrentOrganization();
+        this.userOrg.getAllOrganizations().subscribe(orgs => {
+            this.orgOther = orgs.filter(o => o.oid !== this.orgCurrent.oid);
+        });
+        this.activatedRoute.queryParams.subscribe(params => {
+            if (params.key === 'add') {
+                this.items = this.m.getItems(params.key);
+            }
+        });
     }
 
-    this.items = [];
-
-    this.activatedRoute.queryParams.subscribe(params => {
-      if (params.key == 'add') {
-        this.items = this.m.getItems(params.key);
-      }
-    });
-    
-  }
-
-  getTotalItems() {
-    if (this.items) {
-      return this.items.map(function(a) {return a.quantity;})
-              .reduce(function(a, b) {return a + b;});
-    } else {
-      return 0;
+    ngOnInit() {
     }
-  }
 
-  getSubtotal() {
-    if (this.items) {
-      return this.items.map(function(a) {return a.quantity * a.unitPrice;})
-              .reduce(function(a, b) {return a + b;});
-    } else {
-      return 0;
+    getTotalItems() {
+        return this.items.length > 0 ? this.items.map(a => a.quantity).reduce((a, b) => a + b) : 0;
     }
-  }
 
-  getTotalPrice() {
-    return (1 + this.taxRate) * this.getSubtotal();
-  }
+    getSubtotal() {
+        return this.items.length > 0 ? this.items.map(a => a.quantity * a.unitPrice).reduce((a, b) => a + b) : 0;
+    }
 
-  goback() {
-    this.router.navigate(['/orgdashboard']);
-  }
+    getTotalPrice() {
+        return (1 + this.taxRate) * this.getSubtotal();
+    }
 
-  submitItems() {
-    // keep current state
-    this.router.navigate(['/orgdashboard']);
-  }
+    goback() {
+        this.router.navigate(['/organization']);
+    }
 
-  selectItems() {
-    this.router.navigate(['/org/3/transaction/items/add']);
-  }
+    submitItems() {
+        // keep current state
+        this.router.navigate(['/organization']);
+    }
+
+    selectItems() {
+        this.router.navigate(['/organization/transaction/items/add']);
+    }
 }

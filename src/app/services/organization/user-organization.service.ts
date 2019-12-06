@@ -39,4 +39,8 @@ export class UserOrganizationService {
     getAllCurrentUserOrganizations(): Observable<any> {
         return this.http.get(`${environment.api}${environment.routes.getUserOrganizations(this.currentUser.uid)}`, this.httpOptions);
     }
+
+    getAllOrganizations(): Observable<any> {
+        return this.http.get(`${environment.api}${environment.routes.getAllOrganization}`, this.httpOptions);
+    }
 }

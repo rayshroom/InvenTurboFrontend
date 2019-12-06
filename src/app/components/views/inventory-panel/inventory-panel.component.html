@@ -1,8 +1,8 @@
 <div class="inventory-panel-wrapper">
     <div class="row">
         <div class="col-lg-6 col-md-6 col-sm-11 mx-auto">
-            <div class="panel-wrapper">
-                <div class="back-icon-wrapper" (click)="goBack()">
+            <div class="panel-wrapper go-back" (click)="goBack()">
+                <div class="back-icon-wrapper">
                     <svg class="back-icon" xmlns="http://www.w3.org/2000/svg" width="43.166" height="75.505" viewBox="0 0 43.166 75.505">
                         <path id="Icon_ionic-ios-arrow-back" data-name="Icon ionic-ios-arrow-back" class="cls-1" d="M24.263,43.936,52.832,15.39A5.4,5.4,0,1,0,45.19,7.77L12.822,40.115a5.385,5.385,0,0,0-.157,7.44l32.5,32.57a5.4,5.4,0,0,0,7.642-7.62Z" transform="translate(-11.251 -6.194)"/>
                     </svg>
@@ -26,8 +26,16 @@
         </div>
     </div>
     <div class="row">
-        <div class="inventory-list">
-
+        <div class="inventory-grid">
+            <div *ngFor="let item of products" class="inventory-card">
+                <div class="inventory-card-photo-wrapper">
+                    <img class="inventory-card-photo" src="{{ item.photoURL }}" alt="{{ item.name }}" />
+                </div>
+                <div class="inventory-card-body">
+                    <span class="inventory-card-name">{{ item.name }}</span>
+                    <span class="inventory-card-quantity">qty: <strong>{{ item.quantity }}</strong></span>
+                </div>
+            </div>
         </div>
     </div>
 </div>

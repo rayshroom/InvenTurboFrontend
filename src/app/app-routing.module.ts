@@ -41,24 +41,6 @@ const routes: Routes = [
         canActivate: [AuthGuard]
     },
     {
-        path: 'organization/:oid/transaction/new',
-        component: TransactionPageComponent,
-        pathMatch: 'full',
-        canActivate: [AuthGuard]
-    },
-    {
-        path: 'organization/:oid/transaction/view/:txid',
-        component: TransactionPageComponent,
-        pathMatch: 'full',
-        canActivate: [AuthGuard],
-    },
-    {
-        path: 'organization/:oid/transaction/items/add',
-        component: ItemsListingPageComponent,
-        pathMatch: 'full',
-        // canActivate: [AuthGuard],
-    },
-    {
         path: 'organization',
         component: OrganizationDashboardComponent,
         pathMatch: 'full',
@@ -69,6 +51,24 @@ const routes: Routes = [
         component: InventoryPanelComponent,
         pathMatch: 'full',
         canActivate: [AuthGuard]
+    },
+    {
+        path: 'organization/transaction/new',
+        component: TransactionPageComponent,
+        pathMatch: 'full',
+        canActivate: [AuthGuard]
+    },
+    {
+        path: 'organization/transaction/view/:txid',
+        component: TransactionPageComponent,
+        pathMatch: 'full',
+        canActivate: [AuthGuard],
+    },
+    {
+        path: 'organization/transaction/items/add',
+        component: ItemsListingPageComponent,
+        pathMatch: 'full',
+        // canActivate: [AuthGuard],
     },
     { path: '', redirectTo: '/landing', pathMatch: 'full' },
     { path: '**', component: DoesNotExistPageComponent }
