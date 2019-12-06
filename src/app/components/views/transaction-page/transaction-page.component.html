@@ -1,0 +1,100 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+
+<div class="container">
+
+  <!-- COMPONENT: The back button, self org name/avatar, back/forth arrow, other org name/avatar -->
+  <div class="row">
+    <!-- COMPONENT: The back button -->
+    <div class="col-1 back-button" (click)="goback()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="21.583" height="37.7525" viewBox="0 -12 43.166 87.505">
+          <path id="Icon_ionic-ios-arrow-back" data-name="Icon ionic-ios-arrow-back" d="M24.263,43.936,52.832,15.39A5.4,5.4,0,1,0,45.19,7.77L12.822,40.115a5.385,5.385,0,0,0-.157,7.44l32.5,32.57a5.4,5.4,0,0,0,7.642-7.62Z" transform="translate(-11.251 -6.194)" fill="#bf202f"/>
+        </svg>      
+      <span class="rotate-l-90">CANCEL</span>
+    </div>
+
+    <!-- COMPONENT: Self org name/avatar -->
+    <div class="col-5">
+        <div class="row profile-wrapper shadow bg-white rounded-pill login-for mb-lg-3 mb-0">
+            <img class="organization-icon col-2 h-100 w-100" src="{{this.orgCurrent.photoURL}}"/>
+            <span class="col-9">
+                <h2>
+                    <span class="font-weight-bold">{{this.orgCurrent.orgName}}</span>
+                </h2>
+            </span>
+        </div>
+    </div>
+    
+    <!-- <i class="mx-auto bidirectional-arrow fa fa-arrows-h"></i> -->
+    <!-- COMPONENT: The back and forth arrows -->
+    <div class="col-1">
+      <i class="arrow-top fas fa-3x fa-long-arrow-alt-left" [ngClass]="{'correct': fromCurrent}"></i>
+      <br>
+      <i class="arrow-bottom fas fa-3x fa-long-arrow-alt-right" [ngClass]="{'correct': !fromCurrent}"></i>
+    </div>
+    
+    <!-- COMPONENT: Other org name/avatar -->
+    <div class="col-5">
+        <div class="row profile-wrapper shadow bg-white rounded-pill login-for mb-3">
+            <img class="organization-icon col-2 h-100 w-100" src="{{this.orgOther[1].photoURL}}"/>
+            <div class="col-9">
+                <h2>
+                    <span class="font-weight-bold">{{this.orgOther[1].orgName}}</span>
+                </h2>
+            </div>
+        </div>
+    </div>
+  </div>
+
+  <!-- COMPONENT: To display selected items -->
+  <div class="row overflow-auto items-view mb-2 mt-2">
+    <div class="col-1"></div>
+    <div class="col-11">
+      <ul class="col-12 mt-2" *ngFor="let item of items">
+        <li class="list-group-item d-flex justify-content-around" (click)="markSelected(item)">
+
+          <div class="p-2">Name: {{item.displayName}}</div>
+          <div class="p-2">ID: {{item.productID}}</div>
+          <div class="p-2">Qty: <span class="correct">{{item.quantity}}</span></div>
+          <div class="p-2">Price: <span class="correct">{{item.unitPrice | currency}}</span></div>
+          
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- COMPONENT: The add item big button -->
+  <div class="row" [ngClass]="{'trans-body': !items, 'trans-body-small': items}">
+    <div class="col-1"></div>
+    <div class="col-11 remove-left-right-padding">
+      <div class="addTransactionBar" (click)="selectItems()">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 50 50">
+            <path id="Icon_ionic-ios-add-circle" data-name="Icon ionic-ios-add-circle" d="M28.375,3.375a25,25,0,1,0,25,25A25,25,0,0,0,28.375,3.375ZM39.252,30.3H30.3v8.954a1.923,1.923,0,0,1-3.846,0V30.3H17.5a1.923,1.923,0,1,1,0-3.846h8.954V17.5a1.923,1.923,0,1,1,3.846,0v8.954h8.954a1.923,1.923,0,1,1,0,3.846Z" transform="translate(-3.375 -3.375)" fill="#bf202f"/>
+          </svg>
+        <span> Add items to transaction</span>
+      </div>
+    </div>
+    <!-- <div class="col-1"></div> -->
+  </div>
+
+  <!-- COMPONENT: The transaction total info bar -->
+  <div class="row mb-3">
+    <div class="col-1"></div>
+    <div class="col-11 remove-left-right-padding">
+      <div class="submitTransactionBar shadow d-flex justify-content-between">
+          <!-- COMPONENT: The LEFT portion, number of items, total and subtotal -->
+          <div class="submitTransactionLeft col-8">
+            <span class="descriptive-sub">Number of items: {{this.getTotalItems()}}</span>
+            <span class="descriptive-sub">Subtotal: {{this.getSubtotal() | currency}}</span>
+            <span class="descriptive-important">Total: {{this.getTotalPrice() | currency}}</span>
+            <!-- <span class="descriptive-important">Total: {{this.getTotalPrice() | currency:'CAD'}}</span> -->
+          </div>
+          <!-- COMPONENT: The RIGHT portion, the submit button -->
+          <div class="text-center submitTransactionRight col-3" (click)="submitItems()">
+            Submit
+          </div>
+      </div>
+    </div>
+    <!-- <div class="col-1"></div> -->
+  </div>
+
+</div>

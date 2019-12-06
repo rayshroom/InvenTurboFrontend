@@ -1,0 +1,132 @@
+h2 > span {
+    font-size: 0.5em;
+
+    @media (min-width: 992px) {
+        font-size: 1em;
+    }
+}
+
+h3 {
+    font-size: 1em;
+    top: 15px;
+
+    @media (min-width: 992px) {
+        top: 8px;
+        font-size: 1.5em;
+    }
+}
+
+.rotate-l-90 {
+    -webkit-transform: rotate(-90deg);
+    -moz-transform: rotate(-90deg);
+    -ms-transform: rotate(-90deg);
+    -o-transform: rotate(-90deg);
+    float: left;
+    color: #BF202F;
+    margin-top: -30px;
+    margin-left: 10px;
+}
+
+.back-button {
+    cursor: pointer;
+}
+
+.organization-icon {
+    margin-left: -20px;
+    padding-right: 0px !important;
+}
+
+.profile-wrapper {
+    border-collapse: separate;
+    padding: 0.25em 0.75em;
+}
+
+.descriptive-sub {
+    display: block;
+    font-size: 15px;
+    font-style: italic;
+    color: var(--gray);
+    font-weight: 100;
+}
+
+.descriptive-important {
+    display: block;
+    font-size: 25px;
+    color: #BF202F;
+    font-weight: 100;
+}
+
+.arrow-top {
+    margin-top: -14px;
+    margin-bottom: -1em;
+    color: var(--gray);
+}
+
+.arrow-bottom {
+    margin-top: -1em;
+    color: var(--gray);
+}
+
+
+.bottom-bar {
+    position: fixed;
+    bottom: 100px;
+}
+
+.addTransactionBar {
+    border: 2px dashed #BF202F;
+    border-radius: 50px;
+    font-weight: normal;
+    font-size: 24px;
+    color: #BF202F;
+    text-align: center;
+    vertical-align: middle;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    cursor: pointer;
+}
+
+.submitTransactionBar {
+    background-color: white;
+    border-radius: 5px;
+}
+
+.submitTransactionLeft {
+
+}
+
+.submitTransactionRight {
+    font-size: 1.5em;
+    color: white;
+    background-color: #C82333;
+    border-radius: 0px 5px 5px 0px;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    cursor: pointer;
+}
+
+.correct {
+    color: #BF202F;
+}
+
+.remove-left-right-padding {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.trans-body {
+    min-height: 60vh;
+}
+
+.trans-body-small {
+    margin-bottom: 2em;
+    min-height: 10vh;
+}
+
+.container {
+    margin-top: 30px;
+}
+
+.items-view {
+    max-height: 40vh;
+}

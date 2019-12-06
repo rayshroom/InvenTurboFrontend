@@ -11,6 +11,8 @@ import { OrganizationDashboardComponent } from './components/views/organization-
 import { AuthGuard } from './services/auth/auth.guard';
 import { InnerGuard } from './services/auth/inner.guard';
 import { InventoryPanelComponent } from './components/views/inventory-panel/inventory-panel.component';
+import { TransactionPageComponent } from './components/views/transaction-page/transaction-page.component';
+import { ItemsListingPageComponent } from './components/views/items-listing-page/items-listing-page.component';
 
 const routes: Routes = [
     { path: 'landing', component: LandingPageComponent, pathMatch: 'full' },
@@ -37,6 +39,24 @@ const routes: Routes = [
         component: DashboardComponent,
         pathMatch: 'full',
         canActivate: [AuthGuard]
+    },
+    {
+        path: 'organization/:oid/transaction/new',
+        component: TransactionPageComponent,
+        pathMatch: 'full',
+        canActivate: [AuthGuard]
+    },
+    {
+        path: 'organization/:oid/transaction/view/:txid',
+        component: TransactionPageComponent,
+        pathMatch: 'full',
+        canActivate: [AuthGuard],
+    },
+    {
+        path: 'organization/:oid/transaction/items/add',
+        component: ItemsListingPageComponent,
+        pathMatch: 'full',
+        // canActivate: [AuthGuard],
     },
     {
         path: 'organization',
