@@ -142,9 +142,8 @@ hr {
     // background: -moz-linear-gradient(right, #BF202F 12.5%, #fff 12.5%) !important; /* For Firefox 3.6 to 15 */
     // background: linear-gradient(to right, #BF202F 12.5% , #fff 12.5%) !important; /* Standard syntax */
     border-collapse: separate;
-    // padding: 0.25em 1.25em !important;
     margin-bottom: 10px !important;
-    padding: 5px 0;
+    padding: 5px 0 !important;
 }
 
 .transaction-icon {

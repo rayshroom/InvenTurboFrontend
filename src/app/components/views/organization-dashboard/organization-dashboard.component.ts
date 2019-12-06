@@ -29,7 +29,7 @@ export class OrganizationDashboardComponent implements OnInit {
     ) {
         this.auth.getCurrentUser().subscribe(async user => {
             this.user = user;
-            let org = this.userOrg.getCurrentOrganization();
+            const org = this.userOrg.getCurrentOrganization();
             this.org = org;
             this.transactions = [];
             if (!this.org.photoURL) {
@@ -38,11 +38,11 @@ export class OrganizationDashboardComponent implements OnInit {
             this.tms.getAllOrganizationTransactions(this.org.oid).subscribe(transactions => {
                 transactions.forEach(transaction => {
                     console.log(transaction);
-                    let timestamp = Date.parse(transaction.stringTime);
-                    let transactionDate = !isNaN(timestamp) ? new Date(timestamp) : new Date();
-                   
-                    let transactionType = (transaction.oid_dest == this.org.oid) ? "Incoming" : "Outgoing";
-     
+                    const timestamp = Date.parse(transaction.stringTime);
+                    const transactionDate = !isNaN(timestamp) ? new Date(timestamp) : new Date();
+
+                    const transactionType = (transaction.oid_dest === this.org.oid) ? 'Incoming' : 'Outgoing';
+
                     this.transactions.push({timeDate: transactionDate, transactionType, ...transaction});
                 });
                 this.lastTransactionTime = this.transactions[this.transactions.length - 1].timeDate;
