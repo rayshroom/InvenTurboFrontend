@@ -25,6 +25,13 @@ export class TransactionManagementService {
         );
     }
 
+    getOneTransaction(tid: string): Observable<{tid: string, status: string, stringTime: string, oid_source: string, oid_dest: string}> {
+        return this.http.get<{tid: string, status: string, stringTime: string, oid_source: string, oid_dest: string}>(
+            `${environment.api}${environment.routes.getOneTransaction(tid)}`,
+            this.httpOptions
+        );
+    }
+
     submitSimpleTransaction(transaction): Observable<any> {
         return this.http.post<{status: string, stringTime: string, oid_source: string, oid_dest: string}[]>(
             `${environment.api}${environment.routes.addSimpleTransaction}`,

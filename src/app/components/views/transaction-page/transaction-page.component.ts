@@ -52,6 +52,13 @@ export class TransactionPageComponent implements OnInit {
     }
 
     ngOnInit() {
+        // this.activatedRoute.queryParams.subscribe(params => {
+        //     this.tms.getOneTransaction(params.tid).subscribe(transaction => {
+        //         // orgCurrent = getOrganization(transaction.oid_dest);
+        //         // orgOther = [getOrganization(transaction.oid_source)];
+        //         // items still need to be added to transaction, then items = transaction.item
+        //     })
+        // });
     }
 
     getTotalItems() {
