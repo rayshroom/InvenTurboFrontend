@@ -10,6 +10,7 @@ import { OrganizationDashboardComponent } from './components/views/organization-
 
 import { AuthGuard } from './services/auth/auth.guard';
 import { InnerGuard } from './services/auth/inner.guard';
+import { InventoryPanelComponent } from './components/views/inventory-panel/inventory-panel.component';
 
 const routes: Routes = [
     { path: 'landing', component: LandingPageComponent, pathMatch: 'full' },
@@ -40,6 +41,12 @@ const routes: Routes = [
     {
         path: 'organization',
         component: OrganizationDashboardComponent,
+        pathMatch: 'full',
+        canActivate: [AuthGuard]
+    },
+    {
+        path: 'organization/inventory',
+        component: InventoryPanelComponent,
         pathMatch: 'full',
         canActivate: [AuthGuard]
     },

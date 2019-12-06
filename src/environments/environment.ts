@@ -18,7 +18,8 @@ export const environment = {
     routes: {
         register: '/user/register',
         getUserOrganizations: uid => `/profile/${uid}/organization`,
-        getOrganizationTransactions: oid => `/organization/${oid}/transaction`
+        getOrganizationTransactions: oid => `/organization/${oid}/transaction`,
+        getOrganizationProductStocks: oid => `/organization/${oid}/product`
     },
 };
 

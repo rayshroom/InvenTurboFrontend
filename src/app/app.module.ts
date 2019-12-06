@@ -24,6 +24,7 @@ import { AuthGuard } from './services/auth/auth.guard';
 import { InnerGuard } from './services/auth/inner.guard';
 import { UserManagementService } from './services/auth/uam.service';
 import { UserOrganizationService } from './services/organization/user-organization.service';
+import { InventoryPanelComponent } from './components/views/inventory-panel/inventory-panel.component';
 
 @NgModule({
     declarations: [
@@ -36,7 +37,8 @@ import { UserOrganizationService } from './services/organization/user-organizati
         ForgetPasswordPageComponent,
         DoesNotExistPageComponent,
         DashboardComponent,
-        OrganizationDashboardComponent
+        OrganizationDashboardComponent,
+        InventoryPanelComponent
     ],
     imports: [
         BrowserModule,

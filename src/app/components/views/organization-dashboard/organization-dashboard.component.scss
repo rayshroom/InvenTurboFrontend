@@ -17,7 +17,7 @@ h3 {
 }
 
 .dashboard-wrapper {
-    padding: 0.5em 1em;
+    padding: 2em 1em;
     text-overflow: unset !important;
     white-space: nowrap !important;
     overflow: hidden !important;
@@ -31,7 +31,7 @@ h3 {
 .profile-wrapper {
     border-collapse: separate;
     padding: 0.25em 0.75em;
-    // border-radius: 3mm !important;
+    margin-bottom: 1.5em !important;
 }
 
 .descriptive-subtext {
@@ -132,12 +132,15 @@ hr {
     background-color: rgba(255, 255, 255, 0.1) !important;
 }
 
-// .transaction-list-item {
-//     background: -webkit-linear-gradient(left, #BF202F 12.5% , #fff 12.5%) !important; /* For Safari 5.1 to 6.0 */
-//     background: -o-linear-gradient(right, #BF202F 12.5%, #fff 12.5%) !important; /* For Opera 11.1 to 12.0 */
-//     background: -moz-linear-gradient(right, #BF202F 12.5%, #fff 12.5%) !important; /* For Firefox 3.6 to 15 */
-//     background: linear-gradient(to right, #BF202F 12.5% , #fff 12.5%) !important; /* Standard syntax */
-// }
+.transaction-list-item {
+    // background: -webkit-linear-gradient(left, #BF202F 12.5% , #fff 12.5%) !important; /* For Safari 5.1 to 6.0 */
+    // background: -o-linear-gradient(right, #BF202F 12.5%, #fff 12.5%) !important; /* For Opera 11.1 to 12.0 */
+    // background: -moz-linear-gradient(right, #BF202F 12.5%, #fff 12.5%) !important; /* For Firefox 3.6 to 15 */
+    // background: linear-gradient(to right, #BF202F 12.5% , #fff 12.5%) !important; /* Standard syntax */
+    border-collapse: separate;
+    padding: 0.25em 1.25em !important;
+    margin-bottom: 10px !important;
+}
 
 .transaction-icon {
     height: 50px !important;
