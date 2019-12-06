@@ -1,0 +1,173 @@
+h2 > span {
+    font-size: 0.5em;
+
+    @media (min-width: 992px) {
+        font-size: 1em;
+    }
+}
+
+h3 {
+    font-size: 1em;
+    top: 15px;
+
+    @media (min-width: 992px) {
+        top: 8px;
+        font-size: 1.5em;
+    }
+}
+
+.dashboard-wrapper {
+    padding: 0.5em 1em;
+    text-overflow: unset !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+}
+
+.main-title {
+    font-weight: bolder;
+    color: #BF202F;
+}
+
+.profile-wrapper {
+    border-collapse: separate;
+    padding: 0.25em 0.75em;
+    // border-radius: 3mm !important;
+}
+
+.descriptive-subtext {
+    font-size: 15px;
+    font-style: italic;
+    color: var(--gray);
+    font-weight: 100;
+}
+
+.dashboard-icon {
+    height: 30px;
+    margin-top: 8px;
+    margin-left: 2px;
+    position: absolute;
+}
+
+.dashboard-header {
+    margin-left: -15px;
+    letter-spacing: 0.5px;
+}
+
+.bidirectional-arrow {
+    margin-top: 15px;
+    font-size: 3em;
+    color: var(--gray);
+}
+
+.organization-icon {
+    border-radius: 50%;
+    padding: 0px !important;
+}
+
+.dashboard-button {
+    cursor: pointer;
+    height: 55px;
+}
+
+.dashboard-button::after {
+    content: '';
+    font-size: 33px;
+    text-align: center;
+    vertical-align: middle;
+    width: 55px;
+    height: 55px;
+    background: #BF202F;
+    -moz-border-radius: 50px;
+    -webkit-border-radius: 50px;
+    border-radius: 50px;
+    position: absolute;
+    right: 0px;
+    margin: -4px 0 -4px 0;
+}
+
+.dashboard-button-disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+.view-pending-orders-icon::after {
+    content: '🚚';
+}
+
+.create-transaction-icon::after {
+    content: '✏️';
+}
+
+.view-inventory-icon::after {
+    content: '📋';
+}
+
+.view-analytics-icon::after {
+    content: '📈';
+}
+
+.add-personnel-icon::after {
+    content: '👤';
+}
+
+.nav-pills {
+    color: var(--gray);
+}
+
+.nav-pills li a {
+    margin-bottom: -5px !important;
+    padding-bottom: 0px !important;
+    cursor: pointer;
+}
+
+.nav-pills .active {
+    background-color: unset;
+    color: #BF202F;
+}
+
+hr {
+    width: 100%;
+    color: rgba(255, 255, 255, 0.1) !important;
+    height: 0.25px !important;
+    background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+// .transaction-list-item {
+//     background: -webkit-linear-gradient(left, #BF202F 12.5% , #fff 12.5%) !important; /* For Safari 5.1 to 6.0 */
+//     background: -o-linear-gradient(right, #BF202F 12.5%, #fff 12.5%) !important; /* For Opera 11.1 to 12.0 */
+//     background: -moz-linear-gradient(right, #BF202F 12.5%, #fff 12.5%) !important; /* For Firefox 3.6 to 15 */
+//     background: linear-gradient(to right, #BF202F 12.5% , #fff 12.5%) !important; /* Standard syntax */
+// }
+
+.transaction-icon {
+    height: 50px !important;
+    max-width: 80px !important;
+    margin-left: -20px;
+    border-radius: 50%;
+}
+
+.transaction-item-details {
+    font-size: 12px !important;
+    color: var(--gray);
+    font-weight: 100;
+    margin-left: -10px !important;
+    padding-right: 0px !important;
+}
+
+.transaction-link {
+    color: #BF202F;
+    text-decoration: underline;
+    cursor: not-allowed;
+    margin-right: 2px;
+}
+
+.transaction-link-icon {
+    // cursor: pointer;
+    cursor: not-allowed;
+    height: 0px;
+    margin-top: -8px;
+}
+
+.transaction-time {
+    font-size: 10px;
+}
