@@ -24,4 +24,12 @@ export class TransactionManagementService {
             this.httpOptions
         );
     }
+
+    submitSimpleTransaction(transaction): Observable<any> {
+        return this.http.post<{status: string, stringTime: string, oid_source: string, oid_dest: string}[]>(
+            `${environment.api}${environment.routes.addSimpleTransaction}`,
+            transaction,
+            this.httpOptions
+        );
+    }
 }

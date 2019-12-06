@@ -1,10 +1,14 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable, of } from 'rxjs';
 import { Item } from 'src/app/services/item.model';
 import { ItemManagementService } from 'src/app/services/itemManagementService.service';
 import { UserOrganization } from 'src/app/services/organization/user-organization.model';
 import { UserOrganizationService } from 'src/app/services/organization/user-organization.service';
+import { environment } from 'src/environments/environment';
+import { TransactionManagementService } from 'src/app/services/transaction/transaction-management.service';
 
 @Component({
     selector: 'app-transaction-page',
@@ -20,12 +24,21 @@ export class TransactionPageComponent implements OnInit {
     taxRate = 0.13;
     fromCurrent = false;
 
+    private httpOptions = {
+        headers: new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*'
+        })
+    };
+
     constructor(
+        private http: HttpClient,
         private router: Router,
         private activatedRoute: ActivatedRoute,
         public auth: AuthService,
         public userOrg: UserOrganizationService,
-        public m: ItemManagementService
+        public m: ItemManagementService,
+        public tms: TransactionManagementService
     ) {
         this.orgCurrent = this.userOrg.getCurrentOrganization();
         this.userOrg.getAllOrganizations().subscribe(orgs => {
@@ -58,8 +71,14 @@ export class TransactionPageComponent implements OnInit {
     }
 
     submitItems() {
-        // keep current state
-        this.router.navigate(['/organization']);
+        this.tms.submitSimpleTransaction({
+            status: "Submitted",
+            stringTime: new Date(),
+            oid_source: this.orgOther[0].oid,
+            oid_dest: this.orgCurrent.oid
+        }).subscribe(() => {
+            this.router.navigate(['/organization']);
+        });
     }
 
     selectItems() {
