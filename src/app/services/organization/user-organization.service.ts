@@ -16,7 +16,6 @@ export class UserOrganizationService {
         })
     };
 
-    private currentUser: firebase.User;
     private currentOrganization: UserOrganization;
 
     setCurrentOrganization(orglink: UserOrganization) {
@@ -32,12 +31,11 @@ export class UserOrganizationService {
         return this.currentOrganization;
     }
 
-    constructor(private http: HttpClient, private auth: AuthService) {
-        this.auth.getCurrentUser().subscribe(user => this.currentUser = user);
+    constructor(private http: HttpClient) {
     }
 
-    getAllCurrentUserOrganizations(): Observable<any> {
-        return this.http.get(`${environment.api}${environment.routes.getUserOrganizations(this.currentUser.uid)}`, this.httpOptions);
+    getAllUserOrganizations(uid: string): Observable<any> {
+        return this.http.get(`${environment.api}${environment.routes.getUserOrganizations(uid)}`, this.httpOptions);
     }
 
     getAllOrganizations(): Observable<any> {

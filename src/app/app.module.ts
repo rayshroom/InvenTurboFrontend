@@ -11,12 +11,16 @@ import { environment } from 'src/environments/environment';
 import { AppComponent } from './app.component';
 import { FooterComponent } from './components/common/footer/footer.component';
 import { NavComponent } from './components/common/nav/nav.component';
+import { LoadingIconComponent } from './components/common/loading-icon/loading-icon.component';
 import { LandingPageComponent } from './components/views/landing-page/landing-page.component';
 import { RegistrationPageComponent } from './components/views/registration-page/registration-page.component';
 import { LoginPageComponent } from './components/views/login-page/login-page.component';
 import { ForgetPasswordPageComponent } from './components/views/forget-password-page/forget-password-page.component';
 import { DoesNotExistPageComponent } from './components/views/does-not-exist-page/does-not-exist-page.component';
 import { DashboardComponent } from './components/views/dashboard/dashboard.component';
+import { UserProfilePaneComponent } from './components/views/dashboard/user-profile-pane/user-profile-pane.component';
+import { OrganizationListPaneComponent } from './components/views/dashboard/organization-select-pane/organization-select-pane.component';
+import { ActivityFeedPaneComponent } from './components/views/dashboard/activity-feed-pane/activity-feed-pane.component';
 import { OrganizationDashboardComponent } from './components/views/organization-dashboard/organization-dashboard.component';
 import { InventoryPanelComponent } from './components/views/inventory-panel/inventory-panel.component';
 import { TransactionPageComponent } from './components/views/transaction-page/transaction-page.component';
@@ -42,7 +46,11 @@ import { UserOrganizationService } from './services/organization/user-organizati
         OrganizationDashboardComponent,
         InventoryPanelComponent,
         TransactionPageComponent,
-        ItemsListingPageComponent
+        ItemsListingPageComponent,
+        LoadingIconComponent,
+        UserProfilePaneComponent,
+        OrganizationListPaneComponent,
+        ActivityFeedPaneComponent
     ],
     imports: [
         BrowserModule,
