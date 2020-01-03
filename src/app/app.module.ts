@@ -12,6 +12,8 @@ import { AppComponent } from './app.component';
 import { FooterComponent } from './components/common/footer/footer.component';
 import { NavComponent } from './components/common/nav/nav.component';
 import { LoadingIconComponent } from './components/common/loading-icon/loading-icon.component';
+import { InventoryItemCardComponent } from './components/common/inventory-item-card/inventory-item-card.component';
+
 import { LandingPageComponent } from './components/views/landing-page/landing-page.component';
 import { RegistrationPageComponent } from './components/views/registration-page/registration-page.component';
 import { LoginPageComponent } from './components/views/login-page/login-page.component';
@@ -31,6 +33,8 @@ import { AuthGuard } from './services/auth/auth.guard';
 import { InnerGuard } from './services/auth/inner.guard';
 import { UserManagementService } from './services/auth/uam.service';
 import { UserOrganizationService } from './services/organization/user-organization.service';
+import { ProductDetailPageComponent } from './components/views/product-detail-page/product-detail-page.component';
+import { InventoryPanelHeaderComponent } from './components/common/inventory-panel-header/inventory-panel-header.component';
 
 @NgModule({
     declarations: [
@@ -50,7 +54,10 @@ import { UserOrganizationService } from './services/organization/user-organizati
         LoadingIconComponent,
         UserProfilePaneComponent,
         OrganizationListPaneComponent,
-        ActivityFeedPaneComponent
+        ActivityFeedPaneComponent,
+        InventoryItemCardComponent,
+        ProductDetailPageComponent,
+        InventoryPanelHeaderComponent,
     ],
     imports: [
         BrowserModule,

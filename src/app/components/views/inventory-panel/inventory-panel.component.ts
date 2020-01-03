@@ -14,7 +14,6 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 export class InventoryPanelComponent implements OnInit {
     public search: FormGroup;
 
-    public org: UserOrganization;
     public products: ProductStock[];
     public filteredProducts: ProductStock[];
 
@@ -27,11 +26,8 @@ export class InventoryPanelComponent implements OnInit {
         this.search = this.fb.group({
             searchBar: ['']
         });
-        this.org = this.userOrg.getCurrentOrganization();
-        if (!this.org.photoURL) {
-            this.org.photoURL = 'assets/default-org-avatar.png';
-        }
-        this.prodStock.getAllOrganizationProductStock(this.org.oid).subscribe(prod => {
+        const thisorg = this.userOrg.getCurrentOrganization();
+        this.prodStock.getAllOrganizationProductStock(thisorg.oid).subscribe(prod => {
             this.products = prod;
             this.filteredProducts = prod;
         });
@@ -47,10 +43,6 @@ export class InventoryPanelComponent implements OnInit {
         } else {
             this.filteredProducts = this.products;
         }
-    }
-
-    goBack() {
-        this.loc.back();
     }
 
     ngOnInit() {

@@ -1,0 +1,52 @@
+.inventory-card {
+    height: 16em;
+    width: 13em;
+    margin-left: 0.51em;
+    margin-right: 0.5em;
+    margin-bottom: 1em !important;
+    padding: 0 !important;
+    border-radius: 2mm;
+    background-color: white;
+    box-shadow: 2.5px 2.5px 5px 0px rgba(0,0,0,0.5);
+
+}
+
+.inventory-card-photo-wrapper {
+    height: 88%;
+    width: 95%;
+    overflow: hidden;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 0.2em;
+    border-radius: 2mm;
+}
+
+.inventory-card-photo {
+    object-fit: contain;
+    width: 100%;
+    vertical-align: middle;
+    height: 100%;
+}
+
+.inventory-card-body {
+    padding: 0 0.6em;
+    font-size: 0.8em;
+}
+
+.inventory-card-name {
+    float: left;
+    margin-top: 0.5em;
+    font-weight: bold;
+    color: #bf202f;
+}
+
+.inventory-card-quantity {
+    float: right;
+    margin-top: 0.5em;
+    color: #868585;
+}
+
+.inventory-card-quantity-number {
+    color: #bf202f;
+    font-weight: bold;
+}
