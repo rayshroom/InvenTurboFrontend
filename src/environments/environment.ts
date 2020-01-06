@@ -20,8 +20,9 @@ export const environment = {
         getAllOrganization: `/organization`,
 
         getUserOrganizations: uid => `/profile/${uid}/organization`,
-        getOrganizationTransactions: oid => `/organization/${oid}/transaction`,
         getOrganizationProductStocks: oid => `/organization/${oid}/product`,
+        getOneProductStock: (oid, pid) => `/organization/${oid}/product/${pid}`,
+        getOrganizationTransactions: oid => `/organization/${oid}/transaction`,
         getOneTransaction: tid => `/transaction/${tid}`,
         addSimpleTransaction: `/transaction/create`
     },

@@ -1,5 +1,5 @@
 .inventory-card {
-    height: 16em;
+    height: 15em;
     width: 13em;
     margin-left: 0.51em;
     margin-right: 0.5em;
@@ -8,7 +8,14 @@
     border-radius: 2mm;
     background-color: white;
     box-shadow: 2.5px 2.5px 5px 0px rgba(0,0,0,0.5);
+}
 
+.inventory-card:hover {
+    border: 2px solid #bf202f;
+}
+
+.inventory-card:hover .inventory-card-name {
+    color: #bf202f;
 }
 
 .inventory-card-photo-wrapper {
@@ -37,7 +44,7 @@
     float: left;
     margin-top: 0.5em;
     font-weight: bold;
-    color: #bf202f;
+    color: black;
 }
 
 .inventory-card-quantity {

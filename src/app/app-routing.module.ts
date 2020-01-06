@@ -50,6 +50,7 @@ const routes: Routes = [
     {
         path: 'organization/inventory/:pid',
         component: ProductDetailPageComponent,
+        pathMatch: 'full',
         canActivate: [AuthGuard]
     },
     {
@@ -77,7 +78,8 @@ const routes: Routes = [
         canActivate: [AuthGuard],
     },
     { path: '', redirectTo: '/landing', pathMatch: 'full' },
-    { path: '**', component: DoesNotExistPageComponent }
+    { path: 'notfound', component: DoesNotExistPageComponent },
+    { path: '**', redirectTo: '/notfound' }
 ];
 
 @NgModule({

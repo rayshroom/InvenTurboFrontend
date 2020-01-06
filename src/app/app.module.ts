@@ -35,6 +35,9 @@ import { UserManagementService } from './services/auth/uam.service';
 import { UserOrganizationService } from './services/organization/user-organization.service';
 import { ProductDetailPageComponent } from './components/views/product-detail-page/product-detail-page.component';
 import { InventoryPanelHeaderComponent } from './components/common/inventory-panel-header/inventory-panel-header.component';
+import { ProductDetailPaneComponent } from './components/views/product-detail-page/product-detail-pane/product-detail-pane.component';
+import { CornerEditButtonComponent } from './components/common/corner-edit-button/corner-edit-button.component';
+import { InventoryAdjustmentPaneComponent } from './components/views/product-detail-page/inventory-adjustment-pane/inventory-adjustment-pane.component';
 
 @NgModule({
     declarations: [
@@ -58,6 +61,9 @@ import { InventoryPanelHeaderComponent } from './components/common/inventory-pan
         InventoryItemCardComponent,
         ProductDetailPageComponent,
         InventoryPanelHeaderComponent,
+        ProductDetailPaneComponent,
+        CornerEditButtonComponent,
+        InventoryAdjustmentPaneComponent,
     ],
     imports: [
         BrowserModule,

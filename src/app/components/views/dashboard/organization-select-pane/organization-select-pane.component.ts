@@ -15,9 +15,7 @@ export class OrganizationListPaneComponent implements OnInit {
 
     constructor(public auth: AuthService, public userOrg: UserOrganizationService, private router: Router) {
         this.auth.getCurrentUser().pipe(
-            flatMap(user => {
-                return this.userOrg.getAllUserOrganizations(user.uid);
-            })
+            flatMap(user => this.userOrg.getAllUserOrganizations(user.uid))
         ).subscribe(orglinks => {
             orglinks.forEach(org => {
                 if (!org.photoURL) {
