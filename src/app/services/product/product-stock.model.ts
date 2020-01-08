@@ -4,5 +4,5 @@ export class ProductStock {
     name: string;
     description: string;
     photoURL?: string;
-    quantity: number;
+    total_quantity: number;
 }
