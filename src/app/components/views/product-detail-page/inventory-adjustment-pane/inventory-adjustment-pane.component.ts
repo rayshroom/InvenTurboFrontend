@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { LocationInventory } from 'src/app/services/product/product-stock.model';
+import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
 
 @Component({
     selector: 'app-inventory-adjustment-pane',
@@ -6,7 +8,26 @@ import { Component, OnInit } from '@angular/core';
     styleUrls: ['./inventory-adjustment-pane.component.scss']
 })
 export class InventoryAdjustmentPaneComponent implements OnInit {
-    constructor() {}
+    @Input()
+    public invLocs: LocationInventory[];
 
-    ngOnInit() {}
+    public inventoryAdjustmentForm: FormGroup;
+
+    constructor(private fb: FormBuilder) {
+        this.inventoryAdjustmentForm = this.fb.group({
+            inventories: this.fb.array([])
+        });
+    }
+
+    ngOnInit() {
+        const control = (this.inventoryAdjustmentForm.get('inventories') as FormArray);
+        this.invLocs.forEach(loc => control.push(this.fb.group({
+            location: [loc.name],
+            quantity: [loc.quantity]
+        })));
+    }
+
+    onInventoryAdjust() {
+
+    }
 }
