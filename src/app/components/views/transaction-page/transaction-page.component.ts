@@ -23,6 +23,7 @@ export class TransactionPageComponent implements OnInit {
     items: Item[] = [];
     taxRate = 0.13;
     fromCurrent = false;
+    viewTxId: string;
 
     private httpOptions = {
         headers: new HttpHeaders({
@@ -44,6 +45,9 @@ export class TransactionPageComponent implements OnInit {
         this.userOrg.getAllOrganizations().subscribe(orgs => {
             this.orgOther = orgs.filter(o => o.oid !== this.orgCurrent.oid);
         });
+        this.viewTxId = this.activatedRoute.snapshot.paramMap.get('txid');
+        console.log(this.viewTxId);
+        
         this.activatedRoute.queryParams.subscribe(params => {
             if (params.key === 'add') {
                 this.items = this.m.getItems(params.key);
