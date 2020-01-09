@@ -13,6 +13,7 @@ import { InnerGuard } from './services/auth/inner.guard';
 import { InventoryPanelComponent } from './components/views/inventory-panel/inventory-panel.component';
 import { TransactionPageComponent } from './components/views/transaction-page/transaction-page.component';
 import { ItemsListingPageComponent } from './components/views/items-listing-page/items-listing-page.component';
+import { ProductDetailPageComponent } from './components/views/product-detail-page/product-detail-page.component';
 
 const routes: Routes = [
     { path: 'landing', component: LandingPageComponent, pathMatch: 'full' },
@@ -47,6 +48,12 @@ const routes: Routes = [
         canActivate: [AuthGuard]
     },
     {
+        path: 'organization/inventory/:pid',
+        component: ProductDetailPageComponent,
+        pathMatch: 'full',
+        canActivate: [AuthGuard]
+    },
+    {
         path: 'organization/inventory',
         component: InventoryPanelComponent,
         pathMatch: 'full',
@@ -68,10 +75,11 @@ const routes: Routes = [
         path: 'organization/transaction/items/add',
         component: ItemsListingPageComponent,
         pathMatch: 'full',
-        // canActivate: [AuthGuard],
+        canActivate: [AuthGuard],
     },
     { path: '', redirectTo: '/landing', pathMatch: 'full' },
-    { path: '**', component: DoesNotExistPageComponent }
+    { path: 'notfound', component: DoesNotExistPageComponent },
+    { path: '**', redirectTo: '/notfound' }
 ];
 
 @NgModule({

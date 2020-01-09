@@ -1,0 +1,11 @@
+<div class="product-detail-page-wrapper">
+    <app-inventory-panel-header title="Product View"></app-inventory-panel-header>
+    <div *ngIf="product" class="row">
+        <div class="col-lg-5 col-sm-12 mx-auto">
+            <app-product-detail-pane [product]="product"></app-product-detail-pane>
+        </div>
+        <div class="col-lg-5 col-sm-12 mx-auto">
+            <app-inventory-adjustment-pane [invLocs]="product.inventoryByLocation"></app-inventory-adjustment-pane>
+        </div>
+    </div>
+</div>

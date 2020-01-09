@@ -1,0 +1,23 @@
+<form [formGroup]="inventoryAdjustmentForm" (ngSubmit)="onInventoryAdjust()">
+    <div formArrayName="inventories" class="pane-wrapper shadow bg-white rounded login-for mb-3">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Location</th>
+                    <th>Quantity</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let invLoc of inventoryAdjustmentForm.controls.inventories.controls; let i=index" [formGroupName]="i">
+                    <td>{{ invLoc.controls.location.value }}</td>
+                    <td><input id="quantity-{{ i }}" formControlName="quantity" /></td>
+                </tr>
+                <!-- <tr *ngFor="let location of invLocs">
+                    <td>{{ location.name }}</td>
+                    <td>{{ location.quantity }}</td>
+                </tr> -->
+            </tbody>
+        </table>
+    </div>
+    <input type="submit" name="submitBtn" class="btn btn-block btn-danger" value="Click to adjust inventory" />
+</form>

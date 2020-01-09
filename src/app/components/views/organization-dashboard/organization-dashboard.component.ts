@@ -37,7 +37,7 @@ export class OrganizationDashboardComponent implements OnInit {
             }
             this.tms.getAllOrganizationTransactions(this.org.oid).subscribe(transactions => {
                 transactions.forEach(transaction => {
-                    console.log(transaction);
+                    // console.log(transaction);
                     const timestamp = Date.parse(transaction.stringTime);
                     const transactionDate = !isNaN(timestamp) ? new Date(timestamp) : new Date();
 

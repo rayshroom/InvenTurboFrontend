@@ -1,0 +1,19 @@
+<div class="profile-wrapper shadow bg-white rounded login-for mb-2">
+    <h2 class="font-weight-bold">Organizations</h2>
+    <div *ngIf="this.orgs && this.orgs.length > 0; else loadingIcon" class="list-group orglink">
+        <button
+            *ngFor="let org of this.orgs"
+            class="list-group-item shadow-sm p-3 mb-5 bg-white rounded btn btn-link btn-block orglink-item"
+            [ngStyle]="this.getOrglinkItemBackgroundCss(org.photoBackground)"
+            (click)="onClickOrglinkItem(org)"
+        >
+            <div class="orglink-item-photo-wrapper">
+                <img class="orglink-item-photo" src="{{ org.photoURL }}"/>
+            </div>
+            <span class="orglink-item-name">{{ org.name }}</span>
+        </button>
+    </div>
+    <ng-template #loadingIcon>
+        <app-loading-icon></app-loading-icon>
+    </ng-template>
+</div>
