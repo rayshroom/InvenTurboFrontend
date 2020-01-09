@@ -1,9 +1,88 @@
 .pane-wrapper {
     padding: 1em;
     border-radius: 3mm !important;
+    height: 29em;
 }
 
-table > tr > *:last-child {
-    text-align: center !important;
-    width: 50%;
+table {
+    border-collapse: separate;
+    border-spacing: 0 1em;
+    margin: -2em 0 0 0;
 }
+
+table > tbody > tr {
+    box-shadow: 2px 2px 5px 0px rgba(192, 192, 192, 0.75);
+    border-radius: 1cm;
+}
+
+table > thead > tr > th {
+    border-top: none;
+    color: var(--gray);
+    font-size: 15px;
+    padding-bottom: 0.2em;
+}
+
+table > tbody > tr > td {
+    border: none;
+    padding: 0.5em 1.25em;
+}
+
+table tr > *:last-child {
+    text-align: center !important;
+    width: 40%;
+}
+
+table > thead > tr > th:first-child {
+    padding-left: 1.5em;
+}
+
+table > tbody > tr > td:first-child {
+    vertical-align: middle;
+}
+
+table > tbody > tr > td:first-child > span {
+    margin: 0;
+}
+
+.inventory-controller {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.inventory-controller > input {
+    border: dashed 1px #bdbdbd;
+    text-align: center;
+    padding: 0 0.25em;
+    width: 3em;
+    height: 2em;
+    margin-left: 0.35em;
+    margin-right: 0.35em;
+}
+
+.inventory-controller .fas {
+    font-size: 1.55em;
+}
+
+.modified-indicator {
+    font-size: 15px;
+}
+
+.positive-modified {
+    color: #31BF20;
+}
+
+.negative-modified {
+    color: #BF202F;
+}
+
+input[type="number"] {
+    -webkit-appearance: textfield;
+       -moz-appearance: textfield;
+            appearance: textfield;
+  }
+  input[type=number]::-webkit-inner-spin-button,
+  input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+  }

@@ -1,5 +1,5 @@
 <form [formGroup]="inventoryAdjustmentForm" (ngSubmit)="onInventoryAdjust()">
-    <div formArrayName="inventories" class="pane-wrapper shadow bg-white rounded login-for mb-3">
+    <div formArrayName="inventories" class="pane-wrapper form-group shadow bg-white rounded login-for mb-3">
         <table class="table">
             <thead>
                 <tr>
@@ -9,15 +9,27 @@
             </thead>
             <tbody>
                 <tr *ngFor="let invLoc of inventoryAdjustmentForm.controls.inventories.controls; let i=index" [formGroupName]="i">
-                    <td>{{ invLoc.controls.location.value }}</td>
-                    <td><input id="quantity-{{ i }}" formControlName="quantity" /></td>
+                    <td>
+                        <span>{{ invLoc.controls.name.value }}</span><br>
+                        <span *ngIf="invLoc.controls.changedValue.value != 0" class="positive-modified">&nbsp;</span>
+                    </td>
+                    <td>
+                        <div class="inventory-controller">
+                            <i class="fas fa-minus-circle negative-modified" (click)="decrementQuantity(invLoc)"></i>
+                            <input id="quantity-{{i}}" type="number" class="form-control" formControlName="quantity" (change)="onChangeQuantity(invLoc, i)" />
+                            <i class="fas fa-plus-circle positive-modified" (click)="incrementQuantity(invLoc)"></i>
+                        </div>
+                        <div *ngIf="invLoc.controls.changedValue.value != 0" class="modified-indicator">
+                            {{ inventoryByLocations[i].quantity }}
+                            <span *ngIf="invLoc.controls.changedValue.value > 0; else negative" class="positive-modified">+ {{ invLoc.controls.changedValue.value }}</span>
+                            <ng-template #negative>
+                                <span class="negative-modified">- {{ invLoc.controls.changedValue.value * (-1) }}</span>
+                            </ng-template>
+                        </div>
+                    </td>
                 </tr>
-                <!-- <tr *ngFor="let location of invLocs">
-                    <td>{{ location.name }}</td>
-                    <td>{{ location.quantity }}</td>
-                </tr> -->
             </tbody>
         </table>
     </div>
-    <input type="submit" name="submitBtn" class="btn btn-block btn-danger" value="Click to adjust inventory" />
+    <input type="submit" name="submitBtn" [ngClass]="submitBtnClasses" [value]="submitBtnMessage" />
 </form>
