@@ -27,6 +27,8 @@ import { AuthGuard } from './services/auth/auth.guard';
 import { InnerGuard } from './services/auth/inner.guard';
 import { UserManagementService } from './services/auth/uam.service';
 import { UserOrganizationService } from './services/organization/user-organization.service';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { InventoryDetailOverlayComponent } from './components/views/inventory-detail-overlay/inventory-detail-overlay.component';
 
 @NgModule({
     declarations: [
@@ -42,7 +44,8 @@ import { UserOrganizationService } from './services/organization/user-organizati
         OrganizationDashboardComponent,
         InventoryPanelComponent,
         TransactionPageComponent,
-        ItemsListingPageComponent
+        ItemsListingPageComponent,
+        InventoryDetailOverlayComponent
     ],
     imports: [
         BrowserModule,
@@ -51,7 +54,8 @@ import { UserOrganizationService } from './services/organization/user-organizati
         HttpClientModule,
         AngularFireModule.initializeApp(environment.firebase),
         AngularFirestoreModule,
-        AngularFireAuthModule
+        AngularFireAuthModule,
+        NgbModule,
     ],
     providers: [
         AuthService,
@@ -60,6 +64,7 @@ import { UserOrganizationService } from './services/organization/user-organizati
         UserManagementService,
         UserOrganizationService
     ],
-    bootstrap: [AppComponent]
+    bootstrap: [AppComponent],
+    entryComponents: [ InventoryDetailOverlayComponent ],
 })
 export class AppModule {}

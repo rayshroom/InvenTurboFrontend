@@ -14,11 +14,10 @@ export const environment = {
         appId: '1:216500507265:web:ef43d619b4ac117655f380',
         measurementId: 'G-3FKLY60L44'
     },
-    api: 'http://localhost:8080/api',
+    api: 'https://inventurbo-api.herokuapp.com/api',
     routes: {
         register: '/user/register',
         getAllOrganization: `/organization`,
-
         getUserOrganizations: uid => `/profile/${uid}/organization`,
         getOrganizationTransactions: oid => `/organization/${oid}/transaction`,
         getOrganizationProductStocks: oid => `/organization/${oid}/product`,

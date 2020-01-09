@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { UserOrganization } from 'src/app/services/organization/user-organization.model';
 import { UserOrganizationService } from 'src/app/services/organization/user-organization.service';
 import { ProductStock } from 'src/app/services/product/product-stock.model';
 import { ProductStockService } from 'src/app/services/product/product-stock.service';
 import { Location } from '@angular/common';
 import { FormGroup, FormBuilder } from '@angular/forms';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { InventoryDetailOverlayComponent } from 'src/app/components/views/inventory-detail-overlay/inventory-detail-overlay.component';
 
 @Component({
     selector: 'app-inventory-panel',
@@ -23,6 +25,7 @@ export class InventoryPanelComponent implements OnInit {
         private loc: Location,
         public userOrg: UserOrganizationService,
         public prodStock: ProductStockService,
+        private modalService: NgbModal,
     ) {
         this.search = this.fb.group({
             searchBar: ['']
@@ -35,6 +38,8 @@ export class InventoryPanelComponent implements OnInit {
             this.products = prod;
             this.filteredProducts = prod;
         });
+
+        
     }
 
     filterItems() {
@@ -54,5 +59,11 @@ export class InventoryPanelComponent implements OnInit {
     }
 
     ngOnInit() {
+    }
+
+    openDetailOverlay(product: ProductStock) {
+        const modalRef = this.modalService.open(InventoryDetailOverlayComponent);
+        modalRef.componentInstance.item = product;
+        console.log(product);
     }
 }

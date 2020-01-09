@@ -36,7 +36,7 @@
     </div>
     <div class="row">
         <div class="inventory-grid">
-            <div *ngFor="let item of this.filteredProducts" class="inventory-card">
+            <div *ngFor="let item of this.filteredProducts" class="inventory-card"  (click)="openDetailOverlay(item)">
                 <div class="inventory-card-photo-wrapper">
                     <img class="inventory-card-photo" src="{{ item.photoURL }}" alt="{{ item.name }}" />
                 </div>
