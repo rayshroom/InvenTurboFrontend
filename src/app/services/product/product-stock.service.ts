@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { catchError } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { LocationInventory } from './product-stock.model';
 
 @Injectable({
     providedIn: 'root'
@@ -37,6 +38,14 @@ export class ProductStockService {
             `${
                 environment.api
             }${environment.routes.getOrganizationProductStocks(oid)}`,
+            this.httpOptions
+        );
+    }
+
+    updateOneProductStock(oid: string, pid: string, locInvData: LocationInventory[]): Observable<any> {
+        return this.http.put<any>(
+            `${environment.api}${environment.routes.updateOneProductStock(oid, pid)}`,
+            locInvData,
             this.httpOptions
         );
     }

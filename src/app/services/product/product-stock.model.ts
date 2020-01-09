@@ -1,6 +1,7 @@
 export class LocationInventory {
-    name: string;
-    address: string;
+    locid: string;
+    name?: string;
+    address?: string;
     quantity: number;
 }
 
