@@ -9,11 +9,14 @@ import { DashboardComponent } from './components/views/dashboard/dashboard.compo
 import { OrganizationDashboardComponent } from './components/views/organization-dashboard/organization-dashboard.component';
 
 import { AuthGuard } from './services/auth/auth.guard';
-import { InnerGuard } from './services/auth/inner.guard';
 import { InventoryPanelComponent } from './components/views/inventory-panel/inventory-panel.component';
 import { TransactionPageComponent } from './components/views/transaction-page/transaction-page.component';
 import { ItemsListingPageComponent } from './components/views/items-listing-page/items-listing-page.component';
 import { ProductDetailPageComponent } from './components/views/product-detail-page/product-detail-page.component';
+import { UnverifiedEmailPageComponent } from './components/views/unverified-email-page/unverified-email-page.component';
+import { AuthVerifyGuard } from './services/auth/auth-verify.guard';
+import { LoggedInGuard } from './services/auth/logged-in.guard';
+import { EmailVerifiedGuard } from './services/auth/email-verified.guard';
 
 const routes: Routes = [
     { path: 'landing', component: LandingPageComponent, pathMatch: 'full' },
@@ -21,69 +24,74 @@ const routes: Routes = [
         path: 'login',
         component: LoginPageComponent,
         pathMatch: 'full',
-        canActivate: [InnerGuard]
+        canActivate: [LoggedInGuard]
     },
     {
         path: 'register',
         component: RegistrationPageComponent,
         pathMatch: 'full',
-        canActivate: [InnerGuard]
+        canActivate: [LoggedInGuard]
     },
     {
         path: 'forget',
         component: ForgetPasswordPageComponent,
         pathMatch: 'full',
-        canActivate: [InnerGuard]
+        canActivate: [LoggedInGuard]
     },
     {
         path: 'dashboard',
         component: DashboardComponent,
         pathMatch: 'full',
-        canActivate: [AuthGuard]
+        canActivate: [AuthVerifyGuard]
     },
     {
         path: 'organization',
         component: OrganizationDashboardComponent,
         pathMatch: 'full',
-        canActivate: [AuthGuard]
+        canActivate: [AuthVerifyGuard]
     },
     {
         path: 'organization/inventory/:pid',
         component: ProductDetailPageComponent,
         pathMatch: 'full',
-        canActivate: [AuthGuard]
+        canActivate: [AuthVerifyGuard]
     },
     {
         path: 'organization/inventory',
         component: InventoryPanelComponent,
         pathMatch: 'full',
-        canActivate: [AuthGuard]
+        canActivate: [AuthVerifyGuard]
     },
     {
         path: 'organization/transaction/new',
         component: TransactionPageComponent,
         pathMatch: 'full',
-        canActivate: [AuthGuard]
+        canActivate: [AuthVerifyGuard]
     },
     {
         path: 'organization/transaction/view/:txid',
         component: TransactionPageComponent,
         pathMatch: 'full',
-        canActivate: [AuthGuard],
+        canActivate: [AuthVerifyGuard]
     },
     {
         path: 'organization/transaction/items/add',
         component: ItemsListingPageComponent,
         pathMatch: 'full',
-        canActivate: [AuthGuard],
+        canActivate: [AuthVerifyGuard]
     },
     { path: '', redirectTo: '/landing', pathMatch: 'full' },
+    {
+        path: 'welcome',
+        component: UnverifiedEmailPageComponent,
+        canActivate: [EmailVerifiedGuard]
+    },
     { path: 'notfound', component: DoesNotExistPageComponent },
     { path: '**', redirectTo: '/notfound' }
 ];
 
 @NgModule({
-    imports: [RouterModule.forRoot(routes/*, { useHash: true }*/)],
+    imports: [RouterModule.forRoot(routes /*, { useHash: true }*/)],
     exports: [RouterModule]
 })
 export class AppRoutingModule {}

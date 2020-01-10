@@ -1,0 +1,75 @@
+.page-wrapper {
+    // height: 82.5vh;
+    height: 77.5vh;
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    align-content: center;
+}
+
+.title {
+    font-weight: bold;
+    text-align: center;
+}
+
+a.red {
+    color: #bf202f;
+}
+
+p {
+    text-align: center;
+}
+
+.separator {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    font-size: 20px;
+}
+
+.separator::before, .separator::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid rgb(80, 80, 80);
+}
+.separator::before {
+    margin-right: 0.5em;
+    margin-left: 3em;
+}
+.separator::after {
+    margin-left: 0.5em;
+    margin-right: 3em;
+}
+
+.resend-btn {
+    text-align: center;
+    width: 32.5em;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 1em;
+    margin-bottom: 3em;
+    font-weight: bold;
+}
+
+.resend-btn:disabled {
+    cursor: not-allowed;
+}
+
+.user-email {
+    unicode-bidi: embed;
+    font-family: monospace;
+    white-space: pre;
+    font-size: 18px;
+}
+
+.logo-wrapper {
+    height: 10em;
+    margin-bottom: 1em;
+}
+
+.logo {
+    object-fit: contain;
+    width: 100%;
+    vertical-align: middle;
+    height: 100%;
+}

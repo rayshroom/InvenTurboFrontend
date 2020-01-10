@@ -1,5 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { LocationInventory, ProductStock } from 'src/app/services/product/product-stock.model';
+import {
+    LocationInventory,
+    ProductStock
+} from 'src/app/services/product/product-stock.model';
 import { FormGroup, FormBuilder, FormArray, FormControl } from '@angular/forms';
 import { ProductStockService } from 'src/app/services/product/product-stock.service';
 import { UserOrganizationService } from 'src/app/services/organization/user-organization.service';
@@ -18,7 +21,13 @@ export class InventoryAdjustmentPaneComponent implements OnInit {
 
     public inventoryAdjustmentForm: FormGroup;
     public submitBtnMessage = 'Save inventory adjustment';
-    public submitBtnClasses = ['font-weight-bold', 'btn', 'btn-block', 'btn-lg', 'btn-danger'];
+    public submitBtnClasses = [
+        'font-weight-bold',
+        'btn',
+        'btn-block',
+        'btn-lg',
+        'btn-danger'
+    ];
 
     public currentOrg: UserOrganization;
 
@@ -67,7 +76,7 @@ export class InventoryAdjustmentPaneComponent implements OnInit {
         }
     }
 
-    onChangeQuantity(invLoc: FormControl, index: number) {
+    onChangeQuantity(event, invLoc: FormControl, index: number) {
         const newVal = invLoc.get('quantity').value;
         const oldVal = this.inventoryByLocations[index].quantity;
         if (newVal > 0) {
@@ -81,11 +90,19 @@ export class InventoryAdjustmentPaneComponent implements OnInit {
     onInventoryAdjust() {
         this.submitBtnMessage = 'Saving...';
         this.submitBtnClasses[4] = 'btn-warning';
-        const newInventoryData = this.inventoryAdjustmentForm.value.inventories.map(loc => ({ locid: loc.locid, quantity: loc.quantity }));
-        this.psService.updateOneProductStock(this.currentOrg.oid, this.product.pid, newInventoryData).subscribe(result => {
-            this.submitBtnMessage = 'Inventory updated!';
-            this.submitBtnClasses[4] = 'btn-success';
-            setTimeout(() => this.loc.back(), 1500);
-        });
+        const newInventoryData = this.inventoryAdjustmentForm.value.inventories.map(
+            loc => ({ locid: loc.locid, quantity: loc.quantity })
+        );
+        this.psService
+            .updateOneProductStock(
+                this.currentOrg.oid,
+                this.product.pid,
+                newInventoryData
+            )
+            .subscribe(result => {
+                this.submitBtnMessage = 'Inventory updated!';
+                this.submitBtnClasses[4] = 'btn-success';
+                setTimeout(() => this.loc.back(), 1500);
+            });
     }
 }
