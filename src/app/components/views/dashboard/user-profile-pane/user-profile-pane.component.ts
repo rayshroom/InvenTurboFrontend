@@ -7,7 +7,6 @@ import { AuthService } from 'src/app/services/auth/auth.service';
     styleUrls: ['./user-profile-pane.component.scss']
 })
 export class UserProfilePaneComponent implements OnInit {
-    @Input()
     public user: firebase.User;
 
     constructor(public auth: AuthService) {

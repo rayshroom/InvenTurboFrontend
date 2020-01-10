@@ -14,6 +14,7 @@ import { InventoryPanelComponent } from './components/views/inventory-panel/inve
 import { TransactionPageComponent } from './components/views/transaction-page/transaction-page.component';
 import { ItemsListingPageComponent } from './components/views/items-listing-page/items-listing-page.component';
 import { ProductDetailPageComponent } from './components/views/product-detail-page/product-detail-page.component';
+import { UnverifiedEmailPageComponent } from './components/views/unverified-email-page/unverified-email-page.component';
 
 const routes: Routes = [
     { path: 'landing', component: LandingPageComponent, pathMatch: 'full' },
@@ -78,6 +79,7 @@ const routes: Routes = [
         canActivate: [AuthGuard],
     },
     { path: '', redirectTo: '/landing', pathMatch: 'full' },
+    { path: 'email-unverified', component: UnverifiedEmailPageComponent },
     { path: 'notfound', component: DoesNotExistPageComponent },
     { path: '**', redirectTo: '/notfound' }
 ];

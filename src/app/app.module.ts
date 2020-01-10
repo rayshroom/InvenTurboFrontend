@@ -38,6 +38,7 @@ import { InventoryPanelHeaderComponent } from './components/common/inventory-pan
 import { ProductDetailPaneComponent } from './components/views/product-detail-page/product-detail-pane/product-detail-pane.component';
 import { CornerEditButtonComponent } from './components/common/corner-edit-button/corner-edit-button.component';
 import { InventoryAdjustmentPaneComponent } from './components/views/product-detail-page/inventory-adjustment-pane/inventory-adjustment-pane.component';
+import { UnverifiedEmailPageComponent } from './components/views/unverified-email-page/unverified-email-page.component';
 
 @NgModule({
     declarations: [
@@ -64,6 +65,7 @@ import { InventoryAdjustmentPaneComponent } from './components/views/product-det
         ProductDetailPaneComponent,
         CornerEditButtonComponent,
         InventoryAdjustmentPaneComponent,
+        UnverifiedEmailPageComponent,
     ],
     imports: [
         BrowserModule,

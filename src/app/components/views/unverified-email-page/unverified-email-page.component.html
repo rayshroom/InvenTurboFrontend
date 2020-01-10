@@ -1,0 +1,6 @@
+<div class="page-wrapper">
+    <h1 class="title">Your email has not been verified</h1>
+    <p *ngIf="user">Please check your email <a href="mailto:{{ user.email }}" class="user-email">{{ user.email }}</a> for the account verification link.</p>
+    <div class="separator">OR</div>
+    <button [ngClass]="resendBtnClasses" (click)="onResendVerificationEmail()" [disabled]="resendBtnDisabled">{{ this.resendBtnMessage }}</button>
+</div>
