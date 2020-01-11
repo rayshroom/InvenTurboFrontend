@@ -7,11 +7,11 @@ import { Observable } from 'rxjs';
 
 @Injectable()
 export class AuthService {
-    getCurrentUser() {
-        return this.afAuth.user;
+    constructor(private afAuth: AngularFireAuth, private router: Router) {
     }
 
-    constructor(private afAuth: AngularFireAuth, private router: Router) {
+    getCurrentUser() {
+        return this.afAuth.user;
     }
 
     async doGoogleLogin() {
@@ -28,5 +28,9 @@ export class AuthService {
     async doLogout() {
         await this.afAuth.auth.signOut();
         this.router.navigate(['/']);
+    }
+
+    async doForgetPassword(email: string) {
+        return this.afAuth.auth.sendPasswordResetEmail(email);
     }
 }
