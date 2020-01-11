@@ -22,7 +22,7 @@ export class UnverifiedEmailPageComponent implements OnInit {
     async onResendVerificationEmail() {
         this.resendBtnMessage = 'Sending...';
         this.resendBtnClasses[0] =  'btn-warning';
-        //  await this.user.sendEmailVerification();
+        await this.user.sendEmailVerification();
         this.resendBtnMessage = 'Verification email sent';
         this.resendBtnClasses[0] = 'btn-success';
         this.resendBtnDisabled = true;

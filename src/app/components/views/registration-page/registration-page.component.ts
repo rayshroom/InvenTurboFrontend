@@ -4,6 +4,8 @@ import { UserManagementService } from 'src/app/services/auth/uam.service';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
+import { flatMap } from 'rxjs/operators';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 @Component({
     selector: 'app-registration-page',
@@ -19,6 +21,7 @@ export class RegistrationPageComponent implements OnInit {
 
     constructor(
         public authService: AuthService,
+        public afAuth: AngularFireAuth,
         public uam: UserManagementService,
         private router: Router,
         private fb: FormBuilder
@@ -45,12 +48,17 @@ export class RegistrationPageComponent implements OnInit {
     }
 
     onPersonalRegister() {
-        this.uam.doRegister(this.registerFormPersonal.value).subscribe(
-            _ => {
-                this.router.navigate(['/']);
+        const formData = this.registerFormPersonal.value;
+        this.uam.doRegister(formData).pipe(
+            flatMap(() => this.authService.doLogin(formData)),
+            flatMap(() => this.authService.getCurrentUser()),
+            flatMap(user => user.sendEmailVerification())
+        ).subscribe(
+            () => {
+                this.router.navigate(['/welcome']);
             },
             (err: HttpErrorResponse) => {
-                this.errorMessage = err.error.message;
+                this.errorMessage = err.message;
             }
         );
     }

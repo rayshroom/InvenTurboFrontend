@@ -1,4 +1,4 @@
-<form [formGroup]="inventoryAdjustmentForm" (ngSubmit)="onInventoryAdjust()">
+<form [formGroup]="inventoryAdjustmentForm">
     <div formArrayName="inventories" class="pane-wrapper form-group shadow bg-white rounded login-for mb-3">
         <table class="table">
             <thead>
@@ -16,7 +16,7 @@
                     <td>
                         <div class="inventory-controller">
                             <i class="fas fa-minus-circle negative-modified" (click)="decrementQuantity(invLoc)"></i>
-                            <input id="quantity-{{i}}" type="number" class="form-control" formControlName="quantity" (change)="onChangeQuantity(invLoc, i)" />
+                            <input id="quantity-{{i}}" type="number" class="form-control" formControlName="quantity" (change)="onChangeQuantity($event, invLoc, i)" />
                             <i class="fas fa-plus-circle positive-modified" (click)="incrementQuantity(invLoc)"></i>
                         </div>
                         <div *ngIf="invLoc.controls.changedValue.value != 0" class="modified-indicator">
@@ -31,5 +31,5 @@
             </tbody>
         </table>
     </div>
-    <input type="submit" name="submitBtn" [ngClass]="submitBtnClasses" [value]="submitBtnMessage" />
+    <button type="button" [ngClass]="submitBtnClasses" (click)="onInventoryAdjust()">{{ submitBtnMessage }}</button>
 </form>

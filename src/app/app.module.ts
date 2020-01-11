@@ -30,7 +30,8 @@ import { ItemsListingPageComponent } from './components/views/items-listing-page
 
 import { AuthService } from './services/auth/auth.service';
 import { AuthGuard } from './services/auth/auth.guard';
-import { InnerGuard } from './services/auth/inner.guard';
+import { AuthVerifyGuard } from './services/auth/auth-verify.guard';
+import { LoggedInGuard } from './services/auth/logged-in.guard';
 import { UserManagementService } from './services/auth/uam.service';
 import { UserOrganizationService } from './services/organization/user-organization.service';
 import { ProductDetailPageComponent } from './components/views/product-detail-page/product-detail-page.component';
@@ -79,7 +80,8 @@ import { UnverifiedEmailPageComponent } from './components/views/unverified-emai
     providers: [
         AuthService,
         AuthGuard,
-        InnerGuard,
+        AuthVerifyGuard,
+        LoggedInGuard,
         UserManagementService,
         UserOrganizationService
     ],

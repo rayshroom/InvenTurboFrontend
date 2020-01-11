@@ -1,5 +1,6 @@
 .page-wrapper {
-    height: 70vh;
+    // height: 82.5vh;
+    height: 77.5vh;
     display: flex;
     flex-flow: column wrap;
     justify-content: center;
@@ -9,6 +10,10 @@
 .title {
     font-weight: bold;
     text-align: center;
+}
+
+a.red {
+    color: #bf202f;
 }
 
 p {
@@ -42,7 +47,12 @@ p {
     margin-left: auto;
     margin-right: auto;
     margin-top: 1em;
+    margin-bottom: 3em;
     font-weight: bold;
+}
+
+.resend-btn:disabled {
+    cursor: not-allowed;
 }
 
 .user-email {
@@ -50,4 +60,16 @@ p {
     font-family: monospace;
     white-space: pre;
     font-size: 18px;
+}
+
+.logo-wrapper {
+    height: 10em;
+    margin-bottom: 1em;
+}
+
+.logo {
+    object-fit: contain;
+    width: 100%;
+    vertical-align: middle;
+    height: 100%;
 }
