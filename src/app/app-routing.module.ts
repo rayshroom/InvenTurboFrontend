@@ -17,6 +17,7 @@ import { UnverifiedEmailPageComponent } from './components/views/unverified-emai
 import { AuthVerifyGuard } from './services/auth/auth-verify.guard';
 import { LoggedInGuard } from './services/auth/logged-in.guard';
 import { EmailVerifiedGuard } from './services/auth/email-verified.guard';
+import { AccountSettingPageComponent } from './components/views/account-setting-page/account-setting-page.component';
 
 const routes: Routes = [
     { path: 'landing', component: LandingPageComponent, pathMatch: 'full' },
@@ -37,6 +38,12 @@ const routes: Routes = [
         component: ForgetPasswordPageComponent,
         pathMatch: 'full',
         canActivate: [LoggedInGuard]
+    },
+    {
+        path: 'account',
+        component: AccountSettingPageComponent,
+        pathMatch: 'full',
+        canActivate: [AuthGuard]
     },
     {
         path: 'dashboard',

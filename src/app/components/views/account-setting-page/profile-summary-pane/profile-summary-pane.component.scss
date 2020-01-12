@@ -1,0 +1,50 @@
+.pane-wrapper {
+    padding: 0.25em 0.65em;
+    border-radius: 3mm !important;
+    margin-bottom: 25px !important;
+}
+
+.profile-photo-wrapper {
+    position: relative;
+}
+
+.descriptive-text {
+    position: absolute;
+    top: 45%;
+    left: 18%;
+    display: none;
+    color: white;
+    cursor: pointer;
+}
+
+.descriptive-text:hover {
+    display: inline;
+}
+
+.profile-photo:hover {
+    filter: brightness(50%);
+    cursor: pointer;
+}
+
+.profile-photo:hover ~ .descriptive-text {
+    position: absolute;
+    top: 45%;
+    left: 18%;
+    display: inline;
+    color: white;
+}
+
+.darken {
+    filter: brightness(50%);
+}
+
+.profile-name {
+    color: black;
+    font-weight: bold;
+    font-size: 22px;
+}
+
+p {
+    text-align: center;
+    margin-bottom: 0.5em;
+}

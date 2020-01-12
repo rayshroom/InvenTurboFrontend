@@ -40,6 +40,10 @@ import { ProductDetailPaneComponent } from './components/views/product-detail-pa
 import { CornerEditButtonComponent } from './components/common/corner-edit-button/corner-edit-button.component';
 import { InventoryAdjustmentPaneComponent } from './components/views/product-detail-page/inventory-adjustment-pane/inventory-adjustment-pane.component';
 import { UnverifiedEmailPageComponent } from './components/views/unverified-email-page/unverified-email-page.component';
+import { AccountSettingPageComponent } from './components/views/account-setting-page/account-setting-page.component';
+import { ProfileSummaryPaneComponent } from './components/views/account-setting-page/profile-summary-pane/profile-summary-pane.component';
+import { ProfileDetailPaneComponent } from './components/views/account-setting-page/profile-detail-pane/profile-detail-pane.component';
+import { CredentialPaneComponent } from './components/views/account-setting-page/credential-pane/credential-pane.component';
 
 @NgModule({
     declarations: [
@@ -67,6 +71,10 @@ import { UnverifiedEmailPageComponent } from './components/views/unverified-emai
         CornerEditButtonComponent,
         InventoryAdjustmentPaneComponent,
         UnverifiedEmailPageComponent,
+        AccountSettingPageComponent,
+        ProfileSummaryPaneComponent,
+        ProfileDetailPaneComponent,
+        CredentialPaneComponent,
     ],
     imports: [
         BrowserModule,

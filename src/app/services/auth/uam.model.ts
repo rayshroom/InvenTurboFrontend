@@ -1,10 +1,10 @@
-export class User {
+export class Profile {
     title?: string;
     firstName: string;
     lastName: string;
-    bio?: string;
-    email: string;
+    bio: string;
+    email?: string;
     phoneNumber?: string;
-    password: string;
-    displayName: string;
+    password?: string;
+    displayName?: string;
 }

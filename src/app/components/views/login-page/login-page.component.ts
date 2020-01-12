@@ -40,6 +40,7 @@ export class LoginPageComponent implements OnInit {
                 break;
             default:
                 this.errorMessage = err.message;
+                this.loginForm.get('password').setValue('');
             }
         }
     }

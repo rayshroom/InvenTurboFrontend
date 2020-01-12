@@ -3,7 +3,7 @@
         <div class="col-8">
             <h2 class="font-weight-bold">Hello, {{ this.user.displayName }}!</h2>
             <p class="profile-greeting-subtext">Last login: {{ this.user.metadata.lastSignInTime | date: 'short' }}</p>
-            <a routerLink="/"><app-corner-edit-button></app-corner-edit-button></a>
+            <a routerLink="/account"><app-corner-edit-button></app-corner-edit-button></a>
         </div>
         <div class="col-4">
             <img *ngIf="this.user.photoURL; else defaultAvatar" class="w-100" src="this.user.photoURL"/>
