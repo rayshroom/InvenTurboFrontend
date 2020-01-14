@@ -15,6 +15,7 @@
 
 .search-field {
     display: inline-block;
+    border-radius: 3cm;
     width: 65%;
 }
 
@@ -30,4 +31,45 @@
     flex-flow: row wrap;
     justify-content: center;
     padding: 1em 3em;
+}
+
+.add-inventory-button {
+    height: 15em;
+    width: 13em;
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+    margin-bottom: 1em !important;
+    padding: 1em !important;
+    border-radius: 2mm;
+    background-color: white;
+    box-shadow: 2.5px 2.5px 5px 0px rgba(0,0,0,0.5);
+}
+
+.add-inventory-button:hover {
+    border: 2px solid #007BFF;
+}
+
+.dash-box {
+    display: flex;
+    flex-flow: wrap row;
+    justify-content: center;
+    align-items: center;
+    border: 1px dashed rgba(75, 75, 75, 0.5);
+    height: 100%;
+}
+
+.dash-box:hover {
+    cursor: pointer;
+}
+
+.dash-box-content {
+    display: inline-block;
+    width: 75px;
+    height: 75px;
+    background:
+        linear-gradient(rgba(75, 75, 75, 0.5),rgba(75, 75, 75, 0.5)),
+        linear-gradient(rgba(75, 75, 75, 0.5),rgba(75, 75, 75, 0.5));
+    background-position: center;
+    background-size: 50% 2px, 2px 50%;
+    background-repeat: no-repeat;
 }

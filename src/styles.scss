@@ -20,3 +20,27 @@ p {
     height: 100vh !important;
     background-color: #F9F8F7;
 }
+
+button:disabled {
+    cursor: not-allowed;
+}
+
+.pre-scrollable {
+    overflow-y: auto !important;
+}
+
+.pre-scrollable::-webkit-scrollbar {
+    width: 0.5em;
+}
+
+.pre-scrollable::-webkit-scrollbar-track {
+    background-color: rgb(225, 225, 225);
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    border-radius: 1cm;
+}
+
+.pre-scrollable::-webkit-scrollbar-thumb {
+    background-color: #BF202F;
+    outline: 2px solid rgb(128, 23, 33);
+    border-radius: 1cm;
+}

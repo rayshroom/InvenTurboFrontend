@@ -16,6 +16,13 @@
     </div>
     <div class="row">
         <div class="inventory-grid">
+            <div class="add-inventory-button">
+                <a routerLink="/organization/inventory/add-product">
+                    <div class="dash-box">
+                        <div class="dash-box-content"></div>
+                    </div>
+                </a>
+            </div>
             <ng-container *ngFor="let item of this.filteredProducts">
                 <a [routerLink]="['/organization/inventory', item.pid]">
                     <app-inventory-item-card [productItem]="item"></app-inventory-item-card>

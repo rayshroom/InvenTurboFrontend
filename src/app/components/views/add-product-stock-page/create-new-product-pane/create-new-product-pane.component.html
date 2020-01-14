@@ -1,0 +1,62 @@
+<div class="pane-wrapper shadow bg-white">
+    <h3 class="title">Create new product</h3>
+    <form [formGroup]="addForm">
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <input type="text" formControlName="name" placeholder="Name (short, unique)" class="form-control" />
+                </div>
+            </div>
+            <div class="col-md-6">
+                <!-- <div class="form-group">
+                    <input type="number" step="0.1" formControlName="unitPrice" placeholder="Unit Price (Optional)" class="form-control unitPriceValue" />
+                    <span class="unitPriceUnit">CAD</span>
+                </div> -->
+                <div class="custom-file">
+                    <input
+                        type="file"
+                        accept="image/*"
+                        formControlName="image"
+                        (change)="loadImage($event.target.files[0])"
+                        class="custom-file-input"
+                        id="imageFileInput"
+                    />
+                    <label class="custom-file-label" for="imageFileInput" style="overflow: hidden;">
+                        {{ localProductImage.url ? localProductImage.filename : 'Product image' }}
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <textarea formControlName="description" class="form-control description" placeholder="Description"></textarea>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="preview-area">
+                    <h4>Image Preview:</h4>
+                    <div class="preview-image-wrapper" *ngIf="localProductImage.url; else emptyWrapper">
+                        <img class="product-image" [src]="localProductImage.url" />
+                    </div>
+                    <ng-template #emptyWrapper>
+                        <div class="preview-image-wrapper empty-image-wrapper">
+                            <i class="fas fa-camera fa-3x"></i>
+                            <span>Select an image above</span>
+                        </div>
+                    </ng-template>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<button
+    [ngClass]="submitBtn.classes"
+    (click)="onSubmit()"
+    [disabled]="!addForm.valid"
+>
+    {{ submitBtn.message }}
+</button>

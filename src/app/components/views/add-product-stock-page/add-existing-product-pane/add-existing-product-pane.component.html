@@ -1,0 +1,38 @@
+<div class="pane-wrapper">
+    <h3 class="title">Search existing products</h3>
+    <form
+    [formGroup]="searchForm"
+    (keyup)="filterItems()"
+    class="search-form"
+    >
+        <div class="form-group search-bar">
+            <i class="fas fa-search fa-2x search-bar-icon"></i>
+            <input formControlName="searchBar" class="form-control search-field" type="text" placeholder="Search by ID, name, description..." aria-label="Search">
+        </div>
+    </form>
+    <div class="search-result-wrapper">
+        <div class="search-result pre-scrollable">
+            <ng-container *ngFor="let item of productItems">
+                <app-product-item-card
+                    [hidden]="!item.filtered"
+                    [product]="item.product"
+                    [existed]="item.existed"
+                    [selected]="item.selected"
+                    (click)="chooseItem(item)"
+                >
+                </app-product-item-card>
+            </ng-container>
+            <!-- <div class="dummy-product-card"></div>
+            <div class="dummy-product-card"></div>
+            <div class="dummy-product-card"></div> -->
+        </div>
+    </div>
+    <!-- <pre>
+        {{ this.productItems | json }}
+    </pre> -->
+    <button
+        [ngClass]="submitButton.classes"
+        [disabled]="!selectedItem || submitButton.disabled"
+        (click)="onAddProductStock()"
+    >{{ submitButton.message }}</button>
+</div>

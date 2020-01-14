@@ -1,0 +1,84 @@
+.product-card {
+    position: relative;
+    height: 12em;
+    width: 10em;
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+    margin-bottom: 0.5em !important;
+    padding: 0 !important;
+    border-radius: 2mm;
+    background-color: white;
+    box-shadow: 2px 2px 3px 0px rgba(0,0,0,0.25);
+}
+
+.product-photo-wrapper {
+    height: 88%;
+    width: 95%;
+    overflow: hidden;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 0.2em;
+    border-radius: 2mm;
+}
+
+.product-photo {
+    object-fit: contain;
+    width: 100%;
+    vertical-align: middle;
+    height: 100%;
+}
+
+.product-card-body {
+    padding: 0 0.6em;
+}
+
+.product-name {
+    // float: left;
+    // margin-top: 0.75em;
+    font-size: 10px;
+}
+
+.selected-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 11;
+    border: #bf202f 3px solid;
+    border-radius: 2mm;
+}
+
+.selected-overlay-content {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    padding: 0 3px;
+    color: white;
+    background-color: #bf202f;
+    font-size: 15px;
+}
+
+.existed-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    background-color: rgba(0, 0, 0, 0.65);
+    border-radius: 2mm;
+}
+
+.existed-overlay-content {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    white-space: normal;
+    color: white;
+    padding: 1em;
+    height: 100%;
+    width: 100%;
+}

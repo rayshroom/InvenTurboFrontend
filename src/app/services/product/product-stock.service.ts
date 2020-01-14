@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { environment } from 'src/environments/environment';
+import { environment as env } from 'src/environments/environment';
 import { catchError } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { LocationInventory } from './product-stock.model';
@@ -22,7 +22,7 @@ export class ProductStockService {
     getOneProductStock(oid: string, pid: string): Observable<any> {
         return this.http
             .get<any>(
-                `${environment.api}${environment.routes.getOneProductStock(oid, pid)}`,
+                `${env.api}${env.routes.getOneProductStock(oid, pid)}`,
                 this.httpOptions
             )
             .pipe(
@@ -35,16 +35,22 @@ export class ProductStockService {
 
     getAllOrganizationProductStock(oid: string): Observable<any> {
         return this.http.get<any>(
-            `${
-                environment.api
-            }${environment.routes.getOrganizationProductStocks(oid)}`,
+            `${env.api}${env.routes.getOrganizationProductStocks(oid)}`,
+            this.httpOptions
+        );
+    }
+
+    addOneOrganizationProductStock(oid: string, pid: string): Observable<any> {
+        return this.http.post<any>(
+            `${env.api}${env.routes.addOneProductStock(oid)}`,
+            { pid },
             this.httpOptions
         );
     }
 
     updateOneProductStock(oid: string, pid: string, locInvData: LocationInventory[]): Observable<any> {
         return this.http.put<any>(
-            `${environment.api}${environment.routes.updateOneProductStock(oid, pid)}`,
+            `${env.api}${env.routes.updateOneProductStock(oid, pid)}`,
             locInvData,
             this.httpOptions
         );
