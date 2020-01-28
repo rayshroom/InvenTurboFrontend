@@ -6,6 +6,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireModule } from '@angular/fire';
+import { AngularFireStorageModule } from '@angular/fire/storage';
 import { environment } from 'src/environments/environment';
 
 import { AppComponent } from './app.component';
@@ -44,6 +45,7 @@ import { AccountSettingPageComponent } from './components/views/account-setting-
 import { ProfileSummaryPaneComponent } from './components/views/account-setting-page/profile-summary-pane/profile-summary-pane.component';
 import { ProfileDetailPaneComponent } from './components/views/account-setting-page/profile-detail-pane/profile-detail-pane.component';
 import { CredentialPaneComponent } from './components/views/account-setting-page/credential-pane/credential-pane.component';
+import { UploadFileComponent } from './components/views/upload-file/upload-file.component';
 
 @NgModule({
     declarations: [
@@ -75,6 +77,7 @@ import { CredentialPaneComponent } from './components/views/account-setting-page
         ProfileSummaryPaneComponent,
         ProfileDetailPaneComponent,
         CredentialPaneComponent,
+        UploadFileComponent
     ],
     imports: [
         BrowserModule,
@@ -83,6 +86,7 @@ import { CredentialPaneComponent } from './components/views/account-setting-page
         HttpClientModule,
         AngularFireModule.initializeApp(environment.firebase),
         AngularFirestoreModule,
+        AngularFireStorageModule,
         AngularFireAuthModule
     ],
     providers: [

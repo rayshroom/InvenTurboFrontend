@@ -7,6 +7,7 @@ import { ForgetPasswordPageComponent } from './components/views/forget-password-
 import { DoesNotExistPageComponent } from './components/views/does-not-exist-page/does-not-exist-page.component';
 import { DashboardComponent } from './components/views/dashboard/dashboard.component';
 import { OrganizationDashboardComponent } from './components/views/organization-dashboard/organization-dashboard.component';
+import { UploadFileComponent } from './components/views/upload-file/upload-file.component';
 
 import { AuthGuard } from './services/auth/auth.guard';
 import { InventoryPanelComponent } from './components/views/inventory-panel/inventory-panel.component';
@@ -84,6 +85,12 @@ const routes: Routes = [
     {
         path: 'organization/transaction/items/add',
         component: ItemsListingPageComponent,
+        pathMatch: 'full',
+        canActivate: [AuthVerifyGuard]
+    },
+    {
+        path: 'upload',
+        component: UploadFileComponent,
         pathMatch: 'full',
         canActivate: [AuthVerifyGuard]
     },
