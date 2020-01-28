@@ -2,7 +2,7 @@
 <div class="line-wrapper">
     <div class="vertical-line"></div>
     <div class="text-wrapper">
-        <div class="vertical-line-text">- or -</div>
+        <div class="vertical-line-text">- OR -</div>
     </div>
 </div>
 <div class="row">
@@ -25,18 +25,18 @@
             </div>
             <div class="row form-group">
                 <div class="col-md-8 left-inline-input">
-                    <input type="email" formControlName="email" class="form-control" placeholder="Email Address" />
+                    <input type="email" formControlName="email" class="form-control" placeholder="Email Address" autocomplete="email" />
                 </div>
                 <div class="col-md-4 right-inline-input">
-                    <input type="text" formControlName="phone" class="form-control" placeholder="Phone (optional)" />
+                    <input type="text" formControlName="phone" class="form-control" placeholder="Phone (optional)" autocomplete="tel" />
                 </div>
             </div>
             <div class="row form-group">
                 <div class="col-md-6 left-inline-input">
-                    <input type="password" formControlName="password" class="form-control" placeholder="Password"/>
+                    <input type="password" formControlName="password" class="form-control" placeholder="Password" autocomplete="new-password"/>
                 </div>
                 <div class="col-md-6 right-inline-input">
-                    <input type="password" formControlName="passwordConfirm" class="form-control" placeholder="Confirm Password" />
+                    <input type="password" formControlName="passwordConfirm" class="form-control" placeholder="Confirm Password" autocomplete="new-password" />
                 </div>
             </div>
             <span class="error">{{ errorMessage.length > 0 ? errorMessage : '&nbsp;' }}</span>

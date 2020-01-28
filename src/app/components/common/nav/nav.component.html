@@ -18,13 +18,30 @@
         </ul>
         <ul class="navbar-nav nav justify-content-end ml-auto right-nav" [ngSwitch]="this.isAuthenticated">
             <li class="nav-item" *ngSwitchCase="false">
-                <a class="nav-link log" routerLink="/login">Login</a>
+                <a class="nav-link log" routerLink="/login">
+                    <i class="fas fa-lg fa-sign-in-alt"></i>&nbsp;
+                    Login
+                </a>
             </li>
             <li class="nav-item" *ngSwitchCase="false">
                 <a class="nav-link btn btn-danger primary-btn" routerLink="/register">Get Started</a>
             </li>
-            <li class="nav-item" *ngSwitchCase="true">
-                <button class="btn btn-link log" (click)="logout()" >Logout</button>
+            <li class="nav-item dropdown" *ngSwitchCase="true">
+                <button class="btn btn-default dropdown-toggle setting" data-toggle="dropdown">
+                    <i class="fas fa-lg fa-cog"></i>&nbsp;
+                    Setting
+                </button>
+                <div class="dropdown-menu dropdown-menu-right shadow-sm bg-white rounded">
+                    <a class="dropdown-item" routerLink="/account">
+                        <i class="fas fa-lg fa-user"></i>&nbsp;
+                        My Account
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <button class="dropdown-item logout" (click)="logout()" >
+                        <i class="fas fa-lg fa-sign-out-alt"></i>&nbsp;
+                        Logout
+                    </button>
+                </div>
             </li>
             <li class="nav-item" *ngSwitchCase="true">
                 <a class="nav-link btn btn-success primary-btn" routerLink="/dashboard">My Dashboard</a>

@@ -30,7 +30,8 @@ import { ItemsListingPageComponent } from './components/views/items-listing-page
 
 import { AuthService } from './services/auth/auth.service';
 import { AuthGuard } from './services/auth/auth.guard';
-import { InnerGuard } from './services/auth/inner.guard';
+import { AuthVerifyGuard } from './services/auth/auth-verify.guard';
+import { LoggedInGuard } from './services/auth/logged-in.guard';
 import { UserManagementService } from './services/auth/uam.service';
 import { UserOrganizationService } from './services/organization/user-organization.service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -40,6 +41,11 @@ import { InventoryPanelHeaderComponent } from './components/common/inventory-pan
 import { ProductDetailPaneComponent } from './components/views/product-detail-page/product-detail-pane/product-detail-pane.component';
 import { CornerEditButtonComponent } from './components/common/corner-edit-button/corner-edit-button.component';
 import { InventoryAdjustmentPaneComponent } from './components/views/product-detail-page/inventory-adjustment-pane/inventory-adjustment-pane.component';
+import { UnverifiedEmailPageComponent } from './components/views/unverified-email-page/unverified-email-page.component';
+import { AccountSettingPageComponent } from './components/views/account-setting-page/account-setting-page.component';
+import { ProfileSummaryPaneComponent } from './components/views/account-setting-page/profile-summary-pane/profile-summary-pane.component';
+import { ProfileDetailPaneComponent } from './components/views/account-setting-page/profile-detail-pane/profile-detail-pane.component';
+import { CredentialPaneComponent } from './components/views/account-setting-page/credential-pane/credential-pane.component';
 
 @NgModule({
     declarations: [
@@ -67,6 +73,11 @@ import { InventoryAdjustmentPaneComponent } from './components/views/product-det
         ProductDetailPaneComponent,
         CornerEditButtonComponent,
         InventoryAdjustmentPaneComponent,
+        UnverifiedEmailPageComponent,
+        AccountSettingPageComponent,
+        ProfileSummaryPaneComponent,
+        ProfileDetailPaneComponent,
+        CredentialPaneComponent,
     ],
     imports: [
         BrowserModule,
@@ -81,7 +92,8 @@ import { InventoryAdjustmentPaneComponent } from './components/views/product-det
     providers: [
         AuthService,
         AuthGuard,
-        InnerGuard,
+        AuthVerifyGuard,
+        LoggedInGuard,
         UserManagementService,
         UserOrganizationService
     ],

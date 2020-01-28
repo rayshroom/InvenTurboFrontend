@@ -17,6 +17,8 @@ export const environment = {
     api: 'https://inventurbo-api.herokuapp.com/api',
     routes: {
         register: '/user/register',
+        getOneProfile: uid => `/profile/${uid}`,
+
         getAllOrganization: `/organization`,
         getUserOrganizations: uid => `/profile/${uid}/organization`,
         getOrganizationProductStocks: oid => `/organization/${oid}/product`,

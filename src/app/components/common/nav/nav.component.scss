@@ -18,8 +18,24 @@ a {
     width: 10em;
 }
 
-.log {
+.setting {
     margin-top: 0.15em;
+}
+
+.setting:focus {
+    box-shadow: none;
+}
+
+.logout {
+    color: #007bff;
+}
+
+.dropdown-divider {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 0.25em;
+    margin-bottom: 0.25em;
+    width: 80%;
 }
 
 .right-nav {
