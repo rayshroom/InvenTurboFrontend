@@ -21,6 +21,15 @@ import { EmailVerifiedGuard } from './services/auth/email-verified.guard';
 import { AccountSettingPageComponent } from './components/views/account-setting-page/account-setting-page.component';
 
 const routes: Routes = [
+    // DEV ROUTES STARTS
+    {
+        path: 'upload',
+        component: UploadFileComponent,
+        pathMatch: 'full',
+        canActivate: [AuthVerifyGuard]
+    },
+    // DEV ROUTES ENDS
+
     { path: 'landing', component: LandingPageComponent, pathMatch: 'full' },
     {
         path: 'login',
@@ -85,12 +94,6 @@ const routes: Routes = [
     {
         path: 'organization/transaction/items/add',
         component: ItemsListingPageComponent,
-        pathMatch: 'full',
-        canActivate: [AuthVerifyGuard]
-    },
-    {
-        path: 'upload',
-        component: UploadFileComponent,
         pathMatch: 'full',
         canActivate: [AuthVerifyGuard]
     },

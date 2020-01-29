@@ -1,28 +1,20 @@
-// https://github.com/angular/angularfire/blob/master/docs/storage/storage.md
-
 import { Component, OnInit } from '@angular/core';
-// import { Observable } from 'rxjs';
-import { FileUploadService } from '../../../services/file-upload.service'
+import { FileStorageService } from 'src/app/services/storage/file-storage.service';
 
 @Component({
-  selector: 'app-upload-file',
-  templateUrl: './upload-file.component.html',
-  styleUrls: ['./upload-file.component.scss']
+    selector: 'app-upload-file',
+    templateUrl: './upload-file.component.html',
+    styleUrls: ['./upload-file.component.scss']
 })
 export class UploadFileComponent implements OnInit {
+    public downloadURL: string;
 
-  // uploadPercent: Observable<number>;
-  // downloadURL: Observable<string>;
-  downloadURL: string;
+    ngOnInit() {}
 
-  ngOnInit() {
-  }
+    constructor(private fs: FileStorageService) {}
 
-  constructor(private m: FileUploadService) {
-  }
-
-  uploadFile(event) {
-    this.m.uploadFile(event).subscribe(url => { this.downloadURL = url });
-  }
-
+    uploadFile(event) {
+        this.fs.uploadFile(event.target.files[0], '/images/test')
+            .subscribe(url => this.downloadURL = url);
+    }
 }
