@@ -1,38 +1,20 @@
-// https://github.com/angular/angularfire/blob/master/docs/storage/storage.md
-
 import { Component, OnInit } from '@angular/core';
-import { AngularFireStorage } from '@angular/fire/storage';
-import { Observable } from 'rxjs';
-import { finalize, tap } from 'rxjs/operators';
+import { FileStorageService } from 'src/app/services/storage/file-storage.service';
 
 @Component({
-  selector: 'app-upload-file',
-  templateUrl: './upload-file.component.html',
-  styleUrls: ['./upload-file.component.scss']
+    selector: 'app-upload-file',
+    templateUrl: './upload-file.component.html',
+    styleUrls: ['./upload-file.component.scss']
 })
 export class UploadFileComponent implements OnInit {
+    public downloadURL: string;
 
-  uploadPercent: Observable<number>;
-  downloadURL: Observable<string>;
+    ngOnInit() {}
 
-  ngOnInit() {
-  }
+    constructor(private fs: FileStorageService) {}
 
-  constructor(private storage: AngularFireStorage) {}
-
-  uploadFile(event) {
-    const file = event.target.files[0];
-    const filePath = `images/${Date.now()}_${file.name}`;
-    const fileRef = this.storage.ref(filePath);
-    const task = this.storage.upload(filePath, file);
-
-    this.uploadPercent = task.percentageChanges();
-
-    task
-    .snapshotChanges()
-    .pipe(
-      finalize(() => this.downloadURL = fileRef.getDownloadURL())
-    )
-    .subscribe()
-  }
+    uploadFile(event) {
+        this.fs.uploadFile(event.target.files[0], '/images/test')
+            .subscribe(url => this.downloadURL = url);
+    }
 }
