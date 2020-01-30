@@ -20,7 +20,7 @@ export class ItemsListingPageComponent implements OnInit {
     items: Item[];
     selectedItems: Item[];
     allItems: Item[];
-    
+
     viewModeList = false;
 
     constructor(

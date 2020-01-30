@@ -77,15 +77,14 @@ export class TransactionPageComponent implements OnInit {
             }
             console.log(this.openMode);
         });
-                
+              
     }
 
     ngOnInit() {
     }
 
     setCurrentPartner(org) {
-        console.log('Set org');
-        console.log(org);
+
         this.tms.setOtherOrganization(org);
         this.currentPartner = org;
         this.showSelectionMenu = false;
@@ -203,5 +202,5 @@ export class TransactionPageComponent implements OnInit {
         modalRef.componentInstance.item = product;
         console.log(product);
     }
-    
+
 }

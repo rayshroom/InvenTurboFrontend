@@ -32,7 +32,7 @@
     </div>
 
     <!-- COMPONENT: Other org name/avatar -->
-    
+
     <div class="col-5" [ngClass]="{'hidden': showSelectionMenu}">
       <!-- <div class="row profile-wrapper shadow bg-white rounded-pill login-for mb-3" *ngFor="let org of orgOther"></div> -->
       <div class="row profile-wrapper shadow bg-white rounded-pill login-for mb-lg-3 mb-0" [ngClass]="{'clickable': this.openMode == 'new' && items.length == 0}" (click)="this.openMode == 'new' && items.length == 0 && this.showSelectionMenu = true">
@@ -74,7 +74,7 @@
   </div>
 
   <!-- COMPONENT: To display selected items -->
-  
+
   <div class="row overflow-auto items-view mb-2 mt-2">
     <div class="col-1"></div>
     <div class="col-11">
@@ -99,10 +99,10 @@
       </ul>
     </div>
   </div>
-  
+
 
   <!-- COMPONENT: The add item big button -->
-  
+
 
   <!-- COMPONENT: The transaction total info bar -->
   <div class="row mb-3">
@@ -141,7 +141,7 @@
     </div>
   </div>
 
-  
+
 
 </div>
 <ng-template #loadingIcon>
