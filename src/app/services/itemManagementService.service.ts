@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import {Item} from './item.model';
+import { Item } from './item.model';
+import { TxProduct } from 'src/app/services/transaction/transaction-management.model';
 
 @Injectable({
     providedIn: 'root'
 })
 export class ItemManagementService {
-    items: object;
+    items: Item[] = [];
+    items_existing: TxProduct[] = [];
 
     // private httpOptions = {
     //     headers: new HttpHeaders({
@@ -16,16 +18,32 @@ export class ItemManagementService {
     // };
 
     constructor(private http: HttpClient) {
-        this.items = {};
     }
 
-    saveItems(key: string, saved: Item[]) {
-        console.log(key);
-        console.log(saved);
-        this.items[key] = saved;
+    saveItems( saved: Item[]) {
+        // let items = JSON.parse(sessionStorage.getItem('selectedItems')) || [];
+        
+        // let names = items.map(p => p.name);
+        // for(var i = 0; i < saved.length; i++) {
+        //     if (!names.includes(saved[i].name)) {
+        //         items.push(saved[i]);
+        //     }
+        // }
+
+        sessionStorage.setItem('selectedItems', JSON.stringify(saved));
     }
 
-    getItems(key: string) {
-        return this.items[key];
+    getItems() {
+        let items = sessionStorage.getItem('selectedItems');
+        return JSON.parse(items) || [];
+    }
+
+    saveItemsExisting(saved: TxProduct[]) {
+        sessionStorage.setItem('existingItems', JSON.stringify(saved));
+    }
+
+    getItemsExisting() {
+        let items = sessionStorage.getItem('existingItems');
+        return JSON.parse(items) || [];
     }
 }

@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireModule } from '@angular/fire';
@@ -52,6 +52,8 @@ import { AddProductStockPageComponent } from './components/views/add-product-sto
 import { AddExistingProductPaneComponent } from './components/views/add-product-stock-page/add-existing-product-pane/add-existing-product-pane.component';
 import { ProductItemCardComponent } from './components/views/add-product-stock-page/add-existing-product-pane/product-item-card/product-item-card.component';
 import { CreateNewProductPaneComponent } from './components/views/add-product-stock-page/create-new-product-pane/create-new-product-pane.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { InventoryDetailOverlayComponent } from './components/views/inventory-detail-overlay/inventory-detail-overlay.component';
 
 @NgModule({
     declarations: [
@@ -89,17 +91,19 @@ import { CreateNewProductPaneComponent } from './components/views/add-product-st
         AddExistingProductPaneComponent,
         ProductItemCardComponent,
         CreateNewProductPaneComponent,
+        InventoryDetailOverlayComponent,
     ],
     imports: [
         BrowserModule,
         ReactiveFormsModule,
+        FormsModule,
         AppRoutingModule,
         HttpClientModule,
         AngularFireModule.initializeApp(environment.firebase),
         AngularFirestoreModule,
+        AngularFireStorageModule,
         AngularFireAuthModule,
         NgbModule,
-        AngularFireStorageModule,
     ],
     providers: [
         AuthService,
