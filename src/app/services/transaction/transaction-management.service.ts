@@ -59,10 +59,19 @@ export class TransactionManagementService {
         );
     }
 
-    orderTransaction(tid): Observable<any> {
+    updateTransaction(tid: string, items: any): Observable<any> {
+        console.log(items);
+        return this.http.post<any>(
+            `${environment.api}${environment.routes.orderTransaction(tid)}`,
+            {'status': 'Pending', 'addItems': items},
+            this.httpOptions
+        )
+    }
+
+    orderTransaction(tid: string, items: any): Observable<any> {
         return this.http.post<string>(
             `${environment.api}${environment.routes.orderTransaction(tid)}`,
-            {'status': 'Requested'},
+            {'status': 'Requested', 'addItems': items},
             this.httpOptions
         )
     }

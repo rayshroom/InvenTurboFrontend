@@ -64,7 +64,10 @@ export class TransactionPageComponent implements OnInit {
             this.tms.getOneTransaction(this.viewTxId).subscribe(tx => {
                 this.thisTx = tx;
                 this.openMode = tx.status;
-                this.items_existing = tx.items;
+                if (this.items_existing.length == 0) {
+                    this.items_existing = tx.items;
+                    this.m.saveItemsExisting(this.items_existing);
+                }
                 this.currentPartner = this.orgOther.find(o => o.oid == tx.oid_source);
             });
             
@@ -116,45 +119,85 @@ export class TransactionPageComponent implements OnInit {
 
     goback() {
         this.m.saveItems([]);
+        this.m.saveItemsExisting([]);
         this.router.navigate(['/organization']);
     }
 
     submitItems() {
-        this.m.saveItems([]);
         this.tms.submitSimpleTransaction({
             status: "Submitted",
             stringTime: (new Date()).toString(),
             oid_source: this.orgOther[0].oid,
-            oid_dest: this.orgCurrent.oid
+            oid_dest: this.orgCurrent.oid,
+            items: this.m.getItems()
         }).subscribe(ref => {
-            this.m.saveItems(this.items);
+            this.m.saveItems([]);
+            this.m.saveItemsExisting([]);
             this.router.navigate(['/organization']);
         });
     }
 
-    saveOrder() {
+    mergeItems() {
+        const it = this.m.getItems();
+        const ite = this.m.getItemsExisting();
+        const iteid = ite.map(p => p.pid);
+        for(var i = 0; i < it.length; i++) {
+            if (iteid.includes(it[i].pid)) {
+                ite[iteid.indexOf(it[i].pid)].quantity += it[i].quantity;
+            } else {
+                ite.push(it[i]);
+            }
+        }
+        return ite;
+    }
 
+    saveOrder() {
+        this.m.saveItems(this.items);
+        this.m.saveItemsExisting(this.items_existing);
+        const items = this.mergeItems();
+        this.m.saveItems([]);
+        this.m.saveItemsExisting([]);
+        this.tms.updateTransaction(this.viewTxId, items)
+            .subscribe(ref => {
+                this.router.navigate(['/organization']);
+            })
     }
 
     orderTransaction() {
-        this.tms.orderTransaction(this.viewTxId)
+        this.m.saveItems(this.items);
+        this.m.saveItemsExisting(this.items_existing);
+        const items = this.mergeItems();
+        this.m.saveItems([]);
+        this.m.saveItemsExisting([]);
+        this.tms.orderTransaction(this.viewTxId, items)
           .subscribe(ref => {
-              this.router.navigate['/organization'];
+              this.router.navigate(['/organization']);
           })
     }
 
     selectItems() {
         this.m.saveItemsExisting(this.items_existing);
+        this.m.saveItems(this.items);
         this.router.navigate([`/organization/transaction/items/add/${this.currentPartner.oid}`]);
     }
 
-    removeItem(item: TxProduct) {
+    removeItemExisting(item: TxProduct) {
         for(var i = 0; i < this.items_existing.length; i++) {
             if (this.items_existing[i].name == item.name) {
                 this.items_existing.splice(i, 1);
                 break;
             }
         }
+    }
+
+    removeItem(item: TxProduct) {
+        for(var i = 0; i < this.items.length; i++) {
+            if (this.items[i].name == item.name) {
+                this.items.splice(i, 1);
+                break;
+            }
+        }
+        this.m.saveItems(this.items);
     }
 
     openDetailOverlay(product: ProductStock) {

@@ -34,6 +34,8 @@ export class ItemsListingPageComponent implements OnInit {
     ) {
         this.items = [];
 
+        this.selectedItems = this.m.getItems();
+
         const otherOrg = this.activatedRoute.snapshot.paramMap.get('oid');
         this.prodStock.getAllOrganizationProductStock(otherOrg).subscribe(prod => {
             this.items = prod.map(p => {
@@ -44,13 +46,12 @@ export class ItemsListingPageComponent implements OnInit {
                     description: p.description,
                     photoURL: p.photoURL,
                     unit_price: p.unit_price,
-                    quantity: 0,
+                    quantity: 1,
                     total_quantity: p.total_quantity,
-                    isSelected: false
+                    isSelected: this.selectedItems.map(tp => tp.name).includes(p.name)
                 }
             });
             this.allItems = this.items;
-            this.selectedItems = this.m.getItems();
         });
 
         this.search = new FormGroup({
@@ -69,6 +70,8 @@ export class ItemsListingPageComponent implements OnInit {
     markSelected(item: Item) {
         if (item.isSelected) {
             item.isSelected = false;
+            this.selectedItems.splice(this.selectedItems.map(p => p.name).indexOf(item.name), 1);
+            console.log(this.selectedItems, item);
         } else {
             item.isSelected = true;
             this.selectedItems.push(item);

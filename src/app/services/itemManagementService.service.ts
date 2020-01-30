@@ -21,18 +21,29 @@ export class ItemManagementService {
     }
 
     saveItems( saved: Item[]) {
-        this.items = saved;
+        // let items = JSON.parse(sessionStorage.getItem('selectedItems')) || [];
+        
+        // let names = items.map(p => p.name);
+        // for(var i = 0; i < saved.length; i++) {
+        //     if (!names.includes(saved[i].name)) {
+        //         items.push(saved[i]);
+        //     }
+        // }
+
+        sessionStorage.setItem('selectedItems', JSON.stringify(saved));
     }
 
     getItems() {
-        return this.items;
+        let items = sessionStorage.getItem('selectedItems');
+        return JSON.parse(items) || [];
     }
 
     saveItemsExisting(saved: TxProduct[]) {
-        this.items_existing = saved;
+        sessionStorage.setItem('existingItems', JSON.stringify(saved));
     }
 
     getItemsExisting() {
-        return this.items_existing;
+        let items = sessionStorage.getItem('existingItems');
+        return JSON.parse(items) || [];
     }
 }
