@@ -3,6 +3,8 @@
         <img src="{{ user.photoURL || 'assets/default-avatar.png' }}" [ngClass]="profileImage.classes" />
         <span class="descriptive-text" (mouseenter)="darkenProfileImage()" (mouseleave)="brightenProfileImage()">CLick to change</span>
     </div>
-    <p class="profile-name text-center">{{ user.displayName.split('. ')[1] }}</p>
+    <p class="profile-name text-center">
+        {{ user.displayName.charAt[0] === 'M' ? user.displayName.split('. ')[1] : user.displayName }}
+    </p>
     <p class="profile-bio">{{ profile.bio }}</p>
 </div>

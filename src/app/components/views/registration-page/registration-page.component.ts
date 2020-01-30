@@ -62,8 +62,4 @@ export class RegistrationPageComponent implements OnInit {
             }
         );
     }
-
-    onOrganizationRegister() {
-        console.log('Not Implemented');
-    }
 }
