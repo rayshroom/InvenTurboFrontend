@@ -45,7 +45,8 @@ export class OrganizationDashboardComponent implements OnInit {
 
                     this.transactions.push({timeDate: transactionDate, transactionType, ...transaction});
                 });
-                this.lastTransactionTime = this.transactions[this.transactions.length - 1].timeDate;
+                this.lastTransactionTime = this.transactions.length > 0 ?
+                    this.transactions[this.transactions.length - 1].timeDate : null;
             });
         });
     }

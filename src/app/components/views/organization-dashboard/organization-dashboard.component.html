@@ -6,7 +6,7 @@
                 <span class="col-9">
                     <h2>
                         <span class="font-weight-bold">{{this.org.name}}</span>
-                        <div class="descriptive-subtext">Last transaction: {{this.lastTransactionTime | date: 'medium'}}</div>
+                        <div class="descriptive-subtext">Last transaction: {{lastTransactionTime ? (lastTransactionTime | date: 'medium') : 'N/A'}}</div>
                     </h2>
                 </span>
             </div>
