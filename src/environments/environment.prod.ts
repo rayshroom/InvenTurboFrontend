@@ -12,6 +12,20 @@ export const environment = {
     },
     api: 'https://inventurbo-api.herokuapp.com/api',
     routes: {
-        register: '/user/register'
-    }
+        register: '/user/register',
+        getOneProfile: uid => `/profile/${uid}`,
+
+        getAllOrganization: `/organization`,
+        getAllProduct: `/product`,
+        createProduct: `/product/create`,
+
+        getUserOrganizations: uid => `/profile/${uid}/organization`,
+        getOrganizationProductStocks: oid => `/organization/${oid}/product`,
+        getOneProductStock: (oid, pid) => `/organization/${oid}/product/${pid}`,
+        addOneProductStock: oid => `/organization/${oid}/product/add/`,
+        updateOneProductStock: (oid, pid) => `/organization/${oid}/product/update/${pid}`,
+        getOrganizationTransactions: oid => `/organization/${oid}/transaction`,
+        getOneTransaction: tid => `/transaction/${tid}`,
+        addSimpleTransaction: `/transaction/create`
+    },
 };

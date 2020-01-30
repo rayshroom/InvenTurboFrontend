@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireModule } from '@angular/fire';
@@ -35,6 +35,8 @@ import { AuthVerifyGuard } from './services/auth/auth-verify.guard';
 import { LoggedInGuard } from './services/auth/logged-in.guard';
 import { UserManagementService } from './services/auth/uam.service';
 import { UserOrganizationService } from './services/organization/user-organization.service';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { InventoryDetailOverlayComponent } from './components/views/inventory-detail-overlay/inventory-detail-overlay.component';
 import { ProductDetailPageComponent } from './components/views/product-detail-page/product-detail-page.component';
 import { InventoryPanelHeaderComponent } from './components/common/inventory-panel-header/inventory-panel-header.component';
 import { ProductDetailPaneComponent } from './components/views/product-detail-page/product-detail-pane/product-detail-pane.component';
@@ -50,6 +52,8 @@ import { AddProductStockPageComponent } from './components/views/add-product-sto
 import { AddExistingProductPaneComponent } from './components/views/add-product-stock-page/add-existing-product-pane/add-existing-product-pane.component';
 import { ProductItemCardComponent } from './components/views/add-product-stock-page/add-existing-product-pane/product-item-card/product-item-card.component';
 import { CreateNewProductPaneComponent } from './components/views/add-product-stock-page/create-new-product-pane/create-new-product-pane.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { InventoryDetailOverlayComponent } from './components/views/inventory-detail-overlay/inventory-detail-overlay.component';
 
 @NgModule({
     declarations: [
@@ -66,6 +70,7 @@ import { CreateNewProductPaneComponent } from './components/views/add-product-st
         InventoryPanelComponent,
         TransactionPageComponent,
         ItemsListingPageComponent,
+        InventoryDetailOverlayComponent,
         LoadingIconComponent,
         UserProfilePaneComponent,
         OrganizationListPaneComponent,
@@ -86,16 +91,19 @@ import { CreateNewProductPaneComponent } from './components/views/add-product-st
         AddExistingProductPaneComponent,
         ProductItemCardComponent,
         CreateNewProductPaneComponent,
+        InventoryDetailOverlayComponent,
     ],
     imports: [
         BrowserModule,
         ReactiveFormsModule,
+        FormsModule,
         AppRoutingModule,
         HttpClientModule,
         AngularFireModule.initializeApp(environment.firebase),
         AngularFirestoreModule,
         AngularFireStorageModule,
-        AngularFireAuthModule
+        AngularFireAuthModule,
+        NgbModule,
     ],
     providers: [
         AuthService,
@@ -105,6 +113,7 @@ import { CreateNewProductPaneComponent } from './components/views/add-product-st
         UserManagementService,
         UserOrganizationService
     ],
-    bootstrap: [AppComponent]
+    bootstrap: [AppComponent],
+    entryComponents: [ InventoryDetailOverlayComponent ],
 })
 export class AppModule {}
