@@ -20,7 +20,7 @@ export class ItemsListingPageComponent implements OnInit {
     items: Item[];
     selectedItems: Item[];
     allItems: Item[];
-    
+
     viewModeList = false;
 
     constructor(
@@ -45,7 +45,7 @@ export class ItemsListingPageComponent implements OnInit {
                     name: p.name,
                     description: p.description,
                     photoURL: p.photoURL,
-                    unit_price: p.unit_price,
+                    unit_price: p.unit_price || 0,
                     quantity: 1,
                     total_quantity: p.total_quantity,
                     isSelected: this.selectedItems.map(tp => tp.name).includes(p.name)

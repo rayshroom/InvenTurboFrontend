@@ -14,6 +14,7 @@ export const environment = {
         appId: '1:216500507265:web:ef43d619b4ac117655f380',
         measurementId: 'G-3FKLY60L44'
     },
+    // api: 'https://inventurbo-api.herokuapp.com/api',
     api: 'http://localhost:8080/api',
     routes: {
         register: '/user/register',

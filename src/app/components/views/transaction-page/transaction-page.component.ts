@@ -53,7 +53,7 @@ export class TransactionPageComponent implements OnInit {
         this.orgCurrent = this.userOrg.getCurrentOrganization();
         this.userOrg.getAllOrganizations().subscribe(orgs => {
             this.orgOther = orgs.filter(o => o.oid !== this.orgCurrent.oid);
-            this.currentPartner = this.orgOther[0];
+            this.currentPartner = this.tms.getOtherOrganization() || this.orgOther[0];
         });
         this.viewTxId = this.activatedRoute.snapshot.paramMap.get('txid');
 
@@ -64,16 +64,23 @@ export class TransactionPageComponent implements OnInit {
             this.tms.getOneTransaction(this.viewTxId).subscribe(tx => {
                 this.thisTx = tx;
                 this.openMode = tx.status;
+                console.log(tx.items);
                 if (this.items_existing.length == 0) {
-                    this.items_existing = tx.items;
+                    this.items_existing = tx.items.map(t => {
+                        return {
+                            ...t,
+                            unit_price: t.unit_price || 0
+                        }
+                    });
                     this.m.saveItemsExisting(this.items_existing);
                 }
+                this.tms.setOtherOrganization(this.orgOther.find(o => o.oid == tx.oid_source));
                 this.currentPartner = this.orgOther.find(o => o.oid == tx.oid_source);
             });
-            
+
         } else {
-            
-            
+
+
             // this.items = this.m.getItems(params.key || params.txid || this.orgCurrent.oid);
             // this.activatedRoute.queryParams.subscribe(params => {
             //     this.tms.getOneTransaction(params.txid).subscribe(transaction => {
@@ -82,18 +89,19 @@ export class TransactionPageComponent implements OnInit {
             //         // items still need to be added to transaction, then items = transaction.item
             //     })
             // });
-            
+
         }
 
         console.log(this.viewTxId, this.openMode);
-        
+
     }
 
     ngOnInit() {
     }
 
-    setCurrentPartner(oid:string) {
-        this.currentPartner = this.orgOther.find(o => o.oid == oid);
+    setCurrentPartner(org) {
+        this.tms.setOtherOrganization(org);
+        this.currentPartner = this.tms.getOtherOrganization();
         this.showSelectionMenu = false;
     }
 
@@ -120,6 +128,7 @@ export class TransactionPageComponent implements OnInit {
     goback() {
         this.m.saveItems([]);
         this.m.saveItemsExisting([]);
+        this.tms.setOtherOrganization(null);
         this.router.navigate(['/organization']);
     }
 
@@ -127,12 +136,13 @@ export class TransactionPageComponent implements OnInit {
         this.tms.submitSimpleTransaction({
             status: "Submitted",
             stringTime: (new Date()).toString(),
-            oid_source: this.orgOther[0].oid,
+            oid_source: this.tms.getOtherOrganization().oid,
             oid_dest: this.orgCurrent.oid,
             items: this.m.getItems()
         }).subscribe(ref => {
             this.m.saveItems([]);
             this.m.saveItemsExisting([]);
+            this.tms.setOtherOrganization(null);
             this.router.navigate(['/organization']);
         });
     }
@@ -157,6 +167,7 @@ export class TransactionPageComponent implements OnInit {
         const items = this.mergeItems();
         this.m.saveItems([]);
         this.m.saveItemsExisting([]);
+        this.tms.setOtherOrganization(null);
         this.tms.updateTransaction(this.viewTxId, items)
             .subscribe(ref => {
                 this.router.navigate(['/organization']);
@@ -169,6 +180,7 @@ export class TransactionPageComponent implements OnInit {
         const items = this.mergeItems();
         this.m.saveItems([]);
         this.m.saveItemsExisting([]);
+        this.tms.setOtherOrganization(null);
         this.tms.orderTransaction(this.viewTxId, items)
           .subscribe(ref => {
               this.router.navigate(['/organization']);
@@ -205,5 +217,5 @@ export class TransactionPageComponent implements OnInit {
         modalRef.componentInstance.item = product;
         console.log(product);
     }
-    
+
 }
