@@ -82,7 +82,7 @@ const routes: Routes = [
         canActivate: [AuthVerifyGuard]
     },
     {
-        path: 'organization/transaction/items/add',
+        path: 'organization/transaction/items/add/:oid',
         component: ItemsListingPageComponent,
         pathMatch: 'full',
         canActivate: [AuthVerifyGuard]

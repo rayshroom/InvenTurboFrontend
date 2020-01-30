@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireModule } from '@angular/fire';
@@ -82,6 +82,7 @@ import { CredentialPaneComponent } from './components/views/account-setting-page
     imports: [
         BrowserModule,
         ReactiveFormsModule,
+        FormsModule,
         AppRoutingModule,
         HttpClientModule,
         AngularFireModule.initializeApp(environment.firebase),

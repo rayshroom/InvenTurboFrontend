@@ -26,44 +26,41 @@
     <!-- COMPONENT: The back and forth arrows -->
     <div class="col-1">
         <div class="arrow-wrapper">
-            <i class="arrow-top fas fa-3x fa-long-arrow-alt-left" [ngClass]="{'correct': fromCurrent}"></i>
-            <br>
-            <i class="arrow-bottom fas fa-3x fa-long-arrow-alt-right" [ngClass]="{'correct': !fromCurrent}"></i>
+            <!-- <i class="arrow-top fas fa-4x fa-long-arrow-alt-left correct" [ngClass]="{'correct': fromCurrent}"></i> -->
+            <i class="arrow-top fas fa-4x fa-long-arrow-alt-left correct"></i>
         </div>
     </div>
 
     <!-- COMPONENT: Other org name/avatar -->
-    <div class="col-5">
-        <div class="row profile-wrapper shadow bg-white rounded-pill login-for mb-3">
-            <img class="organization-icon col-2 h-100 w-100" src="{{this.orgOther[1].photoURL}}"/>
-            <div class="col-9">
-                <h2>
-                    <span class="font-weight-bold">{{this.orgOther[1].name}}</span>
-                </h2>
-            </div>
+    
+    <div class="col-5" [ngClass]="{'hidden': showSelectionMenu}">
+      <!-- <div class="row profile-wrapper shadow bg-white rounded-pill login-for mb-3" *ngFor="let org of orgOther"></div> -->
+      <div class="row profile-wrapper shadow bg-white rounded-pill login-for mb-lg-3 mb-0" [ngClass]="{'clickable': this.openMode == 'new'}" (click)="this.openMode == 'new' && this.showSelectionMenu = true">
+        <img class="organization-icon col-2 h-100 w-100" src="{{this.currentPartner.photoURL}}"/>
+        <div class="col-9">
+          <h2>
+              <span class="font-weight-bold">{{this.currentPartner.name}}</span>
+          </h2>
         </div>
+        <i class="fas fa-2x fa-chevron-down pt-3" *ngIf="this.openMode == 'new'"></i>
+      </div>
     </div>
+
+    <div class="col-5" [ngClass]="{'hidden': !showSelectionMenu}" *ngIf="this.openMode == 'new'">
+      <!-- <div class="row profile-wrapper shadow bg-white rounded-pill login-for mb-3" *ngFor="let org of orgOther"></div> -->
+      <div class="row profile-wrapper bg-white login-for mb-1 clickable" *ngFor="let org of orgOther" (click)="setCurrentPartner(org.oid)">
+        <img class="organization-icon col-2 h-100 w-100" src="{{org.photoURL}}"/>
+        <div class="col-9">
+          <h2>
+              <span class="font-weight-bold">{{org.name}}</span>
+          </h2>
+        </div>
+      </div>
+    </div>
+
   </div>
 
-  <!-- COMPONENT: To display selected items -->
-  <div class="row overflow-auto items-view mb-2 mt-2">
-    <div class="col-1"></div>
-    <div class="col-11">
-      <ul class="col-12 mt-2" *ngFor="let item of items">
-        <li class="list-group-item d-flex justify-content-around" (click)="markSelected(item)">
-
-          <div class="p-2">Name: {{item.displayName}}</div>
-          <div class="p-2">ID: {{item.productID}}</div>
-          <div class="p-2">Qty: <input class="correct" value={{item.quantity}}/></div>
-          <div class="p-2">Price: <span class="correct">{{item.unitPrice | currency}}</span></div>
-
-        </li>
-      </ul>
-    </div>
-  </div>
-
-  <!-- COMPONENT: The add item big button -->
-  <div class="row" [ngClass]="{'trans-body': !items, 'trans-body-small': items}">
+  <div class="row" [ngClass]="{'trans-body': !items, 'trans-body-small': items}" *ngIf="this.openMode == 'new' || this.openMode == 'Pending'">
     <div class="col-1"></div>
     <div class="col-11 remove-left-right-padding">
       <div class="addTransactionBar" (click)="selectItems()">
@@ -76,6 +73,37 @@
     <!-- <div class="col-1"></div> -->
   </div>
 
+  <!-- COMPONENT: To display selected items -->
+  
+  <div class="row overflow-auto items-view mb-2 mt-2">
+    <div class="col-1"></div>
+    <div class="col-11">
+      <ul class="col-12 mt-2" *ngFor="let item of items; let index = index">
+        <li class="list-group-item d-flex justify-content-around">
+
+          <div class="p-2 clickable" (click)="openDetailOverlay(item)">Name: {{item.name}}</div>
+          <div class="p-2">Qty: <input class="correct" type="number" min="0" max="{{item.total_quantity}}" name={{item.name}} [ngModel]="items[index].quantity" (ngChange)="setCorrectValue(item)"/></div>
+          <div class="p-2">Price: <span class="correct">{{item.unit_price | currency}}</span></div>
+          <div class="p-2 clickable correct" (click)="removeItem(item)"><i class="fas fa-times-circle"></i></div>
+
+        </li>
+      </ul>
+      <hr>
+      <ul class="col-12 mt-2" *ngFor="let item of items_existing; let index = index">
+        <li class="list-group-item d-flex justify-content-around">
+          <div class="p-2 clickable" (click)="openDetailOverlay(item)">Name: {{item.name}}</div>
+          <div class="p-2">Qty: {{item.quantity}}</div>
+          <div class="p-2">Price: <span class="correct">{{item.unit_price | currency}}</span></div>
+          <div class="p-2 clickable correct" (click)="removeItem(item)"><i class="fas fa-times-circle"></i></div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  
+
+  <!-- COMPONENT: The add item big button -->
+  
+
   <!-- COMPONENT: The transaction total info bar -->
   <div class="row mb-3">
     <div class="col-1"></div>
@@ -84,17 +112,35 @@
           <!-- COMPONENT: The LEFT portion, number of items, total and subtotal -->
           <div class="submitTransactionLeft col-8">
             <span class="descriptive-sub">Number of items: {{this.getTotalItems()}}</span>
-            <span class="descriptive-sub">Subtotal: {{this.getSubtotal() | currency}}</span>
+            <span class="descriptive-sub">Estimated subtotal: {{this.getSubtotal() | currency}}</span>
             <span class="descriptive-important">Total: {{this.getTotalPrice() | currency}}</span>
             <!-- <span class="descriptive-important">Total: {{this.getTotalPrice() | currency:'CAD'}}</span> -->
           </div>
           <!-- COMPONENT: The RIGHT portion, the submit button -->
-          <div class="text-center submitTransactionRight col-3" (click)="submitItems()">
-            Submit
-          </div>
       </div>
     </div>
     <!-- <div class="col-1"></div> -->
   </div>
+
+  <div class="row mb-3">
+    <div class="col-1"></div>
+    <div *ngIf="this.openMode == 'new'" class="text-center submitTransactionRight col-3" (click)="submitItems()">
+      Save
+    </div>
+    <div *ngIf="this.openMode == 'Pending'" class="text-center submitTransactionRight col-3" (click)="saveOrder()">
+      Save
+    </div>
+    <div *ngIf="this.openMode == 'Pending'" class="text-center mx-1 submitTransactionRight col-3" (click)="orderTransaction()">
+      Order
+    </div>
+    <div *ngIf="this.openMode == 'Requested'" class="text-center submitTransactionRight disabled col-3">
+      Requested
+    </div>
+    <div *ngIf="this.openMode == 'Done'" class="text-center submitTransactionRight col-3" (click)="submitItems()">
+      Re-order
+    </div>
+  </div>
+
+  
 
 </div>

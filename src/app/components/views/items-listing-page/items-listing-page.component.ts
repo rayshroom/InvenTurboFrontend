@@ -1,9 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth/auth.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Item } from 'src/app/services/item.model';
 import { ItemManagementService } from 'src/app/services/itemManagementService.service';
+import { ProductStock } from 'src/app/services/product/product-stock.model';
+import { ProductStockService } from 'src/app/services/product/product-stock.service';
+import { UserOrganizationService } from 'src/app/services/organization/user-organization.service';
+import { Location } from '@angular/common';
 
 @Component({
     selector: 'app-items-listing-page',
@@ -16,27 +20,38 @@ export class ItemsListingPageComponent implements OnInit {
     items: Item[];
     selectedItems: Item[];
     allItems: Item[];
+    
     viewModeList = false;
 
     constructor(
         public auth: AuthService,
         private router: Router,
-        public m: ItemManagementService
+        public m: ItemManagementService,
+        private activatedRoute: ActivatedRoute,
+        public userOrg: UserOrganizationService,
+        public prodStock: ProductStockService,
+        private location: Location
     ) {
         this.items = [];
-        for (let i = 0; i < 30; i++) {
-            this.items[i] = {
-                displayName: 'AABC' + i,
-                productID: 'JD' + i,
-                photoURL: 'assets/sample-product.png',
-                quantity: Math.floor(Math.random() * 20) + 1,
-                unitPrice: Math.random() * 2
-            };
-        }
 
-        this.allItems = this.items;
-
-        this.selectedItems = [];
+        const otherOrg = this.activatedRoute.snapshot.paramMap.get('oid');
+        this.prodStock.getAllOrganizationProductStock(otherOrg).subscribe(prod => {
+            this.items = prod.map(p => {
+                return {
+                    pid: p.pid,
+                    oid: p.oid,
+                    name: p.name,
+                    description: p.description,
+                    photoURL: p.photoURL,
+                    unit_price: p.unit_price,
+                    quantity: 0,
+                    total_quantity: p.total_quantity,
+                    isSelected: false
+                }
+            });
+            this.allItems = this.items;
+            this.selectedItems = this.m.getItems();
+        });
 
         this.search = new FormGroup({
             search: new FormControl('')
@@ -47,7 +62,7 @@ export class ItemsListingPageComponent implements OnInit {
 
     filterItems(partial: string) {
         this.items = this.allItems.filter(function(a) {
-            return a.productID.includes(partial);
+            return a.name.includes(partial);
         });
     }
 
@@ -69,15 +84,16 @@ export class ItemsListingPageComponent implements OnInit {
     }
 
     goback() {
-        this.router.navigate(['/organization/transaction/new']);
+        this.location.back();
     }
 
     submitItems() {
         // keep current state
-        this.m.saveItems('add', this.selectedItems);
+        this.m.saveItems(this.selectedItems);
         // console.log(this.selectedItems);
-        this.router.navigate(['/organization/transaction/new'], {
-            queryParams: { key: 'add' }
-        });
+        this.location.back();
+        // this.router.navigate(['/organization/transaction/new'], {
+        //     queryParams: { key: 'add' }
+        // });
     }
 }
