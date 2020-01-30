@@ -19,6 +19,7 @@ import { AuthVerifyGuard } from './services/auth/auth-verify.guard';
 import { LoggedInGuard } from './services/auth/logged-in.guard';
 import { EmailVerifiedGuard } from './services/auth/email-verified.guard';
 import { AccountSettingPageComponent } from './components/views/account-setting-page/account-setting-page.component';
+import { AddProductStockPageComponent } from './components/views/add-product-stock-page/add-product-stock-page.component';
 
 const routes: Routes = [
     // DEV ROUTES STARTS
@@ -64,6 +65,12 @@ const routes: Routes = [
     {
         path: 'organization',
         component: OrganizationDashboardComponent,
+        pathMatch: 'full',
+        canActivate: [AuthVerifyGuard]
+    },
+    {
+        path: 'organization/inventory/add-product',
+        component: AddProductStockPageComponent,
         pathMatch: 'full',
         canActivate: [AuthVerifyGuard]
     },
