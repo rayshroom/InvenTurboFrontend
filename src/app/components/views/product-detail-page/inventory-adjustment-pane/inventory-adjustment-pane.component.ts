@@ -34,13 +34,14 @@ export class InventoryAdjustmentPaneComponent implements OnInit {
         this.currentOrg = this.orgSerivce.getCurrentOrganization();
     }
 
+    get inventoriesControls() {
+        return (this.inventoryAdjustmentForm.controls.inventories as FormArray).controls;
+    }
+
     ngOnInit() {
-        const control = this.inventoryAdjustmentForm.get(
-            'inventories'
-        ) as FormArray;
         this.inventoryByLocations = this.product.inventoryByLocation;
         this.inventoryByLocations.forEach(location =>
-            control.push(
+            this.inventoriesControls.push(
                 this.fb.group({
                     locid: [location.locid],
                     name: [location.name],

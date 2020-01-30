@@ -47,6 +47,10 @@ export class RegistrationPageComponent implements OnInit {
     ngOnInit() {
     }
 
+    onOrganizationRegister() {
+
+    }
+
     onPersonalRegister() {
         const formData = this.registerFormPersonal.value;
         this.uam.doRegister(formData).pipe(
