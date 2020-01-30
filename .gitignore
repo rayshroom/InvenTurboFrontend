@@ -12,6 +12,7 @@ environment.prod.ts
 # dependencies
 /node_modules
 /dist
+.firebase
 
 # profiling files
 chrome-profiler-events.json
