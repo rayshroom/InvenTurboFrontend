@@ -48,7 +48,7 @@
 
     <div class="col-5" [ngClass]="{'hidden': !showSelectionMenu}" *ngIf="this.openMode == 'new'">
       <!-- <div class="row profile-wrapper shadow bg-white rounded-pill login-for mb-3" *ngFor="let org of orgOther"></div> -->
-      <div class="row profile-wrapper bg-white login-for mb-1 clickable" *ngFor="let org of orgOther" (click)="setCurrentPartner(org.oid)">
+      <div class="row profile-wrapper bg-white login-for mb-1 clickable" *ngFor="let org of orgOther" (click)="setCurrentPartner(org)">
         <img class="organization-icon col-2 h-100 w-100" src="{{org.photoURL}}"/>
         <div class="col-9">
           <h2>
