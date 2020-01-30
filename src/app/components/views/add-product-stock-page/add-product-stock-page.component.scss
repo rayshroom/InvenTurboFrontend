@@ -1,0 +1,44 @@
+.view-wrapper {
+    padding-left: 1em;
+    padding-right: 1em;
+    padding-top: 2em;
+    padding-bottom: 0em;
+    text-overflow: unset !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+}
+
+.line-wrapper {
+    position: relative;
+    width: 5em;
+    height: 28em;
+}
+
+.vertical-line {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 0.75mm;
+    background: #707070;
+    z-index: 1;
+}
+
+.text-wrapper {
+    text-align: center;
+    height: 2em;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 42%;
+    z-index: 2;
+}
+
+.vertical-line-text {
+    font-weight: 900;
+    font-size: 16pt;
+    color: #707070;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    background: #F9F8F7;
+}

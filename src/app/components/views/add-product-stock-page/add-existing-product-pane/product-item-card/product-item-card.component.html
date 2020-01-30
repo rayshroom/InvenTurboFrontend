@@ -1,0 +1,14 @@
+<div class="product-card">
+    <div class="product-photo-wrapper">
+        <img class="product-photo" src="{{ product.photoURL }}" alt="{{ product.name }}" />
+    </div>
+    <div class="product-card-body">
+        <span class="product-name">{{ product.name }}</span>
+    </div>
+    <div *ngIf="existed" class="existed-overlay">
+        <div class="existed-overlay-content">This item is already in your invetory</div>
+    </div>
+    <div *ngIf="selected" class="selected-overlay">
+        <div class="selected-overlay-content">Selected</div>
+    </div>
+</div>

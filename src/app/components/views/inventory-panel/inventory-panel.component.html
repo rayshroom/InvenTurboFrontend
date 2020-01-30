@@ -16,15 +16,13 @@
     </div>
     <div class="row">
         <div class="inventory-grid">
-            <!-- <div *ngFor="let item of this.filteredProducts" class="inventory-card"  (click)="openDetailOverlay(item)">
-                <div class="inventory-card-photo-wrapper">
-                    <img class="inventory-card-photo" src="{{ item.photoURL }}" alt="{{ item.name }}" />
-                </div>
-                <div class="inventory-card-body">
-                    <span class="inventory-card-name">{{ item.name }}</span>
-                    <span class="inventory-card-quantity">Qty: <span class="inventory-card-quantity-number">{{ item.quantity }}</span></span>
-                </div>
-            </div> -->
+            <div class="add-inventory-button">
+                <a routerLink="/organization/inventory/add-product">
+                    <div class="dash-box">
+                        <div class="dash-box-content"></div>
+                    </div>
+                </a>
+            </div>
             <ng-container *ngFor="let item of this.filteredProducts">
                 <a [routerLink]="['/organization/inventory', item.pid]">
                     <app-inventory-item-card [productItem]="item"></app-inventory-item-card>

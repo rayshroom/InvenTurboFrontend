@@ -6,6 +6,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireModule } from '@angular/fire';
+import { AngularFireStorageModule } from '@angular/fire/storage';
 import { environment } from 'src/environments/environment';
 
 import { AppComponent } from './app.component';
@@ -46,6 +47,11 @@ import { AccountSettingPageComponent } from './components/views/account-setting-
 import { ProfileSummaryPaneComponent } from './components/views/account-setting-page/profile-summary-pane/profile-summary-pane.component';
 import { ProfileDetailPaneComponent } from './components/views/account-setting-page/profile-detail-pane/profile-detail-pane.component';
 import { CredentialPaneComponent } from './components/views/account-setting-page/credential-pane/credential-pane.component';
+import { UploadFileComponent } from './components/views/upload-file/upload-file.component';
+import { AddProductStockPageComponent } from './components/views/add-product-stock-page/add-product-stock-page.component';
+import { AddExistingProductPaneComponent } from './components/views/add-product-stock-page/add-existing-product-pane/add-existing-product-pane.component';
+import { ProductItemCardComponent } from './components/views/add-product-stock-page/add-existing-product-pane/product-item-card/product-item-card.component';
+import { CreateNewProductPaneComponent } from './components/views/add-product-stock-page/create-new-product-pane/create-new-product-pane.component';
 
 @NgModule({
     declarations: [
@@ -78,6 +84,11 @@ import { CredentialPaneComponent } from './components/views/account-setting-page
         ProfileSummaryPaneComponent,
         ProfileDetailPaneComponent,
         CredentialPaneComponent,
+        UploadFileComponent,
+        AddProductStockPageComponent,
+        AddExistingProductPaneComponent,
+        ProductItemCardComponent,
+        CreateNewProductPaneComponent,
     ],
     imports: [
         BrowserModule,
@@ -88,6 +99,7 @@ import { CredentialPaneComponent } from './components/views/account-setting-page
         AngularFirestoreModule,
         AngularFireAuthModule,
         NgbModule,
+        AngularFireStorageModule,
     ],
     providers: [
         AuthService,

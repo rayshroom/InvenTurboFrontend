@@ -7,6 +7,7 @@ import { ForgetPasswordPageComponent } from './components/views/forget-password-
 import { DoesNotExistPageComponent } from './components/views/does-not-exist-page/does-not-exist-page.component';
 import { DashboardComponent } from './components/views/dashboard/dashboard.component';
 import { OrganizationDashboardComponent } from './components/views/organization-dashboard/organization-dashboard.component';
+import { UploadFileComponent } from './components/views/upload-file/upload-file.component';
 
 import { AuthGuard } from './services/auth/auth.guard';
 import { InventoryPanelComponent } from './components/views/inventory-panel/inventory-panel.component';
@@ -18,8 +19,18 @@ import { AuthVerifyGuard } from './services/auth/auth-verify.guard';
 import { LoggedInGuard } from './services/auth/logged-in.guard';
 import { EmailVerifiedGuard } from './services/auth/email-verified.guard';
 import { AccountSettingPageComponent } from './components/views/account-setting-page/account-setting-page.component';
+import { AddProductStockPageComponent } from './components/views/add-product-stock-page/add-product-stock-page.component';
 
 const routes: Routes = [
+    // DEV ROUTES STARTS
+    {
+        path: 'upload',
+        component: UploadFileComponent,
+        pathMatch: 'full',
+        canActivate: [AuthVerifyGuard]
+    },
+    // DEV ROUTES ENDS
+
     { path: 'landing', component: LandingPageComponent, pathMatch: 'full' },
     {
         path: 'login',
@@ -54,6 +65,12 @@ const routes: Routes = [
     {
         path: 'organization',
         component: OrganizationDashboardComponent,
+        pathMatch: 'full',
+        canActivate: [AuthVerifyGuard]
+    },
+    {
+        path: 'organization/inventory/add-product',
+        component: AddProductStockPageComponent,
         pathMatch: 'full',
         canActivate: [AuthVerifyGuard]
     },
