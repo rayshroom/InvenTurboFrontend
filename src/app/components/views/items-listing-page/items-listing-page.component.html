@@ -44,13 +44,12 @@
     <div class="row overflow-auto mt-3 items-view">
       <!-- COMPONENT: The grid view -->
       <ng-container *ngIf="!viewModeList; else listView">
-          <div class="col-2 mt-2" *ngFor="let item of items">
-            <div class="card" (click)="markSelected(item)">
-
-              <img class="card-img-top"  src="{{item.photoURL}}" alt="item.productID">
-
-              <!-- COMPONENT: The selected checkmark overlay -->
-              <div *ngIf="item.isSelected" class="selected-item">
+        <div class="inventory-grid">
+          <ng-container *ngFor="let item of items">
+            <div (click)="markSelected(item)" style="position: relative;">
+              <app-inventory-item-card [productItem]="item"></app-inventory-item-card>
+              <!-- <div *ngIf="item.isSelected" class="selected-item"> -->
+                <div *ngIf="item.isSelected" class="selected-item">
                   <div class="move-svg">
                     <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 100 100">
                       <g id="Group_268" data-name="Group 268" transform="translate(-66 -498)">
@@ -59,14 +58,10 @@
                       </g>
                     </svg>
                   </div>
-                </div>
-
-              <div class="card-body no-padding">
-                <span class="left-desc-text">{{item.productID}}</span>
-                <span class="right-desc-text">Qty: <span class="important-color">{{item.quantity}}</span></span>
               </div>
             </div>
-          </div>
+          </ng-container>
+        </div>
       </ng-container>
 
       <!-- COMPONENT: the list view -->
@@ -74,7 +69,7 @@
           <ul class="col-12 mt-2" *ngFor="let item of items">
             <li class="list-group-item d-flex justify-content-around" (click)="markSelected(item)">
 
-              <div *ngIf="item.isSelected" class="selected-item">
+              <div *ngIf="item.isSelected" class="selected-item-list">
                   <div class="move-svg">
                     <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 100 100">
                       <g id="Group_268" data-name="Group 268" transform="translate(-66 -498)">
@@ -86,9 +81,8 @@
                 </div>
 
 
-              <div class="p-2">Name: {{item.displayName}}</div>
-              <div class="p-2">ID: {{item.productID}}</div>
-              <div class="p-2">Qty: <span class="correct">{{item.quantity}}</span></div>
+              <div class="p-2">Name: {{item.name}}</div>
+              <div class="p-2">Qty: <span class="correct">{{item.total_quantity}}</span></div>
 
             </li>
           </ul>

@@ -55,12 +55,4 @@ export class ProductStockService {
             this.httpOptions
         );
     }
-
-    updateOneProductStock(oid: string, pid: string, locInvData: LocationInventory[]): Observable<any> {
-        return this.http.put<any>(
-            `${environment.api}${environment.routes.updateOneProductStock(oid, pid)}`,
-            locInvData,
-            this.httpOptions
-        );
-    }
 }

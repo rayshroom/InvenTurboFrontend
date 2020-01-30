@@ -1,9 +1,10 @@
 export class Item {
-    productID: string;
-    displayName?: string;
+    pid: string;
+    oid: string;
+    name?: string;
     photoURL?: string;
     quantity: number;
-    unitPrice: number;
+    unit_price: number;
     isSelected?: boolean
 }
   
