@@ -26,6 +26,7 @@ export const environment = {
         updateOneProductStock: (oid, pid) => `/organization/${oid}/product/update/${pid}`,
         getOrganizationTransactions: oid => `/organization/${oid}/transaction`,
         getOneTransaction: tid => `/transaction/${tid}`,
-        addSimpleTransaction: `/transaction/create`
+        addSimpleTransaction: `/transaction/create`,
+        orderTransaction: tid => `/transaction/update/${tid}`,
     },
 };

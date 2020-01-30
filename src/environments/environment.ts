@@ -16,6 +16,7 @@ export const environment = {
     },
     // api: 'https://inventurbo-api.herokuapp.com/api',
     api: 'http://localhost:8080/api',
+    // api: 'https://inventurbo-api.herokuapp.com/api',
     routes: {
         register: '/user/register',
         getOneProfile: uid => `/profile/${uid}`,
