@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Credential } from './auth.model';
 import { Router } from '@angular/router';
-import { map } from 'rxjs/operators';
+import { map, first } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import * as firebase from 'firebase/app';
 
 @Injectable()
 export class AuthService {
@@ -12,13 +13,6 @@ export class AuthService {
 
     getCurrentUser() {
         return this.afAuth.user;
-    }
-
-    async doGoogleLogin() {
-        // const provider = new firebase.auth.GoogleAuthProvider();
-        // provider.addScope('profile');
-        // provider.addScope('email');
-        // await this.afAuth.auth.signInWithPopup(provider);
     }
 
     async doLogin(value: Credential) {
@@ -31,6 +25,14 @@ export class AuthService {
     }
 
     async doForgetPassword(email: string) {
-        return this.afAuth.auth.sendPasswordResetEmail(email);
+        return await this.afAuth.auth.sendPasswordResetEmail(email);
     }
+
+    async doChangePassword(oldPassword: string, newPassword: string) {
+        const user = await this.afAuth.user.pipe(first()).toPromise();
+        const credential = firebase.auth.EmailAuthProvider.credential(user.email, oldPassword);
+        await user.reauthenticateWithCredential(credential);
+        await user.updatePassword(newPassword);
+    }
+
 }
