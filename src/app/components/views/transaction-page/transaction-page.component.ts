@@ -30,7 +30,7 @@ export class TransactionPageComponent implements OnInit {
     fromCurrent = true;
     showSelectionMenu = false;
     viewTxId: string;
-    openMode = "new";
+    openMode = "pending";
     thisTx: any;
 
     private httpOptions = {
@@ -53,47 +53,41 @@ export class TransactionPageComponent implements OnInit {
         this.orgCurrent = this.userOrg.getCurrentOrganization();
         this.userOrg.getAllOrganizations().subscribe(orgs => {
             this.orgOther = orgs.filter(o => o.oid !== this.orgCurrent.oid);
-            this.currentPartner = this.orgOther[0];
+            this.currentPartner = (this.tms.getOtherOrganization() == null ? this.orgOther[0] : this.tms.getOtherOrganization());
+            this.tms.setOtherOrganization(this.currentPartner);
+            this.viewTxId = this.activatedRoute.snapshot.paramMap.get('txid');
+
+            this.items = this.m.getItems();
+            this.items_existing = this.m.getItemsExisting();
+            console.log(this.viewTxId);
+            if (this.viewTxId) {
+                this.tms.getOneTransaction(this.viewTxId).subscribe(tx => {
+                    this.thisTx = tx;
+                    this.openMode = tx.status;
+                    if (this.items_existing.length == 0) {
+                        this.items_existing = tx.items;
+                        this.m.saveItemsExisting(this.items_existing);
+                    }
+                    this.tms.setOtherOrganization(this.orgOther.find(o => o.oid == tx.oid_source));
+                    this.currentPartner = this.tms.getOtherOrganization();
+                });
+                
+            } else {
+                this.openMode = 'new';
+            }
+            console.log(this.openMode);
         });
-        this.viewTxId = this.activatedRoute.snapshot.paramMap.get('txid');
-
-        this.items = this.m.getItems();
-        this.items_existing = this.m.getItemsExisting();
-
-        if (this.viewTxId) {
-            this.tms.getOneTransaction(this.viewTxId).subscribe(tx => {
-                this.thisTx = tx;
-                this.openMode = tx.status;
-                if (this.items_existing.length == 0) {
-                    this.items_existing = tx.items;
-                    this.m.saveItemsExisting(this.items_existing);
-                }
-                this.currentPartner = this.orgOther.find(o => o.oid == tx.oid_source);
-            });
-            
-        } else {
-            
-            
-            // this.items = this.m.getItems(params.key || params.txid || this.orgCurrent.oid);
-            // this.activatedRoute.queryParams.subscribe(params => {
-            //     this.tms.getOneTransaction(params.txid).subscribe(transaction => {
-            //         // orgCurrent = getOrganization(transaction.oid_dest);
-            //         // orgOther = [getOrganization(transaction.oid_source)];
-            //         // items still need to be added to transaction, then items = transaction.item
-            //     })
-            // });
-            
-        }
-
-        console.log(this.viewTxId, this.openMode);
-        
+                
     }
 
     ngOnInit() {
     }
 
-    setCurrentPartner(oid:string) {
-        this.currentPartner = this.orgOther.find(o => o.oid == oid);
+    setCurrentPartner(org) {
+        console.log('Set org');
+        console.log(org);
+        this.tms.setOtherOrganization(org);
+        this.currentPartner = org;
         this.showSelectionMenu = false;
     }
 
@@ -120,6 +114,7 @@ export class TransactionPageComponent implements OnInit {
     goback() {
         this.m.saveItems([]);
         this.m.saveItemsExisting([]);
+        this.tms.setOtherOrganization(null);
         this.router.navigate(['/organization']);
     }
 
@@ -127,12 +122,13 @@ export class TransactionPageComponent implements OnInit {
         this.tms.submitSimpleTransaction({
             status: "Submitted",
             stringTime: (new Date()).toString(),
-            oid_source: this.orgOther[0].oid,
+            oid_source: this.tms.getOtherOrganization().oid,
             oid_dest: this.orgCurrent.oid,
             items: this.m.getItems()
         }).subscribe(ref => {
             this.m.saveItems([]);
             this.m.saveItemsExisting([]);
+            this.tms.setOtherOrganization(null);
             this.router.navigate(['/organization']);
         });
     }
@@ -157,6 +153,7 @@ export class TransactionPageComponent implements OnInit {
         const items = this.mergeItems();
         this.m.saveItems([]);
         this.m.saveItemsExisting([]);
+        this.tms.setOtherOrganization(null);
         this.tms.updateTransaction(this.viewTxId, items)
             .subscribe(ref => {
                 this.router.navigate(['/organization']);
@@ -169,6 +166,7 @@ export class TransactionPageComponent implements OnInit {
         const items = this.mergeItems();
         this.m.saveItems([]);
         this.m.saveItemsExisting([]);
+        this.tms.setOtherOrganization(null);
         this.tms.orderTransaction(this.viewTxId, items)
           .subscribe(ref => {
               this.router.navigate(['/organization']);
