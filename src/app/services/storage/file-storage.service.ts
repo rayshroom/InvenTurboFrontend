@@ -9,11 +9,16 @@ import { mergeMap, last, map } from 'rxjs/operators';
 export class FileStorageService {
 
     constructor(private afStorage: AngularFireStorage) {
-        // https://github.com/angular/angularfire/blob/master/docs/storage/storage.md
     }
 
-    uploadFile(file: File, cloudDir: string): Observable<string> {
-        const filepath = `${cloudDir}/${Date.now()}_${file.name}`;
+    uploadFile(file: File, cloudDir: string, fileName?: string): Observable<string> {
+        let filepath;
+        if (!fileName) {
+            filepath = `${cloudDir}/${Date.now()}_${file.name}`;
+        } else {
+            const fileExtension = file.name.substr(file.name.lastIndexOf('.') + 1);
+            filepath = `${cloudDir}/${fileName}.${fileExtension}`;
+        }
         const fileRef = this.afStorage.ref(filepath);
         const task = this.afStorage.upload(filepath, file);
 

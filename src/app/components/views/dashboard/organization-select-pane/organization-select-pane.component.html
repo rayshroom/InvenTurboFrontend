@@ -8,13 +8,13 @@
             (click)="onClickOrglinkItem(org)"
         >
             <div class="orglink-item-photo-wrapper">
-                <img class="orglink-item-photo" src="{{ org.photoURL }}"/>
+                <img class="orglink-item-photo" [src]="org.photoURL"/>
             </div>
             <span class="orglink-item-name">{{ org.name }}</span>
         </button>
     </div>
     <ng-template #loadingIcon>
-        <app-loading-icon></app-loading-icon>
+        <app-loading-icon message="Loading your organizations. Please wait..."></app-loading-icon>
     </ng-template>
 </div>
 <div class="red-link-wrapper">
