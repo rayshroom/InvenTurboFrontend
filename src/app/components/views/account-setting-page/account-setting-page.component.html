@@ -4,7 +4,7 @@
             <h1 class="page-title">My Account <i class="fas fa-user-circle"></i></h1>
         </div>
     </div>
-    <div class="row" *ngIf="user && profile">
+    <div class="row" *ngIf="user && profile; else loadingIcon">
         <div class="col-lg-2 col-sm-12 mx-auto">
             <app-profile-summary-pane [user]="user" [profile]="profile"></app-profile-summary-pane>
         </div>
@@ -13,4 +13,7 @@
             <app-credential-pane></app-credential-pane>
         </div>
     </div>
+    <ng-template #loadingIcon>
+        <app-loading-icon message="Loading user profile. Please wait..."></app-loading-icon>
+    </ng-template>
 </div>

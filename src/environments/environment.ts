@@ -20,6 +20,7 @@ export const environment = {
         getOneProfile(uid) { return `/profile/${uid}`; },
 
         getAllOrganization: `/organization`,
+        createOrganization: `/organization/create`,
         getAllProduct: `/product`,
         createProduct: `/product/create`,
 

@@ -1,9 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { environment as env } from 'src/environments/environment';
 
 import { Profile } from './uam.model';
+import { flatMap, last } from 'rxjs/operators';
+import { AuthService } from './auth.service';
+import { Credential } from './auth.model';
 
 @Injectable({
     providedIn: 'root'
@@ -16,14 +19,16 @@ export class UserManagementService {
         })
     };
 
-    constructor(private http: HttpClient) {}
+    constructor(private http: HttpClient, public auth: AuthService) {}
 
-    doRegister(values: Profile): Observable<any> {
+    doRegister(values: Profile): Observable<firebase.User> {
         values.displayName = `${values.title} ${values.firstName} ${values.lastName}`.trim();
-        return this.http.post<any>(
-            `${env.api}${env.routes.register}`,
-            values,
-            this.httpOptions
+        return this.http.post<any>(`${env.api}${env.routes.register}`, values, this.httpOptions).pipe(
+            flatMap(() => this.auth.doLogin(new Credential(values.email, values.password))),
+            flatMap(user => {
+                user.sendEmailVerification();
+                return of(user);
+            }),
         );
     }
 

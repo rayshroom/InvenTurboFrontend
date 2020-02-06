@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { SafeResourceUrl } from '@angular/platform-browser';
 import { FileStorageService } from 'src/app/services/storage/file-storage.service';
 import { ProductService } from 'src/app/services/product/product.service';
 import { ProductStockService } from 'src/app/services/product/product-stock.service';
@@ -31,7 +31,6 @@ export class CreateNewProductPaneComponent implements OnInit {
     constructor(
         private router: Router,
         private fb: FormBuilder,
-        private sanitizer: DomSanitizer,
         public userOrg: UserOrganizationService,
         public fs: FileStorageService,
         public prodService: ProductService,
@@ -46,9 +45,7 @@ export class CreateNewProductPaneComponent implements OnInit {
 
     loadImage(file: File) {
         this.localProductImage.file = file;
-        this.localProductImage.url = this.sanitizer.bypassSecurityTrustResourceUrl(
-            URL.createObjectURL(file)
-        );
+        this.localProductImage.url = this.fs.getSanitizedLocalUrl(file);
         this.localProductImage.filename = file.name;
     }
 
@@ -74,7 +71,7 @@ export class CreateNewProductPaneComponent implements OnInit {
             }),
         ).subscribe(() => {
             this.submitBtn.message = 'Success!';
-            this.submitBtn.classes[0] = 'btn-success'
+            this.submitBtn.classes[0] = 'btn-success';
             setTimeout(() => {
                 this.router.navigate(['/organization/inventory/', newProduct.pid]);
             }, 1500);

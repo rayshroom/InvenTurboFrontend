@@ -1,0 +1,121 @@
+<div class="page-wrapper row">
+    <div class="col-lg-6 col-sm-11 mx-auto">
+        <h1 class="main-title">Thanks for choosing InvenTurbo!</h1>
+        <h2 class="secondary-title">Let us help you unleash the full potential of your business.</h2>
+        <div *ngIf="!user; else unauthContent">
+            <p class="scroll-checkpoint">Firstly, let's get you a new account. Already have one? <a routerLink="/login">Login here</a>.</p>
+            <form [formGroup]="ownerAccountForm" class="shadow bg-white rounded register-form">
+                <h3 class="title">Owner's Account Information</h3>
+                <p class="notice">(*) indicates mandatory field.</p>
+                <div class="row form-group">
+                    <div class="col-md-3 left-inline-inputer">
+                        <label for="titleInput">Title: <span class="mandatory">(*)</span></label>
+                        <select id="titleInput" class="form-control custom-select" formControlName="title">
+                            <option hidden [value]="null">[Select one]</option>
+                            <option *ngFor="let title of titles" [value]="title">{{ title.length > 1 ? title : 'N/A' }}</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4 middle-inline-inputer">
+                        <label for="fNameInput">First Name: <span class="mandatory">(*)</span></label>
+                        <input type="text" formControlName="firstName" id="fNameInput" class="form-control" placeholder="e.g.: John" />
+                    </div>
+                    <div class="col-md-5 right-inline-inputer">
+                        <label for="lNameInput">Last Name: <span class="mandatory">(*)</span></label>
+                        <input type="text" formControlName="lastName" id="lNameInput" class="form-control" placeholder="e.g.: Smith" />
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-md-8 left-inline-inputer">
+                        <label for="emailInput">Email Address: <span class="mandatory">(*)</span></label>
+                        <input type="email" formControlName="email" id="emailInput" class="form-control" placeholder="e.g.: john.smith@inventurbo.ca" autocomplete="email" />
+                    </div>
+                    <div class="col-md-4 right-inline-inputer">
+                        <label for="phoneInput">Phone:</label>
+                        <input type="text" formControlName="phone" id="phoneInput" class="form-control" placeholder="e.g.: (999) 999-9999" autocomplete="tel" />
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-md-6 left-inline-inputer">
+                        <label for="pwdInput">Password: <span class="mandatory">(*)</span></label>
+                        <input type="password" formControlName="password" id="pwdInput" class="form-control" autocomplete="new-password"/>
+                    </div>
+                    <div class="col-md-6 right-inline-inputer">
+                        <label for="pwd2Input">Confirm Password: <span class="mandatory">(*)</span></label>
+                        <input type="password" formControlName="passwordConfirm" id="pwd2Input" class="form-control" autocomplete="new-password" />
+                    </div>
+                </div>
+                <div class="form-group last-form-group">
+                    <label for="descInput">Bio:</label>
+                    <textarea formControlName="bio" id="descInput" class="form-control owner-bio" placeholder="A short bio about yourself... (255 characters max)"></textarea>
+                </div>
+            </form>
+            <p class="scroll-checkpoint">and also some info about your business...</p>
+        </div>
+        <ng-template #unauthContent>
+            <p class="scroll-checkpoint">We just need some info about your business</p>
+        </ng-template>
+        <form [formGroup]="organizationProfileForm" class="shadow bg-white rounded register-form">
+            <h3 class="title">Organization Information</h3>
+            <p class="notice">(*) indicates mandatory field.</p>
+            <div class="form-group">
+                <label for="orgNameInput">Organization's Name: <span class="mandatory">(*)</span></label>
+                <input type="text" formControlName="name" id="orgNameInput" class="form-control" placeholder="e.g.: InvenTurbo" />
+            </div>
+            <div class="row form-group">
+                <div class="col-md-7 left-inline-inputer">
+                    <label for="orgEmailInput">Official Email: <span class="mandatory">(*)</span></label>
+                    <input type="email" formControlName="email" id="orgEmailInput" class="form-control" placeholder="e.g.: info@inventurbo.ca" autocomplete="email" />
+                </div>
+                <div class="col-md-5 right-inline-inputer">
+                    <label for="orgPhoneInput">Official Telephone: <span class="mandatory">(*)</span></label>
+                    <input type="text" formControlName="phone" id="orgPhoneInput" class="form-control" placeholder="e.g.: (999) 999-9999" autocomplete="tel" />
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-md-7">
+                    <div class="preview-area">
+                        <h4>Organization's Logo:</h4>
+                        <div
+                        *ngIf="organizationLogo.url; else emptyWrapper"
+                        class="preview-image-wrapper"
+                        [style.background]="imageBackgroundColor"
+                        >
+                            <img class="org-logo" [src]="organizationLogo.url" />
+                        </div>
+                        <ng-template #emptyWrapper>
+                            <div class="preview-image-wrapper empty-image-wrapper">
+                                <i class="fas fa-camera fa-3x"></i>
+                                <span>Select an image below</span>
+                            </div>
+                        </ng-template>
+                    </div>
+                    <div class="custom-file">
+                        <input
+                            type="file"
+                            accept="image/*"
+                            formControlName="image"
+                            (change)="onImageSelection($event.target.files[0])"
+                            class="custom-file-input"
+                            id="imageFileInput"
+                        />
+                        <label class="custom-file-label" for="imageFileInput" style="overflow: hidden;">
+                            Organization's Logo
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-5 text-center">
+                    <input ejs-colorpicker type="color" id="colorpicker" formControlName="photoBackground"
+                        [inline]="true"
+                        [showButtons]="false"
+                    />
+                </div>
+            </div>
+            <div class="form-group last-form-group">
+                <label for="orgDescInput">Description: <span class="mandatory">(*)</span></label>
+                <textarea formControlName="description" id="orgDescInput" class="form-control organization-desc" placeholder="A short description about your organization... (500 characters max)"></textarea>
+            </div>
+        </form>
+        <span class="error">{{ errorMessage.length > 0 ? errorMessage : '' }}</span>
+        <button type="button" [ngClass]='submitBtn.classes' [disabled]="!validInputs || submitBtn.disabled" (click)="onSubmit()">{{ submitBtn.message }}</button>
+    </div>
+</div>

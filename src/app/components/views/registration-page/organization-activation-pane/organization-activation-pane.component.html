@@ -1,0 +1,10 @@
+<form [formGroup]="registerFormOrganization" (ngSubmit)="onOrganizationActivate()" class="shadow bg-white rounded register-form">
+    <h2 class="title text-center">Organization</h2>
+    <div class="form-group last-form-group">
+        <input type="text" formControlName="activationCode" class="form-control" placeholder="Organization Activation Code" />
+    </div>
+    <span class="error">{{ errorMessage.length > 0 ? errorMessage : '' }}</span>
+    <div class="text-center">
+        <button type="submit" [disabled]="!registerFormOrganization.valid" class="btn btn-danger">Activate</button>
+    </div>
+</form>
