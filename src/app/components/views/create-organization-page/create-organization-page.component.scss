@@ -1,0 +1,122 @@
+a {
+    text-decoration: underline;
+    color: #BF202F;
+}
+
+.page-wrapper {
+    margin-top: 1em;
+}
+
+.main-title {
+    font-weight: bold;
+    font-size: 40px;
+    color: #BF202F;
+}
+
+.secondary-title {
+    font-size: 23px;
+    margin-bottom: 0.75em;
+    font-weight: bold;
+    color: rgb(87, 86, 86);
+}
+
+.title {
+    font-weight: bolder;
+    margin-bottom: 0;
+}
+
+.notice {
+    margin-bottom: 1.75em;
+    color: #BF202F;
+}
+
+.mandatory {
+    color: #BF202F;
+}
+
+.register-form {
+    width: 100%;
+    padding: 1.5em 2em 1.5em 2em;
+    background-color: #f0f0f0;
+    margin-bottom: 1.5em;
+}
+
+.left-inline-input {
+    padding-right: 0.3em;
+}
+
+.middle-inline-input {
+    padding-left: 0.3em;
+    padding-right: 0.3em;
+}
+
+.right-inline-input {
+    padding-left: 0.3em;
+}
+
+textarea.owner-bio {
+    height: 6em;
+}
+
+textarea.organization-desc {
+    height: 8em;
+}
+
+.form-group.last-form-group {
+    margin-bottom: 0.5em;
+}
+
+.preview-area {
+    height: 17.5em;
+    border: 2px #bf202f dashed;
+    border-radius: 2mm;
+    padding: 1em;
+    margin-bottom: 1em;
+}
+
+.preview-area > h4 {
+    color: #bf202f;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.preview-image-wrapper {
+    height: 88%;
+    padding: 0.5em;
+    display: flex;
+    flex-flow: wrap column;
+    justify-content: center;
+    align-items: center;
+}
+
+.empty-image-wrapper {
+    border: 1px dashed grey;
+}
+
+.empty-image-wrapper > * {
+    color: grey;
+    white-space: normal;
+}
+
+.org-logo {
+    object-fit: contain;
+    vertical-align: middle;
+    height: 100%;
+}
+
+.submit-btn {
+    margin-top: 2em;
+    margin-bottom: 2em;
+}
+
+// #topOfPage {
+//     position: fixed;
+//     visibility: hidden;
+//     top: 0;
+// }
+
+// .scroll-btn {
+//     position: fixed;
+//     left: 92%;
+//     top: 92%;
+// }

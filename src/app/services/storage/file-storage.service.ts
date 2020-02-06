@@ -1,4 +1,5 @@
 import { Injectable, OnInit } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { Observable } from 'rxjs';
 import { mergeMap, last, map } from 'rxjs/operators';
@@ -8,12 +9,21 @@ import { mergeMap, last, map } from 'rxjs/operators';
 })
 export class FileStorageService {
 
-    constructor(private afStorage: AngularFireStorage) {
-        // https://github.com/angular/angularfire/blob/master/docs/storage/storage.md
+    constructor(private afStorage: AngularFireStorage, private sanitizer: DomSanitizer) {
     }
 
-    uploadFile(file: File, cloudDir: string): Observable<string> {
-        const filepath = `${cloudDir}/${Date.now()}_${file.name}`;
+    getSanitizedLocalUrl(file: File) {
+        return this.sanitizer.bypassSecurityTrustResourceUrl(URL.createObjectURL(file));
+    }
+
+    uploadFile(file: File, cloudDir: string, fileName?: string): Observable<string> {
+        let filepath;
+        if (!fileName) {
+            filepath = `${cloudDir}/${Date.now()}_${file.name}`;
+        } else {
+            const fileExtension = file.name.substr(file.name.lastIndexOf('.') + 1);
+            filepath = `${cloudDir}/${fileName}.${fileExtension}`;
+        }
         const fileRef = this.afStorage.ref(filepath);
         const task = this.afStorage.upload(filepath, file);
 

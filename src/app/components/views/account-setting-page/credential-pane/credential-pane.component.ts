@@ -49,6 +49,7 @@ export class CredentialPaneComponent implements OnInit {
             try {
                 await this.auth.doChangePassword(this.oldPassword.value, this.newPassword.value);
                 this.updateSuccessful = true;
+                this.passwordChangeForm.reset();
             } catch (error) {
                 this.updateSuccessful = false;
                 if (error.code === 'auth/wrong-password') {
