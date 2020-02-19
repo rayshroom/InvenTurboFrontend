@@ -25,16 +25,12 @@ export class TransactionManagementService {
     private otherOrganization: UserOrganization = null;
 
     setOtherOrganization(orglink: UserOrganization) {
-        this.otherOrganization = orglink;
-        sessionStorage.setItem('tx_other_organization', JSON.stringify(this.otherOrganization));
+        sessionStorage.setItem('tx_other_organization', JSON.stringify(orglink));
     }
 
     getOtherOrganization() {
         const storedOtherTx = sessionStorage.getItem('tx_other_organization');
-        if (!this.otherOrganization && storedOtherTx) {
-            this.otherOrganization = JSON.parse(storedOtherTx);
-        }
-        return this.otherOrganization;
+        return JSON.parse(storedOtherTx) || null;
     }
 
     getAllOrganizationTransactions(oid: string): Observable<{tid: string, status: string, stringTime: string, oid_source: string, oid_dest: string}[]> {

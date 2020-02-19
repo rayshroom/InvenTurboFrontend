@@ -8,7 +8,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let invLoc of inventoryAdjustmentForm.controls.inventories.controls; let i=index" [formGroupName]="i">
+                <tr *ngFor="let invLoc of inventoriesControls; let i=index" [formGroupName]="i">
                     <td>
                         <span>{{ invLoc.controls.name.value }}</span><br>
                         <span *ngIf="invLoc.controls.changedValue.value != 0" class="positive-modified">&nbsp;</span>

@@ -34,8 +34,6 @@ export class InventoryPanelComponent implements OnInit {
             this.products = prod;
             this.filteredProducts = prod;
         });
-
-        
     }
 
     filterItems() {

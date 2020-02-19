@@ -35,8 +35,6 @@ import { AuthVerifyGuard } from './services/auth/auth-verify.guard';
 import { LoggedInGuard } from './services/auth/logged-in.guard';
 import { UserManagementService } from './services/auth/uam.service';
 import { UserOrganizationService } from './services/organization/user-organization.service';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { InventoryDetailOverlayComponent } from './components/views/inventory-detail-overlay/inventory-detail-overlay.component';
 import { ProductDetailPageComponent } from './components/views/product-detail-page/product-detail-page.component';
 import { InventoryPanelHeaderComponent } from './components/common/inventory-panel-header/inventory-panel-header.component';
 import { ProductDetailPaneComponent } from './components/views/product-detail-page/product-detail-pane/product-detail-pane.component';

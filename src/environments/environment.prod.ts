@@ -10,23 +10,23 @@ export const environment = {
         appId: '1:216500507265:web:ef43d619b4ac117655f380',
         measurementId: 'G-3FKLY60L44'
     },
-    api: 'https://inventurbo-api.herokuapp.com/api',
+    api: 'https://us-central1-inventurbo-f0eca.cloudfunctions.net/app/api',
     routes: {
         register: '/user/register',
-        getOneProfile: uid => `/profile/${uid}`,
+        getOneProfile(uid) { return `/profile/${uid}`; },
 
         getAllOrganization: `/organization`,
         getAllProduct: `/product`,
         createProduct: `/product/create`,
 
-        getUserOrganizations: uid => `/profile/${uid}/organization`,
-        getOrganizationProductStocks: oid => `/organization/${oid}/product`,
-        getOneProductStock: (oid, pid) => `/organization/${oid}/product/${pid}`,
-        addOneProductStock: oid => `/organization/${oid}/product/add/`,
-        updateOneProductStock: (oid, pid) => `/organization/${oid}/product/update/${pid}`,
-        getOrganizationTransactions: oid => `/organization/${oid}/transaction`,
-        getOneTransaction: tid => `/transaction/${tid}`,
+        getUserOrganizations(uid) { return `/profile/${uid}/organization`; },
+        getOrganizationProductStocks(oid) { return `/organization/${oid}/product`; },
+        getOneProductStock(oid, pid) { return `/organization/${oid}/product/${pid}`; },
+        addOneProductStock(oid) { return `/organization/${oid}/product/add/`; },
+        updateOneProductStock(oid, pid) { return `/organization/${oid}/product/update/${pid}`; },
+        getOrganizationTransactions(oid) { return `/organization/${oid}/transaction`; },
+        getOneTransaction(tid) { return `/transaction/${tid}`; },
         addSimpleTransaction: `/transaction/create`,
-        orderTransaction: tid => `/transaction/update/${tid}`,
+        orderTransaction(tid) { return `/transaction/update/${tid}`; },
     },
 };

@@ -1,4 +1,4 @@
-<div *ngIf="this.orgCurrent && this.orgOther.length > 0" class="container">
+<div *ngIf="this.orgCurrent && this.orgOther.length > 0 && (this.thisTx || this.openMode == 'new') && this.currentPartner; else loadingIcon" class="container">
 
   <!-- COMPONENT: The back button, self org name/avatar, back/forth arrow, other org name/avatar -->
   <div class="row">
@@ -35,18 +35,18 @@
 
     <div class="col-5" [ngClass]="{'hidden': showSelectionMenu}">
       <!-- <div class="row profile-wrapper shadow bg-white rounded-pill login-for mb-3" *ngFor="let org of orgOther"></div> -->
-      <div class="row profile-wrapper shadow bg-white rounded-pill login-for mb-lg-3 mb-0" [ngClass]="{'clickable': this.openMode == 'new'}" (click)="this.openMode == 'new' && this.showSelectionMenu = true">
+      <div class="row profile-wrapper shadow bg-white rounded-pill login-for mb-lg-3 mb-0" [ngClass]="{'clickable': this.openMode == 'new' && items.length == 0}" (click)="this.openMode == 'new' && items.length == 0 && this.showSelectionMenu = true">
         <img class="organization-icon col-2 h-100 w-100" src="{{this.currentPartner.photoURL}}"/>
         <div class="col-9">
           <h2>
               <span class="font-weight-bold">{{this.currentPartner.name}}</span>
           </h2>
         </div>
-        <i class="fas fa-2x fa-chevron-down pt-3" *ngIf="this.openMode == 'new'"></i>
+        <i class="fas fa-2x fa-chevron-down pt-3" *ngIf="this.openMode == 'new' && items.length == 0"></i>
       </div>
     </div>
 
-    <div class="col-5" [ngClass]="{'hidden': !showSelectionMenu}" *ngIf="this.openMode == 'new'">
+    <div class="col-5" [ngClass]="{'hidden': !showSelectionMenu}" *ngIf="this.openMode == 'new' && items.length == 0">
       <!-- <div class="row profile-wrapper shadow bg-white rounded-pill login-for mb-3" *ngFor="let org of orgOther"></div> -->
       <div class="row profile-wrapper bg-white login-for mb-1 clickable" *ngFor="let org of orgOther" (click)="setCurrentPartner(org)">
         <img class="organization-icon col-2 h-100 w-100" src="{{org.photoURL}}"/>
@@ -144,3 +144,6 @@
 
 
 </div>
+<ng-template #loadingIcon>
+  <app-loading-icon></app-loading-icon>
+</ng-template>
