@@ -53,7 +53,12 @@ export class TransactionPageComponent implements OnInit {
         this.orgCurrent = this.userOrg.getCurrentOrganization();
         this.userOrg.getAllOrganizations().subscribe(orgs => {
             this.orgOther = orgs.filter(o => o.oid !== this.orgCurrent.oid);
-            this.currentPartner = this.tms.getOtherOrganization() || this.orgOther[0];
+            if (this.tms.getOtherOrganization() == null) {
+                this.currentPartner = this.orgOther[0];
+                this.tms.setOtherOrganization(this.currentPartner);
+            } else {
+                this.currentPartner = this.tms.getOtherOrganization();
+            }
         });
         this.viewTxId = this.activatedRoute.snapshot.paramMap.get('txid');
 

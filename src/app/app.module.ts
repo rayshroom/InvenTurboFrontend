@@ -52,8 +52,6 @@ import { AddProductStockPageComponent } from './components/views/add-product-sto
 import { AddExistingProductPaneComponent } from './components/views/add-product-stock-page/add-existing-product-pane/add-existing-product-pane.component';
 import { ProductItemCardComponent } from './components/views/add-product-stock-page/add-existing-product-pane/product-item-card/product-item-card.component';
 import { CreateNewProductPaneComponent } from './components/views/add-product-stock-page/create-new-product-pane/create-new-product-pane.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { InventoryDetailOverlayComponent } from './components/views/inventory-detail-overlay/inventory-detail-overlay.component';
 
 @NgModule({
     declarations: [
