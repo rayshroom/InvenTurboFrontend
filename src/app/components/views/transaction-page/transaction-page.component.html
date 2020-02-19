@@ -27,7 +27,8 @@
     <div class="col-1">
         <div class="arrow-wrapper">
             <!-- <i class="arrow-top fas fa-4x fa-long-arrow-alt-left correct" [ngClass]="{'correct': fromCurrent}"></i> -->
-            <i class="arrow-top fas fa-4x fa-long-arrow-alt-left correct"></i>
+            <i class="arrow-top fas fa-4x fa-long-arrow-alt-left correct" *ngIf="!this.fromCurrent"></i>
+            <i class="arrow-top fas fa-4x fa-long-arrow-alt-right correct" *ngIf="this.fromCurrent"></i>
         </div>
     </div>
 
@@ -94,8 +95,31 @@
           <div class="p-2 clickable" (click)="openDetailOverlay(item)">Name: {{item.name}}</div>
           <div class="p-2">Qty: {{item.quantity}}</div>
           <div class="p-2">Price: <span class="correct">{{item.unit_price | currency}}</span></div>
-          <div class="p-2 clickable correct" *ngIf="openMode == 'new' || openMode == 'Pending'" (click)="removeItemExisting(item)"><i class="fas fa-times-circle"></i></div>
+          <div class="p-2 clickable correct" *ngIf="(openMode == 'new' || openMode == 'Pending')" (click)="removeItemExisting(item)"><i class="fas fa-times-circle"></i></div>
+          <div class="p-2 clickable"><i 
+                              [ngClass]="{'fas': true, 'fa-chevron-circle-down': this.items_shipping[index].collapse, 'fa-chevron-circle-up': !this.items_shipping[index].collapse}"
+                              [attr.aria-expanded]="!this.items_shipping[index].collapse" 
+                              [attr.aria-controls]="'location-'+index" 
+                              *ngIf="(this.openMode == 'Requested' && this.fromCurrent) || (this.openMode == 'Shipped' && !this.fromCurrent)"
+                              
+                              (click)="this.items_shipping[index].collapse = !this.items_shipping[index].collapse"></i></div>
         </li>
+        <ul [id]="'location-'+index" [ngbCollapse]="this.items_shipping[index].collapse" *ngIf="this.openMode == 'Requested' && this.fromCurrent">
+          <li *ngFor="let location of this.items_shipping[index].location; let i = index" class="list-group-item d-flex justify-content-around">
+            <div class="p-2">Location: {{this.items_shipping[index].location[i]}}</div>
+            <div class="p-2">Stock left: {{this.items_shipping[index].maxcount[i]}}</div>
+            <input class="correct" type="number" min="0" max="{{this.items_shipping[index].maxcount[i]}}" [(ngModel)]="this.items_shipping[index].count[i]"/>
+          </li>
+        </ul>
+
+        <ul [id]="'location-'+index" [ngbCollapse]="this.items_shipping[index].collapse" *ngIf="this.openMode == 'Shipped' && !this.fromCurrent">
+          <li *ngFor="let location of this.items_shipping[index].location; let i = index" class="list-group-item d-flex justify-content-around">
+            <div class="p-2">Location: {{this.items_shipping[index].location[i]}}</div>
+            <div class="p-2">Current stock: {{this.items_shipping[index].maxcount[i]}}</div>
+            <input class="correct" type="number" min="0" max="{{this.items_existing[index].quantity}}" [(ngModel)]="this.items_shipping[index].count[i]"/>
+          </li>
+        </ul>
+      
       </ul>
     </div>
   </div>
@@ -133,12 +157,32 @@
     <div *ngIf="this.openMode == 'Pending'" class="text-center mx-1 submitTransactionRight col-3" (click)="orderTransaction()">
       Order
     </div>
-    <div *ngIf="this.openMode == 'Requested'" class="text-center submitTransactionRight disabled col-3">
+    <div *ngIf="this.openMode == 'Requested' && !this.fromCurrent" class="text-center submitTransactionRight disabled col-3">
       Requested
     </div>
-    <div *ngIf="this.openMode == 'Done'" class="text-center submitTransactionRight disabled col-3" (click)="submitItems()">
+    <div *ngIf="this.openMode == 'Requested' && this.fromCurrent" class="text-center submitTransactionRight col-3" (click)="approveTransaction()">
+      Ship
+    </div>
+    <div *ngIf="this.openMode == 'Shipped'" class="text-center submitTransactionRight col-3 disabled">
+      Shipped
+    </div>
+    <div *ngIf="this.openMode == 'Shipped' && !this.fromCurrent" class="text-center ml-1 submitTransactionRight accepted col-3" (click)="acceptTransaction()">
+      Accept
+    </div>
+    <div *ngIf="this.openMode == 'Shipped' && !this.fromCurrent" class="text-center ml-1 submitTransactionRight col-3" (click)="declineTransaction()">
+      Decline
+    </div>
+    <div *ngIf="this.openMode == 'Declined'" class="text-center ml-1 submitTransactionRight col-3 disabled">
+      Declined
+    </div>
+    <div *ngIf="this.openMode == 'Completed'" class="text-center submitTransactionRight col-3" (click)="reorderTransaction()">
       Re-order
     </div>
+  </div>
+
+  <div class="row mb-3 correct">
+    <div class="col-1"></div>
+    <div>{{this.errorMessage}}</div>
   </div>
 
 

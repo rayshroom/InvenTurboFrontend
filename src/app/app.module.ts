@@ -68,7 +68,6 @@ import { InventoryDetailOverlayComponent } from './components/views/inventory-de
         InventoryPanelComponent,
         TransactionPageComponent,
         ItemsListingPageComponent,
-        InventoryDetailOverlayComponent,
         LoadingIconComponent,
         UserProfilePaneComponent,
         OrganizationListPaneComponent,
