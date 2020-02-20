@@ -95,13 +95,13 @@
                                     - {{transaction.TransactionItems.length}} item<span *ngIf="transaction.TransactionItems.length != 1">s</span>
                                     <span *ngIf="transaction.totalPrice">&nbsp;({{transaction.totalPrice | currency}})</span>
                                 </span>
-                                <span class="float-left text-left align-middle d-inline w-100">
+                                <div class="float-left text-left align-middle d-inline w-100">
                                     <span>{{transaction.transactionType}} Transaction&nbsp;</span>
                                     <a routerLink="/organization/transaction/view/{{transaction.tid}}" class="transaction-link">(ID {{transaction.tid}})</a>
                                     <i routerLink="/organization/transaction/view/{{transaction.tid}}" class="fas fa-external-link-square-alt cursor-pointer"></i>
                                     <h4 routerLink="/organization/transaction/view/{{transaction.tid}}" class="transaction-link-icon float-right text-right align-middle d-inline fas fa-external-link-alt"></h4>
-                                    <a *ngIf="transaction.currentUser" href="{{this.getProfileLink(transaction.currentUser.uid)}}" class="transaction-link" style="float: left;">{{transaction.currentUser.displayName}}</a>
-                                </span>
+                                </div>
+                                <a *ngIf="transaction.currentUser" href="{{this.getProfileLink(transaction.currentUser.uid)}}" class="transaction-link" style="float: left;">{{transaction.currentUser.displayName}}</a>
                             </div>
                         </ng-template>
                         <ng-template #hideTransaction></ng-template>
