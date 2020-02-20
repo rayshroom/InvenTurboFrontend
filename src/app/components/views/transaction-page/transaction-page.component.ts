@@ -58,7 +58,7 @@ export class TransactionPageComponent implements OnInit, OnDestroy {
         public psService: ProductStockService,
         private modalService: NgbModal
     ) {
-        this.orgCurrent = this.userOrg.getCurrentOrganization();      
+        this.orgCurrent = this.userOrg.getCurrentOrganization();
     }
 
     ngOnInit() {
@@ -68,7 +68,7 @@ export class TransactionPageComponent implements OnInit, OnDestroy {
             this.currentPartner = (this.tms.getOtherOrganization() === null ? this.orgOther[0] : this.tms.getOtherOrganization());
             this.tms.setOtherOrganization(this.currentPartner);
 
-            this.errorMessage = "";
+            this.errorMessage = '';
 
             this.items = this.m.getItems();
             this.items_existing = this.m.getItemsExisting();
@@ -218,25 +218,25 @@ export class TransactionPageComponent implements OnInit, OnDestroy {
     approveTransaction() {
         this.m.saveItems(this.items);
         this.m.saveItemsExisting(this.items_existing);
-        for(var i = 0; i < this.items_shipping.length; i++) {
-            if(this.items_existing[i].quantity != this.items_shipping[i].count.reduce((a, b) => a + b, 0)) {
-                this.errorMessage = "Incorrect number of items selected";
+        for (let i = 0; i < this.items_shipping.length; i++) {
+            if (this.items_existing[i].quantity != this.items_shipping[i].count.reduce((a, b) => a + b, 0)) {
+                this.errorMessage = 'Incorrect number of items selected';
                 return;
             }
         }
-        this.errorMessage = "";
+        this.errorMessage = '';
 
         of(...this.items_shipping).pipe(
             flatMap(item => {
-                let locationInfo = [];
-                for (var i = 0; i < item.location_id.length; i++) {
+                const locationInfo = [];
+                for (let i = 0; i < item.location_id.length; i++) {
                     locationInfo.push({
                         locid: item.location_id[i],
                         name: item.location[i],
                         quantity: item.maxcount[i] - item.count[i]
-                    })
-                };
-                return this.psService.updateOneProductStock(this.orgCurrent.oid, item.pid, locationInfo)
+                    });
+                }
+                return this.psService.updateOneProductStock(this.orgCurrent.oid, item.pid, locationInfo);
             })
         ).subscribe(
             result => {
@@ -244,56 +244,56 @@ export class TransactionPageComponent implements OnInit, OnDestroy {
                 this.tms.approveTransaction(this.viewTxId)
                 .subscribe(ref => {
                     this.router.navigate(['/organization']);
-                })
+                });
             }
         );
         // this.psService.updateOneProductStock(this.orgCurrent.oid, this.product.pid, newInventoryData).subscribe(result => {});
 
-        
+
     }
 
     acceptTransaction() {
         this.m.saveItems(this.items);
         this.m.saveItemsExisting(this.items_existing);
-        for(var i = 0; i < this.items_shipping.length; i++) {
-            if(this.items_existing[i].quantity != this.items_shipping[i].count.reduce((a, b) => a + b, 0)) {
-                this.errorMessage = "Incorrect number of items selected";
+        for (let i = 0; i < this.items_shipping.length; i++) {
+            if (this.items_existing[i].quantity != this.items_shipping[i].count.reduce((a, b) => a + b, 0)) {
+                this.errorMessage = 'Incorrect number of items selected';
                 return;
             }
         }
 
-        this.errorMessage = "";
+        this.errorMessage = '';
         of(...this.items_shipping).pipe(
             flatMap(item => {
-                let locationInfo = [];
-                for (var i = 0; i < item.location_id.length; i++) {
+                const locationInfo = [];
+                for (let i = 0; i < item.location_id.length; i++) {
                     locationInfo.push({
                         locid: item.location_id[i],
                         name: item.location[i],
                         quantity: item.maxcount[i] + item.count[i]
-                    })
-                };
-                return this.psService.updateOneProductStock(this.orgCurrent.oid, item.pid, locationInfo)
+                    });
+                }
+                return this.psService.updateOneProductStock(this.orgCurrent.oid, item.pid, locationInfo);
             })
         ).subscribe(
-            result => 
+            result =>
             this.tms.acceptTransaction(this.viewTxId)
             .subscribe(ref => {
                 this.router.navigate(['/organization']);
             })
-        )
+        );
     }
 
     declineTransaction() {
         this.tms.declineTransaction(this.viewTxId)
           .subscribe(ref => {
               this.router.navigate(['/organization']);
-          })
+          });
     }
 
     reorderTransaction() {
         this.tms.submitSimpleTransaction({
-            status: "Submitted",
+            status: 'Submitted',
             stringTime: (new Date()).toString(),
             oid_source: this.tms.getOtherOrganization().oid,
             oid_dest: this.orgCurrent.oid,
