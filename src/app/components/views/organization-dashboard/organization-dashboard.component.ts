@@ -34,19 +34,11 @@ export class OrganizationDashboardComponent implements OnInit {
             label: 'Pending Transactions'
         },
         {
-            id: 'initiated',
-            label: 'Initiated Transactions'
+            id: 'requested',
+            label: 'Requested Transactions'
         },
         {
-            id: 'approved',
-            label: 'Approved Transactions'
-        },
-        {
-            id: 'shipped',
-            label: 'Shipped Transactions'
-        },
-        {
-            id: 'completed',
+            id: 'done',
             label: 'Completed Transactions'
         }
 
@@ -82,17 +74,11 @@ export class OrganizationDashboardComponent implements OnInit {
         else if (this.filterType == 'pending') {
             return transaction.status.toLowerCase() == 'pending';
         }
-        else if (this.filterType == 'initiated') {
-            return transaction.status.toLowerCase() == 'initiated';
+        else if (this.filterType == 'requested') {
+            return transaction.status.toLowerCase() == 'requested';
         }
-        else if (this.filterType == 'approved') {
-            return transaction.status.toLowerCase() == 'approved';
-        }
-        else if (this.filterType == 'shipped') {
-            return transaction.status.toLowerCase() == 'shipped';
-        }
-        else if (this.filterType == 'completed') {
-            return transaction.status.toLowerCase() == 'completed';
+        else if (this.filterType == 'done') {
+            return transaction.status.toLowerCase() == 'done';
         }
 
         return false;
