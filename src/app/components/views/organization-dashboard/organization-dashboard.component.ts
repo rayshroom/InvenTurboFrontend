@@ -43,13 +43,40 @@ export class OrganizationDashboardComponent implements OnInit {
         }
 
     ]
+
+    timePeriods = [
+        {
+            label: "minutes ago",
+            value: 1
+        },
+        {
+            label: "hours ago",
+            value: 60
+        },
+        {
+            label: "days ago",
+            value: 1440
+        },
+        {
+            label: "weeks ago",
+            value: 10080
+        },
+        {
+            label: "months ago",
+            value: 43200
+        },
+        {
+            label: "years ago",
+            value: 525600
+        }
+    ]
+
     filterType: string = this.filters[0].id;
     filterDateStart: any;
     filterDateEnd: any;
+    filterTimePeriod: any;
 
     shouldDisplay(transaction) {
-        this.filterDateStart = this.filterDateEnd = null;
-
         if (this.filterType == 'all') {
             return true;
         }
@@ -62,11 +89,18 @@ export class OrganizationDashboardComponent implements OnInit {
                 return true;
             }
             else {
-                var s, e;
-                s = new Date(this.filterDateStart)
-                e = new Date(this.filterDateEnd)
-                console.log(Date.now() >= s && Date.now() <= e)
-                if (Date.now() >= s && Date.now() <= e) {
+                let today = new Date();
+                let upperBound = new Date(today.valueOf());
+                let lowerBound = new Date(upperBound.valueOf());
+
+                upperBound = new Date(today.getTime() - this.filterDateStart * Number(this.filterTimePeriod) * 60 * 1000);
+                lowerBound = new Date(upperBound.getTime() - this.filterDateEnd * Number(this.filterTimePeriod) * 60 * 1000);
+
+                if (lowerBound.getTime() > upperBound.getTime()) {
+                    this.filterDateEnd = this.filterDateStart;
+                }
+
+                if (transaction.timeDate.getTime() <= upperBound.getTime() && transaction.timeDate.getTime() >= lowerBound.getTime()) {
                     return true;
                 }
             }
@@ -99,8 +133,10 @@ export class OrganizationDashboardComponent implements OnInit {
         public auth: AuthService,
         public userOrg: UserOrganizationService,
         public tms: TransactionManagementService,
-        private _changeDetectionRef : ChangeDetectorRef
     ) {
+        this.filterDateStart = 0;
+        this.filterDateEnd = 12;
+        this.filterTimePeriod = 60;
         this.auth.getCurrentUser().subscribe(async user => {
             this.user = user;
             const org = this.userOrg.getCurrentOrganization();
@@ -127,8 +163,4 @@ export class OrganizationDashboardComponent implements OnInit {
 
     ngOnInit() {
     }
-
-    // ngAfterViewChecked() : void {
-    //     this._changeDetectionRef.detectChanges();
-    // }
 }

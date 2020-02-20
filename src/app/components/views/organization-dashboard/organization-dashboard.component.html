@@ -67,14 +67,17 @@
                     <option *ngFor="let filter of filters" value={{filter.id}}>{{ filter.label }}</option>
                 </select>
                 <ng-template class="mt-3" [ngIf]="filterType == 'range'">
+                    <hr style="width: 100%; color: black; height: 1px; background-color:black;" />
                     From&nbsp;
-                    <!-- <input [(ngModel)]="filterDateStart" type="date" id="start" name="start"> -->
-                    <input [ngModel]="filterDateStart | date:'yyyy-MM-dd'" (ngModelChange)="filterDateStart = $event" type="date" name="filterDateStart"/>
+                    <input [(ngModel)]="filterDateStart" type="number" min="0" max="99" style='width: 40px'/>
                     &nbsp;to&nbsp;
-                    <input [ngModel]="filterEndStart | date:'yyyy-MM-dd'" (ngModelChange)="filterEndStart = $event" type="date" name="filterEndStart"/>
-                    <!-- <input [(ngModel)]="filterDateEnd" type="date" id="end" name="end"> -->
+                    <input [(ngModel)]="filterDateEnd" type="number" min="0" max="99" style='width: 40px'/>
+                    &nbsp;
+                    <select [(ngModel)]="filterTimePeriod" style='width: auto'>
+                        <option *ngFor="let timePeriod of timePeriods" value={{timePeriod.value}}>{{ timePeriod.label }}</option>
+                    </select>
+                    <hr style="width: 100%; color: black; height: 1px; background-color:black;" />
                 </ng-template>
-                <hr style="width: 100%; color: black; height: 1px; background-color:black;" />
                 <div class="pre-scrollable w-100">
                     <div
                         *ngFor="let transaction of transactions"
