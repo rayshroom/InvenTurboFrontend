@@ -7,3 +7,12 @@ export class TxProduct {
     unit_price: number;
     quantity: number;
 }
+
+export class TxProductShippingConfig {
+    pid: string;
+    collapse: boolean;
+    location: string[];
+    location_id: string[];
+    maxcount: number[];
+    count: number[];
+}

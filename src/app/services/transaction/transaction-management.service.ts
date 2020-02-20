@@ -30,7 +30,8 @@ export class TransactionManagementService {
 
     getOtherOrganization() {
         const storedOtherTx = sessionStorage.getItem('tx_other_organization');
-        return JSON.parse(storedOtherTx) || null;
+        // console.log(storedOtherTx === "undefined");
+        return storedOtherTx === "undefined" || storedOtherTx === undefined ? null : JSON.parse(storedOtherTx);
     }
 
     getAllOrganizationTransactions(oid: string): Observable<{tid: string, status: string, stringTime: string, oid_source: string, oid_dest: string}[]> {
@@ -71,4 +72,39 @@ export class TransactionManagementService {
             this.httpOptions
         )
     }
+
+    // TODO: use executeTransaction
+    approveTransaction(tid: string): Observable<any> {
+        return this.http.post<string>(
+            `${environment.api}${environment.routes.orderTransaction(tid)}`,
+            {'status': 'Shipped'},
+            this.httpOptions
+        )
+    }
+
+    acceptTransaction(tid: string): Observable<any> {
+        return this.http.post<string>(
+            `${environment.api}${environment.routes.orderTransaction(tid)}`,
+            {'status': 'Completed'},
+            this.httpOptions
+        )
+    }
+
+    declineTransaction(tid: string): Observable<any> {
+        return this.http.post<string>(
+            `${environment.api}${environment.routes.orderTransaction(tid)}`,
+            {'status': 'Declined'},
+            this.httpOptions
+        )
+    }
+
+    reorderTransaction(tid: string): Observable<any> {
+        return this.http.post<string>(
+            `${environment.api}${environment.routes.orderTransaction(tid)}`,
+            {'status': 'Reordered'},
+            this.httpOptions
+        )
+    }
+
+    
 }
