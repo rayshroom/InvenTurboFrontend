@@ -91,7 +91,7 @@
                             <div class="transaction-item-details col-10 w-100">
                                 <span class="font-weight-bold">Status: {{transaction.status}}&nbsp;</span>
                                 <span class="transaction-time font-italic">
-                                    {{transaction.timeDate | date: 'shortTime'}}
+                                    {{transaction.timeDate | date: 'short'}}
                                     - {{transaction.TransactionItems.length}} item<span *ngIf="transaction.TransactionItems.length != 1">s</span>
                                     <span *ngIf="transaction.totalPrice">&nbsp;({{transaction.totalPrice | currency}})</span>
                                 </span>
