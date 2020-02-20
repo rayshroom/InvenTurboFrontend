@@ -34,7 +34,7 @@ export class TransactionPageComponent implements OnInit, OnDestroy {
     fromCurrent = true;
     showSelectionMenu = false;
     viewTxId: string;
-    openMode = "pending";
+    openMode = 'pending';
     thisTx: any;
     errorMessage: string;
 
@@ -80,11 +80,11 @@ export class TransactionPageComponent implements OnInit, OnDestroy {
                         this.items_existing = tx.items;
                         this.items_existing.sort((a, b) => a.pid > b.pid ? 1 : -1);
                         this.m.saveItemsExisting(this.items_existing);
-                        
+
                     }
 
                     if (tx.oid_source === this.orgCurrent.oid) {
-                        this.tms.setOtherOrganization(this.orgOther.find(o => o.oid == tx.oid_dest));
+                        this.tms.setOtherOrganization(this.orgOther.find(o => o.oid === tx.oid_dest));
                         this.currentPartner = this.tms.getOtherOrganization();
                         this.fromCurrent = true;
                         of(...this.items_existing).pipe(
@@ -97,7 +97,7 @@ export class TransactionPageComponent implements OnInit, OnDestroy {
                                 location_id: prod.inventoryByLocation.map(l => l.locid),
                                 maxcount: prod.inventoryByLocation.map(l => l.quantity),
                                 count: Array(prod.inventoryByLocation.length).fill(0)
-                            })
+                            });
                         }, err => console.log(err),
                         () => {
                             this.items_shipping.sort((a, b) => a.pid > b.pid ? 1 : -1);
@@ -106,8 +106,8 @@ export class TransactionPageComponent implements OnInit, OnDestroy {
                         this.tms.setOtherOrganization(this.orgOther.find(o => o.oid == tx.oid_source));
                         this.currentPartner = this.tms.getOtherOrganization();
                         this.fromCurrent = false;
-                        
-                        if (this.openMode === "Shipped") {
+
+                        if (this.openMode === 'Shipped') {
                             of(...this.items_existing).pipe(
                                 flatMap(item => this.psService.addOneOrganizationProductStock(this.orgCurrent.oid, item.pid))
                             ).subscribe( result => {},
@@ -122,7 +122,7 @@ export class TransactionPageComponent implements OnInit, OnDestroy {
                                         location_id: prod.inventoryByLocation.map(l => l.locid),
                                         maxcount: prod.inventoryByLocation.map(l => l.quantity),
                                         count: Array(prod.inventoryByLocation.length).fill(0)
-                                    })
+                                    });
                                 }, err => console.log(err),
                                 () => {
                                     this.items_shipping.sort((a, b) => a.pid > b.pid ? 1 : -1);
@@ -131,7 +131,7 @@ export class TransactionPageComponent implements OnInit, OnDestroy {
                         }
                     }
                 });
-                
+
             } else {
                 this.openMode = 'new';
             }
@@ -171,7 +171,7 @@ export class TransactionPageComponent implements OnInit, OnDestroy {
 
     submitItems() {
         this.tms.submitSimpleTransaction({
-            status: "Submitted",
+            status: 'Submitted',
             stringTime: (new Date()).toString(),
             oid_source: this.tms.getOtherOrganization().oid,
             oid_dest: this.orgCurrent.oid,
@@ -185,7 +185,7 @@ export class TransactionPageComponent implements OnInit, OnDestroy {
         const it = this.m.getItems();
         const ite = this.m.getItemsExisting();
         const iteid = ite.map(p => p.pid);
-        for(var i = 0; i < it.length; i++) {
+        for (let i = 0; i < it.length; i++) {
             if (iteid.includes(it[i].pid)) {
                 ite[iteid.indexOf(it[i].pid)].quantity += it[i].quantity;
             } else {
@@ -202,7 +202,7 @@ export class TransactionPageComponent implements OnInit, OnDestroy {
         this.tms.updateTransaction(this.viewTxId, items)
             .subscribe(ref => {
                 this.router.navigate(['/organization']);
-            })
+            });
     }
 
     orderTransaction() {
@@ -212,7 +212,7 @@ export class TransactionPageComponent implements OnInit, OnDestroy {
         this.tms.orderTransaction(this.viewTxId, items)
           .subscribe(ref => {
               this.router.navigate(['/organization']);
-          })
+          });
     }
 
     approveTransaction() {
@@ -310,7 +310,7 @@ export class TransactionPageComponent implements OnInit, OnDestroy {
     }
 
     removeItemExisting(item: TxProduct) {
-        for(var i = 0; i < this.items_existing.length; i++) {
+        for (let i = 0; i < this.items_existing.length; i++) {
             if (this.items_existing[i].name == item.name) {
                 this.items_existing.splice(i, 1);
                 break;
@@ -319,8 +319,8 @@ export class TransactionPageComponent implements OnInit, OnDestroy {
     }
 
     removeItem(item: TxProduct) {
-        for(var i = 0; i < this.items.length; i++) {
-            if (this.items[i].name == item.name) {
+        for (let i = 0; i < this.items.length; i++) {
+            if (this.items[i].name === item.name) {
                 this.items.splice(i, 1);
                 break;
             }
