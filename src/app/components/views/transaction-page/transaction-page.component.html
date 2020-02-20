@@ -100,8 +100,8 @@
                               [ngClass]="{'fas': true, 'fa-chevron-circle-down': this.items_shipping[index].collapse, 'fa-chevron-circle-up': !this.items_shipping[index].collapse}"
                               [attr.aria-expanded]="!this.items_shipping[index].collapse" 
                               [attr.aria-controls]="'location-'+index" 
+                              *ngIf="(this.openMode == 'Requested' && this.fromCurrent) || (this.openMode == 'Shipped' && !this.fromCurrent)"
                               
-                              *ngIf="(this.openMode == 'Requested' && this.fromCurrent)"
                               (click)="this.items_shipping[index].collapse = !this.items_shipping[index].collapse"></i></div>
         </li>
         <ul [id]="'location-'+index" [ngbCollapse]="this.items_shipping[index].collapse" *ngIf="this.openMode == 'Requested' && this.fromCurrent">
@@ -112,14 +112,14 @@
           </li>
         </ul>
 
-        <!-- <ul [id]="'location-'+index" [ngbCollapse]="this.items_shipping[index].collapse" *ngIf="this.openMode == 'Shipped' && !this.fromCurrent">
+        <ul [id]="'location-'+index" [ngbCollapse]="this.items_shipping[index].collapse" *ngIf="this.openMode == 'Shipped' && !this.fromCurrent">
           <li *ngFor="let location of this.items_shipping[index].location; let i = index" class="list-group-item d-flex justify-content-around">
             <div class="p-2">Location: {{this.items_shipping[index].location[i]}}</div>
             <div class="p-2">Current stock: {{this.items_shipping[index].maxcount[i]}}</div>
             <input class="correct" type="number" min="0" max="{{this.items_existing[index].quantity}}" [(ngModel)]="this.items_shipping[index].count[i]"/>
           </li>
         </ul>
-      *ngIf="(this.openMode == 'Requested' && this.fromCurrent) || (this.openMode == 'Shipped' && !this.fromCurrent)" -->
+      
       </ul>
     </div>
   </div>

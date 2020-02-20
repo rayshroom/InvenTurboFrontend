@@ -108,10 +108,9 @@ export class TransactionPageComponent implements OnInit, OnDestroy {
                         this.fromCurrent = false;
                         
                         if (this.openMode === "Shipped") {
-                            console.log(this.openMode);
                             of(...this.items_existing).pipe(
                                 flatMap(item => this.psService.addOneOrganizationProductStock(this.orgCurrent.oid, item.pid))
-                            ).subscribe( result => console.log(result),
+                            ).subscribe( result => {},
                                 err => console.log(err),
                                 () => of(...this.items_existing).pipe(
                                     flatMap(item => this.psService.getOneProductStock(this.orgCurrent.oid, item.pid))
@@ -126,7 +125,6 @@ export class TransactionPageComponent implements OnInit, OnDestroy {
                                     })
                                 }, err => console.log(err),
                                 () => {
-                                    console.log(this.items_shipping);
                                     this.items_shipping.sort((a, b) => a.pid > b.pid ? 1 : -1);
                                 })
                             );
