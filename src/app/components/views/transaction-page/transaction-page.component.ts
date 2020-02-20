@@ -65,80 +65,80 @@ export class TransactionPageComponent implements OnInit, OnDestroy {
         this.auth.getCurrentUser().subscribe(user => {
             this.currentUser = user;
             this.userOrg.getAllOrganizations().subscribe(orgs => {
-            this.orgOther = orgs.filter(o => o.oid !== this.orgCurrent.oid);
-            this.viewTxId = this.activatedRoute.snapshot.paramMap.get('txid');
-            this.currentPartner = (this.tms.getOtherOrganization() === null ? this.orgOther[0] : this.tms.getOtherOrganization());
-            this.tms.setOtherOrganization(this.currentPartner);
+                this.orgOther = orgs.filter(o => o.oid !== this.orgCurrent.oid);
+                this.viewTxId = this.activatedRoute.snapshot.paramMap.get('txid');
+                this.currentPartner = (this.tms.getOtherOrganization() === null ? this.orgOther[0] : this.tms.getOtherOrganization());
+                this.tms.setOtherOrganization(this.currentPartner);
 
-            this.errorMessage = '';
+                this.errorMessage = '';
 
-            this.items = this.m.getItems();
-            this.items_existing = this.m.getItemsExisting();
-            if (this.viewTxId) {
-                this.tms.getOneTransaction(this.viewTxId).subscribe(tx => {
-                    this.thisTx = tx;
-                    this.openMode = tx.status;
-                    if (this.items_existing.length == 0) {
-                        this.items_existing = tx.items;
-                        this.items_existing.sort((a, b) => a.pid > b.pid ? 1 : -1);
-                        this.m.saveItemsExisting(this.items_existing);
+                this.items = this.m.getItems();
+                this.items_existing = this.m.getItemsExisting();
+                if (this.viewTxId) {
+                    this.tms.getOneTransaction(this.viewTxId).subscribe(tx => {
+                        this.thisTx = tx;
+                        this.openMode = tx.status;
+                        if (this.items_existing.length == 0) {
+                            this.items_existing = tx.items;
+                            this.items_existing.sort((a, b) => a.pid > b.pid ? 1 : -1);
+                            this.m.saveItemsExisting(this.items_existing);
 
-                    }
-
-                    if (tx.oid_source === this.orgCurrent.oid) {
-                        this.tms.setOtherOrganization(this.orgOther.find(o => o.oid === tx.oid_dest));
-                        this.currentPartner = this.tms.getOtherOrganization();
-                        this.fromCurrent = true;
-                        of(...this.items_existing).pipe(
-                            flatMap(item => this.psService.getOneProductStock(tx.oid_source, item.pid))
-                        ).subscribe(prod => {
-                            this.items_shipping.push({
-                                pid: prod.pid,
-                                collapse: true,
-                                location: prod.inventoryByLocation.map(l => l.name),
-                                location_id: prod.inventoryByLocation.map(l => l.locid),
-                                maxcount: prod.inventoryByLocation.map(l => l.quantity),
-                                count: Array(prod.inventoryByLocation.length).fill(0)
-                            });
-                        }, err => console.log(err),
-                        () => {
-                            this.items_shipping.sort((a, b) => a.pid > b.pid ? 1 : -1);
-                        });
-                    } else {
-                        this.tms.setOtherOrganization(this.orgOther.find(o => o.oid == tx.oid_source));
-                        this.currentPartner = this.tms.getOtherOrganization();
-                        this.fromCurrent = false;
-
-                        if (this.openMode === 'Shipped') {
-                            of(...this.items_existing).pipe(
-                                flatMap(item => this.psService.addOneOrganizationProductStock(this.orgCurrent.oid, item.pid))
-                            ).subscribe( result => {},
-                                err => console.log(err),
-                                () => of(...this.items_existing).pipe(
-                                    flatMap(item => this.psService.getOneProductStock(this.orgCurrent.oid, item.pid))
-                                ).subscribe(prod => {
-                                    this.items_shipping.push({
-                                        pid: prod.pid,
-                                        collapse: true,
-                                        location: prod.inventoryByLocation.map(l => l.name),
-                                        location_id: prod.inventoryByLocation.map(l => l.locid),
-                                        maxcount: prod.inventoryByLocation.map(l => l.quantity),
-                                        count: Array(prod.inventoryByLocation.length).fill(0)
-                                    });
-                                }, err => console.log(err),
-                                () => {
-                                    this.items_shipping.sort((a, b) => a.pid > b.pid ? 1 : -1);
-                                })
-                            );
                         }
-                    }
-                });
 
-            } else {
-                this.openMode = 'new';
-            }
+                        if (tx.oid_source === this.orgCurrent.oid) {
+                            this.tms.setOtherOrganization(this.orgOther.find(o => o.oid === tx.oid_dest));
+                            this.currentPartner = this.tms.getOtherOrganization();
+                            this.fromCurrent = true;
+                            of(...this.items_existing).pipe(
+                                flatMap(item => this.psService.getOneProductStock(tx.oid_source, item.pid))
+                            ).subscribe(prod => {
+                                this.items_shipping.push({
+                                    pid: prod.pid,
+                                    collapse: true,
+                                    location: prod.inventoryByLocation.map(l => l.name),
+                                    location_id: prod.inventoryByLocation.map(l => l.locid),
+                                    maxcount: prod.inventoryByLocation.map(l => l.quantity),
+                                    count: Array(prod.inventoryByLocation.length).fill(0)
+                                });
+                            }, err => console.log(err),
+                            () => {
+                                this.items_shipping.sort((a, b) => a.pid > b.pid ? 1 : -1);
+                            });
+                        } else {
+                            this.tms.setOtherOrganization(this.orgOther.find(o => o.oid == tx.oid_source));
+                            this.currentPartner = this.tms.getOtherOrganization();
+                            this.fromCurrent = false;
+
+                            if (this.openMode === 'Shipped') {
+                                of(...this.items_existing).pipe(
+                                    flatMap(item => this.psService.addOneOrganizationProductStock(this.orgCurrent.oid, item.pid))
+                                ).subscribe( result => {},
+                                    err => console.log(err),
+                                    () => of(...this.items_existing).pipe(
+                                        flatMap(item => this.psService.getOneProductStock(this.orgCurrent.oid, item.pid))
+                                    ).subscribe(prod => {
+                                        this.items_shipping.push({
+                                            pid: prod.pid,
+                                            collapse: true,
+                                            location: prod.inventoryByLocation.map(l => l.name),
+                                            location_id: prod.inventoryByLocation.map(l => l.locid),
+                                            maxcount: prod.inventoryByLocation.map(l => l.quantity),
+                                            count: Array(prod.inventoryByLocation.length).fill(0)
+                                        });
+                                    }, err => console.log(err),
+                                    () => {
+                                        this.items_shipping.sort((a, b) => a.pid > b.pid ? 1 : -1);
+                                    })
+                                );
+                            }
+                        }
+                    });
+
+                } else {
+                    this.openMode = 'new';
+                }
+            });
         });
-        }
     }
 
     setCurrentPartner(org) {
@@ -245,7 +245,6 @@ export class TransactionPageComponent implements OnInit, OnDestroy {
             })
         ).subscribe(
             result => {
-                console.log(result);
                 this.tms.approveTransaction(this.viewTxId)
                 .subscribe(ref => {
                     this.router.navigate(['/organization']);
@@ -336,7 +335,6 @@ export class TransactionPageComponent implements OnInit, OnDestroy {
     openDetailOverlay(product: ProductStock) {
         const modalRef = this.modalService.open(InventoryDetailOverlayComponent);
         modalRef.componentInstance.item = product;
-        console.log(product);
     }
 
     ngOnDestroy() {

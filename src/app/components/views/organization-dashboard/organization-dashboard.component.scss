@@ -136,6 +136,10 @@ hr {
     background-color: rgba(255, 255, 255, 0.1) !important;
 }
 
+.pre-scrollable {
+    min-height: 22em;
+}
+
 .transaction-list-item {
     border-collapse: separate;
     margin-bottom: 10px !important;

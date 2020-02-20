@@ -71,7 +71,6 @@ export class ItemsListingPageComponent implements OnInit {
         if (item.isSelected) {
             item.isSelected = false;
             this.selectedItems.splice(this.selectedItems.map(p => p.name).indexOf(item.name), 1);
-            console.log(this.selectedItems, item);
         } else {
             item.isSelected = true;
             this.selectedItems.push(item);
@@ -93,8 +92,6 @@ export class ItemsListingPageComponent implements OnInit {
     submitItems() {
         // keep current state
         this.m.saveItems(this.selectedItems);
-        // console.log(this.selectedItems);
-        console.log(JSON.parse(sessionStorage.getItem('tx_other_organization')));
         this.location.back();
         // this.router.navigate(['/organization/transaction/new'], {
         //     queryParams: { key: 'add' }

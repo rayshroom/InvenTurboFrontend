@@ -11,7 +11,7 @@ import { environment } from 'src/environments/environment';
     templateUrl: './organization-dashboard.component.html',
     styleUrls: ['./organization-dashboard.component.scss']
 })
-export class OrganizationDashboardComponent implements OnInit {
+export class OrganizationDashboardComponent implements OnInit, AfterContentChecked {
     user: firebase.User;
     org: UserOrganization;
     transactions: any = [];
@@ -57,34 +57,34 @@ export class OrganizationDashboardComponent implements OnInit {
             id: 'declined',
             label: 'Declined Transactions'
         }
-    ]
+    ];
 
     timePeriods = [
         {
-            label: "minutes ago",
+            label: 'minutes ago',
             value: 1
         },
         {
-            label: "hours ago",
+            label: 'hours ago',
             value: 60
         },
         {
-            label: "days ago",
+            label: 'days ago',
             value: 1440
         },
         {
-            label: "weeks ago",
+            label: 'weeks ago',
             value: 10080
         },
         {
-            label: "months ago",
+            label: 'months ago',
             value: 43200
         },
         {
-            label: "years ago",
+            label: 'years ago',
             value: 525600
         }
-    ]
+    ];
 
     filterType: string = this.filters[0].id;
     filterDateStart: any;
@@ -92,15 +92,14 @@ export class OrganizationDashboardComponent implements OnInit {
     filterTimePeriod: any;
 
     shouldDisplay(transaction) {
-        if (this.filterType == 'all') {
+        if (this.filterType === 'all') {
             return true;
-        }
-        else if (this.filterType == 'my') {
-            if (transaction.currentUser)
-                return transaction.currentUser.displayName == this.user.displayName;
-        }
-        else if (this.filterType == 'range') {
-            let today = new Date();
+        } else if (this.filterType === 'my') {
+            if (transaction.currentUser) {
+                return transaction.currentUser.displayName === this.user.displayName;
+            }
+        } else if (this.filterType === 'range') {
+            const today = new Date();
             let upperBound = new Date(today.valueOf());
             let lowerBound = new Date(upperBound.valueOf());
 
@@ -111,13 +110,11 @@ export class OrganizationDashboardComponent implements OnInit {
                 this.filterDateEnd = this.filterDateStart;
             }
 
-            console.log(lowerBound.getTime(), transaction.timeDate.getTime(), upperBound.getTime())
             if (transaction.timeDate.getTime() <= upperBound.getTime() && transaction.timeDate.getTime() >= lowerBound.getTime()) {
                 return true;
             }
-        }
-        else {
-            return this.filterType == transaction.transactionType.toLowerCase() || this.filterType == transaction.status.toLowerCase() ;
+        } else {
+            return this.filterType === transaction.transactionType.toLowerCase() || this.filterType === transaction.status.toLowerCase() ;
         }
 
         return false;
@@ -153,7 +150,6 @@ export class OrganizationDashboardComponent implements OnInit {
             }
             this.tms.getAllOrganizationTransactions(this.org.oid).subscribe(transactions => {
                 transactions.forEach(transaction => {
-                    console.log(transaction);
                     const timestamp = Date.parse(transaction.stringTime);
                     const transactionDate = !isNaN(timestamp) ? new Date(timestamp) : new Date();
 

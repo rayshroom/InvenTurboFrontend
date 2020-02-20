@@ -54,6 +54,5 @@ export class InventoryPanelComponent implements OnInit {
     openDetailOverlay(product: ProductStock) {
         const modalRef = this.modalService.open(InventoryDetailOverlayComponent);
         modalRef.componentInstance.item = product;
-        console.log(product);
     }
 }
