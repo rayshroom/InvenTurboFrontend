@@ -63,18 +63,19 @@
                 <select [(ngModel)]="filterType" class='form-control custom-select'>
                     <option *ngFor="let filter of filters" value={{filter.id}}>{{ filter.label }}</option>
                 </select>
-                <ng-template class="mt-3" [ngIf]="filterType == 'range'">
-                    <hr style="width: 100%; color: black; height: 1px; background-color:black;" />
+                <div class="w-100" *ngIf="filterType == 'range'; else hr">
+                    <hr>
                     From&nbsp;
-                    <input [(ngModel)]="filterDateStart" type="number" min="0" max="99" style='width: 40px'/>
+                    <input [(ngModel)]="filterDateStart" class="form-control d-inline" type="number" min="0" max="99" style='width: 60px'/>
                     &nbsp;to&nbsp;
-                    <input [(ngModel)]="filterDateEnd" type="number" min="0" max="99" style='width: 40px'/>
+                    <input [(ngModel)]="filterDateEnd" class="form-control d-inline" type="number" min="0" max="99" style='width: 60px'/>
                     &nbsp;
-                    <select [(ngModel)]="filterTimePeriod" style='width: auto'>
+                    <select [(ngModel)]="filterTimePeriod" class="form-control d-inline" style='width: auto'>
                         <option *ngFor="let timePeriod of timePeriods" value={{timePeriod.value}}>{{ timePeriod.label }}</option>
                     </select>
-                    <hr style="width: 100%; color: black; height: 1px; background-color:black;" />
-                </ng-template>
+                    <hr>
+                </div>
+                <ng-template #hr><hr></ng-template>
                 <div class="pre-scrollable w-100">
                     <div
                         *ngFor="let transaction of transactions"
@@ -92,13 +93,13 @@
                                     - {{transaction.TransactionItems.length}} item<span *ngIf="transaction.TransactionItems.length != 1">s</span>
                                     <span *ngIf="transaction.totalPrice">&nbsp;({{transaction.totalPrice | currency}})</span>
                                 </span>
-                                <span class="float-left text-left align-middle d-inline w-100">
+                                <div class="float-left text-left align-middle d-inline w-100">
                                     <span>{{transaction.transactionType}} Transaction&nbsp;</span>
                                     <a routerLink="/organization/transaction/view/{{transaction.tid}}" class="transaction-link">(ID {{transaction.tid}})</a>
                                     <i routerLink="/organization/transaction/view/{{transaction.tid}}" class="fas fa-external-link-square-alt cursor-pointer"></i>
                                     <h4 routerLink="/organization/transaction/view/{{transaction.tid}}" class="transaction-link-icon float-right text-right align-middle d-inline fas fa-external-link-alt"></h4>
-                                    <a *ngIf="transaction.currentUser" href="{{this.getProfileLink(transaction.currentUser.uid)}}" class="transaction-link" style="float: left;">{{transaction.currentUser.displayName}}</a>
-                                </span>
+                                </div>
+                                <a *ngIf="transaction.currentUser" href="{{this.getProfileLink(transaction.currentUser.uid)}}" class="transaction-link" style="float: left;">{{transaction.currentUser.displayName}}</a>
                             </div>
                         </ng-template>
                         <ng-template #hideTransaction></ng-template>

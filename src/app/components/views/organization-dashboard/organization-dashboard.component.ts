@@ -111,7 +111,6 @@ export class OrganizationDashboardComponent implements OnInit {
                 this.filterDateEnd = this.filterDateStart;
             }
 
-            console.log(lowerBound.getTime(), transaction.timeDate.getTime(), upperBound.getTime())
             if (transaction.timeDate.getTime() <= upperBound.getTime() && transaction.timeDate.getTime() >= lowerBound.getTime()) {
                 return true;
             }
