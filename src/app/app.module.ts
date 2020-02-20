@@ -72,7 +72,6 @@ import { CreateOrganizationPageComponent } from './components/views/create-organ
         InventoryPanelComponent,
         TransactionPageComponent,
         ItemsListingPageComponent,
-        InventoryDetailOverlayComponent,
         LoadingIconComponent,
         UserProfilePaneComponent,
         OrganizationListPaneComponent,
