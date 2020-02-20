@@ -37,8 +37,8 @@ export class TransactionPageComponent implements OnInit, OnDestroy {
     openMode = 'pending';
     thisTx: any;
     errorMessage: string;
-
     shippingForm: FormGroup;
+    currentUser: any;
 
     private httpOptions = {
         headers: new HttpHeaders({
@@ -62,7 +62,9 @@ export class TransactionPageComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-        this.userOrg.getAllOrganizations().subscribe(orgs => {
+        this.auth.getCurrentUser().subscribe(user => {
+            this.currentUser = user;
+            this.userOrg.getAllOrganizations().subscribe(orgs => {
             this.orgOther = orgs.filter(o => o.oid !== this.orgCurrent.oid);
             this.viewTxId = this.activatedRoute.snapshot.paramMap.get('txid');
             this.currentPartner = (this.tms.getOtherOrganization() === null ? this.orgOther[0] : this.tms.getOtherOrganization());
@@ -136,6 +138,7 @@ export class TransactionPageComponent implements OnInit, OnDestroy {
                 this.openMode = 'new';
             }
         });
+        }
     }
 
     setCurrentPartner(org) {
@@ -175,7 +178,9 @@ export class TransactionPageComponent implements OnInit, OnDestroy {
             stringTime: (new Date()).toString(),
             oid_source: this.tms.getOtherOrganization().oid,
             oid_dest: this.orgCurrent.oid,
-            items: this.m.getItems()
+            items: this.m.getItems(),
+            currentUser: this.currentUser,
+            totalPrice: this.getTotalPrice(),
         }).subscribe(ref => {
             this.router.navigate(['/organization']);
         });
@@ -199,7 +204,7 @@ export class TransactionPageComponent implements OnInit, OnDestroy {
         this.m.saveItems(this.items);
         this.m.saveItemsExisting(this.items_existing);
         const items = this.mergeItems();
-        this.tms.updateTransaction(this.viewTxId, items)
+        this.tms.updateTransaction(this.viewTxId, items, this.currentUser, this.getTotalPrice())
             .subscribe(ref => {
                 this.router.navigate(['/organization']);
             });
@@ -209,7 +214,7 @@ export class TransactionPageComponent implements OnInit, OnDestroy {
         this.m.saveItems(this.items);
         this.m.saveItemsExisting(this.items_existing);
         const items = this.mergeItems();
-        this.tms.orderTransaction(this.viewTxId, items)
+        this.tms.orderTransaction(this.viewTxId, items, this.currentUser, this.getTotalPrice())
           .subscribe(ref => {
               this.router.navigate(['/organization']);
           });

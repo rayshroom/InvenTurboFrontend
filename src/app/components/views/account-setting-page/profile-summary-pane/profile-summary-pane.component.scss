@@ -6,12 +6,20 @@
 
 .profile-photo-wrapper {
     position: relative;
+    text-align: center;
+}
+
+.profile-photo {
+    border-radius: 50%;
+    max-width: 202px;
 }
 
 .descriptive-text {
+    left: 0;
+    top: calc(50% - 13px);
     position: absolute;
-    top: 45%;
-    left: 18%;
+    text-align: center;
+    width: 100%;
     display: none;
     color: white;
     cursor: pointer;
@@ -27,15 +35,27 @@
 }
 
 .profile-photo:hover ~ .descriptive-text {
-    position: absolute;
-    top: 45%;
-    left: 18%;
     display: inline;
     color: white;
 }
 
 .darken {
     filter: brightness(50%);
+}
+
+.remove-avatar-btn {
+    color: #bf202f;
+    background-color: white;
+    border: none;
+    border-radius: 50%;
+    box-shadow: 1px 2px 1px 1px rgba(0, 0, 0, 0.25);
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.remove-avatar-btn:focus {
+    outline: none;
 }
 
 .profile-name {

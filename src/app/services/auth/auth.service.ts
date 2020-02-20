@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Credential } from './auth.model';
 import { Router } from '@angular/router';
-import { map, first } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { map, first, flatMap } from 'rxjs/operators';
+import { Observable, from } from 'rxjs';
 import * as firebase from 'firebase/app';
 
 @Injectable()
@@ -15,8 +15,11 @@ export class AuthService {
         return this.afAuth.user;
     }
 
-    async doLogin(value: Credential) {
-        await this.afAuth.auth.signInWithEmailAndPassword(value.email, value.password);
+    doLogin(value: Credential): Observable<firebase.User> {
+        return from(this.afAuth.auth.signInWithEmailAndPassword(value.email, value.password)).pipe(
+            first(),
+            flatMap(() => this.getCurrentUser())
+        );
     }
 
     async doLogout() {

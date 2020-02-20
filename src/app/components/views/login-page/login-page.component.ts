@@ -30,18 +30,18 @@ export class LoginPageComponent implements OnInit {
     }
 
     async onSignIn() {
-        try {
-            await this.authService.doLogin(this.loginForm.value);
-            this.loc.back();
-        } catch (err) {
-            switch (err.code) {
-            case 'auth/user-not-found':
-                this.errorMessage = 'User not found. Are you a new user?';
-                break;
-            default:
-                this.errorMessage = err.message;
-                this.loginForm.get('password').setValue('');
+        this.authService.doLogin(this.loginForm.value).subscribe(
+            user => this.loc.back(),
+            err => {
+                switch (err.code) {
+                case 'auth/user-not-found':
+                    this.errorMessage = 'User not found. Are you a new user?';
+                    break;
+                default:
+                    this.errorMessage = err.message;
+                    this.loginForm.get('password').setValue('');
+                }
             }
-        }
+        );
     }
 }

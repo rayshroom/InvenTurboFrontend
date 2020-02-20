@@ -1,0 +1,37 @@
+<form [formGroup]="registerFormPersonal" (ngSubmit)="onPersonalRegister()" class="shadow bg-white rounded register-form">
+    <h2 class="title text-center">Personal</h2>
+    <div class="row form-group">
+        <div class="col-md-3 left-inline-input">
+            <select class="form-control custom-select" formControlName="title">
+                <option hidden [value]="null">Title</option>
+                <option *ngFor="let title of titles" [value]="title">{{ title.length > 1 ? title : 'N/A' }}</option>
+            </select>
+        </div>
+        <div class="col-md-4 middl middle-inline-input">
+            <input type="text" formControlName="firstName" class="form-control" placeholder="First Name" />
+        </div>
+        <div class="col-md-5 right-inline-input">
+            <input type="text" formControlName="lastName" class="form-control" placeholder="Last Name" />
+        </div>
+    </div>
+    <div class="row form-group">
+        <div class="col-md-8 left-inline-input">
+            <input type="email" formControlName="email" class="form-control" placeholder="Email Address" autocomplete="email" />
+        </div>
+        <div class="col-md-4 right-inline-input">
+            <input type="text" formControlName="phone" class="form-control" placeholder="Phone (optional)" autocomplete="tel" />
+        </div>
+    </div>
+    <div class="row form-group last-form-group">
+        <div class="col-md-6 left-inline-input">
+            <input type="password" formControlName="password" class="form-control" placeholder="Password" autocomplete="new-password"/>
+        </div>
+        <div class="col-md-6 right-inline-input">
+            <input type="password" formControlName="passwordConfirm" class="form-control" placeholder="Confirm Password" autocomplete="new-password" />
+        </div>
+    </div>
+    <span class="error">{{ errorMessage.length > 0 ? errorMessage : '' }}</span>
+    <div class="text-right">
+        <button type="submit" [disabled]="!registerFormPersonal.valid" class="btn btn-danger">Register</button>
+    </div>
+</form>
