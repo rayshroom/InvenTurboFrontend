@@ -32,6 +32,7 @@ export class TransactionPageComponent implements OnInit {
     viewTxId: string;
     openMode = "pending";
     thisTx: any;
+    currentUser: any;
 
     private httpOptions = {
         headers: new HttpHeaders({
@@ -51,33 +52,36 @@ export class TransactionPageComponent implements OnInit {
         private modalService: NgbModal
     ) {
         this.orgCurrent = this.userOrg.getCurrentOrganization();
-        this.userOrg.getAllOrganizations().subscribe(orgs => {
-            this.orgOther = orgs.filter(o => o.oid !== this.orgCurrent.oid);
-            this.currentPartner = (this.tms.getOtherOrganization() == null ? this.orgOther[0] : this.tms.getOtherOrganization());
-            this.tms.setOtherOrganization(this.currentPartner);
-            this.viewTxId = this.activatedRoute.snapshot.paramMap.get('txid');
+        this.auth.getCurrentUser().subscribe(user => {
+            this.currentUser = user;
+            this.userOrg.getAllOrganizations().subscribe(orgs => {
+                this.orgOther = orgs.filter(o => o.oid !== this.orgCurrent.oid);
+                this.currentPartner = (this.tms.getOtherOrganization() == null ? this.orgOther[0] : this.tms.getOtherOrganization());
+                this.tms.setOtherOrganization(this.currentPartner);
+                this.viewTxId = this.activatedRoute.snapshot.paramMap.get('txid');
 
-            this.items = this.m.getItems();
-            this.items_existing = this.m.getItemsExisting();
-            console.log(this.viewTxId);
-            if (this.viewTxId) {
-                this.tms.getOneTransaction(this.viewTxId).subscribe(tx => {
-                    this.thisTx = tx;
-                    this.openMode = tx.status;
-                    if (this.items_existing.length == 0) {
-                        this.items_existing = tx.items;
-                        this.m.saveItemsExisting(this.items_existing);
-                    }
-                    this.tms.setOtherOrganization(this.orgOther.find(o => o.oid == tx.oid_source));
-                    this.currentPartner = this.tms.getOtherOrganization();
-                });
-                
-            } else {
-                this.openMode = 'new';
-            }
-            console.log(this.openMode);
+                this.items = this.m.getItems();
+                this.items_existing = this.m.getItemsExisting();
+                console.log(this.viewTxId);
+                if (this.viewTxId) {
+                    this.tms.getOneTransaction(this.viewTxId).subscribe(tx => {
+                        this.thisTx = tx;
+                        this.openMode = tx.status;
+                        if (this.items_existing.length == 0) {
+                            this.items_existing = tx.items;
+                            this.m.saveItemsExisting(this.items_existing);
+                        }
+                        this.tms.setOtherOrganization(this.orgOther.find(o => o.oid == tx.oid_source));
+                        this.currentPartner = this.tms.getOtherOrganization();
+                    });
+
+                } else {
+                    this.openMode = 'new';
+                }
+                console.log(this.openMode);
+            });
         });
-              
+
     }
 
     ngOnInit() {
@@ -123,7 +127,9 @@ export class TransactionPageComponent implements OnInit {
             stringTime: (new Date()).toString(),
             oid_source: this.tms.getOtherOrganization().oid,
             oid_dest: this.orgCurrent.oid,
-            items: this.m.getItems()
+            items: this.m.getItems(),
+            currentUser: this.currentUser,
+            totalPrice: this.getTotalPrice(),
         }).subscribe(ref => {
             this.m.saveItems([]);
             this.m.saveItemsExisting([]);
@@ -153,7 +159,7 @@ export class TransactionPageComponent implements OnInit {
         this.m.saveItems([]);
         this.m.saveItemsExisting([]);
         this.tms.setOtherOrganization(null);
-        this.tms.updateTransaction(this.viewTxId, items)
+        this.tms.updateTransaction(this.viewTxId, items, this.currentUser, this.getTotalPrice())
             .subscribe(ref => {
                 this.router.navigate(['/organization']);
             })
@@ -166,7 +172,7 @@ export class TransactionPageComponent implements OnInit {
         this.m.saveItems([]);
         this.m.saveItemsExisting([]);
         this.tms.setOtherOrganization(null);
-        this.tms.orderTransaction(this.viewTxId, items)
+        this.tms.orderTransaction(this.viewTxId, items, this.currentUser, this.getTotalPrice())
           .subscribe(ref => {
               this.router.navigate(['/organization']);
           })

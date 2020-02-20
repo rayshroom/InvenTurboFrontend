@@ -146,6 +146,10 @@ hr {
     padding: 5px 0 !important;
 }
 
+.transaction-list-item:empty {
+    display: none;
+}
+
 .transaction-icon {
     height: 50px !important;
     max-width: 80px !important;

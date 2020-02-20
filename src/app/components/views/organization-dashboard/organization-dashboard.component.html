@@ -63,34 +63,48 @@
 
         <div class="col-lg-5 col-md-5 col-sm-12 mx-auto">
             <div class="row profile-wrapper shadow bg-white login-for mb-lg-3 mb-0">
-                <ul class="nav nav-pills">
-                    <li class="nav-item">
-                        <a class="nav-link active">Your transactions</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link">All transactions</a>
-                    </li>
-                </ul>
-                <hr style="width: 100%; color: black; height: 1px; background-color:black;" />
+                <select [(ngModel)]="filterType" class='form-control custom-select'>
+                    <option *ngFor="let filter of filters" value={{filter.id}}>{{ filter.label }}</option>
+                </select>
+                <ng-template class="mt-3" [ngIf]="filterType == 'range'">
+                    <hr style="width: 100%; color: black; height: 1px; background-color:black;" />
+                    From&nbsp;
+                    <input [(ngModel)]="filterDateStart" type="number" min="0" max="99" style='width: 40px'/>
+                    &nbsp;to&nbsp;
+                    <input [(ngModel)]="filterDateEnd" type="number" min="0" max="99" style='width: 40px'/>
+                    &nbsp;
+                    <select [(ngModel)]="filterTimePeriod" style='width: auto'>
+                        <option *ngFor="let timePeriod of timePeriods" value={{timePeriod.value}}>{{ timePeriod.label }}</option>
+                    </select>
+                    <hr style="width: 100%; color: black; height: 1px; background-color:black;" />
+                </ng-template>
                 <div class="pre-scrollable w-100">
                     <div
                         *ngFor="let transaction of transactions"
                         class="transaction-list-item row shadow-sm p-3 mb-5 bg-white rounded login-for mb-3 mx-auto w-100"
                         [ngStyle]="this.getTransactionItemBackgroundCss(this.org.photoBackground)"
                     >
-                        <div class="orglink-item-photo-wrapper col-2">
-                            <img class="orglink-item-photo" src="{{this.org.photoURL}}"/>
-                        </div>
-                        <div class="transaction-item-details col-10 w-100">
-                            <span class="font-weight-bold">{{transaction.status}}&nbsp;</span>
-                            <span class="transaction-time font-italic">{{transaction.timeDate | date: 'shortTime'}}</span>
-                            <span class="float-left text-left align-middle d-inline w-100">
-                                <span>Transaction&nbsp;</span>
-                                <a routerLink="/organization/transaction/view/{{transaction.tid}}" class="transaction-link">{{transaction.tid}}</a>
-                                <i routerLink="/organization/transaction/view/{{transaction.tid}}" class="fas fa-external-link-square-alt cursor-pointer"></i>
-                                <h4 routerLink="/organization/transaction/view/{{transaction.tid}}" class="transaction-link-icon float-right text-right align-middle d-inline fas fa-external-link-alt"></h4>
-                            </span>
-                        </div>
+                        <ng-template [ngIf]="shouldDisplay(transaction)" [ngIfElse]="hideTransaction">
+                            <div class="orglink-item-photo-wrapper col-2">
+                                <img class="orglink-item-photo" src="{{this.org.photoURL}}"/>
+                            </div>
+                            <div class="transaction-item-details col-10 w-100">
+                                <span class="font-weight-bold">Status: {{transaction.status}}&nbsp;</span>
+                                <span class="transaction-time font-italic">
+                                    {{transaction.timeDate | date: 'short'}}
+                                    - {{transaction.TransactionItems.length}} item<span *ngIf="transaction.TransactionItems.length != 1">s</span>
+                                    <span *ngIf="transaction.totalPrice">&nbsp;({{transaction.totalPrice | currency}})</span>
+                                </span>
+                                <span class="float-left text-left align-middle d-inline w-100">
+                                    <span>{{transaction.transactionType}} Transaction&nbsp;</span>
+                                    <a routerLink="/organization/transaction/view/{{transaction.tid}}" class="transaction-link">(ID {{transaction.tid}})</a>
+                                    <i routerLink="/organization/transaction/view/{{transaction.tid}}" class="fas fa-external-link-square-alt cursor-pointer"></i>
+                                    <h4 routerLink="/organization/transaction/view/{{transaction.tid}}" class="transaction-link-icon float-right text-right align-middle d-inline fas fa-external-link-alt"></h4>
+                                    <a *ngIf="transaction.currentUser" href="{{this.getProfileLink(transaction.currentUser.uid)}}" class="transaction-link" style="float: left;">{{transaction.currentUser.displayName}}</a>
+                                </span>
+                            </div>
+                        </ng-template>
+                        <ng-template #hideTransaction></ng-template>
                     </div>
                 </div>
             </div>
