@@ -1,5 +1,4 @@
 import { Component, OnInit, ChangeDetectorRef, AfterContentChecked } from '@angular/core';
-import { DatePipe } from '@angular/common';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { TransactionManagementService } from 'src/app/services/transaction/transaction-management.service';
 import { UserOrganization } from 'src/app/services/organization/user-organization.model';
@@ -14,7 +13,8 @@ import { environment } from 'src/environments/environment';
 export class OrganizationDashboardComponent implements OnInit, AfterContentChecked {
     user: firebase.User;
     org: UserOrganization;
-    transactions: any = [];
+    transactions: any[] = [];
+    filteredTransactions: Object[] = [];
     lastTransactionTime: Date;
     filters = [
         {
@@ -87,39 +87,38 @@ export class OrganizationDashboardComponent implements OnInit, AfterContentCheck
     ];
 
     filterType: string = this.filters[0].id;
-    filterDateStart: any;
-    filterDateEnd: any;
-    filterTimePeriod: any;
+    filterDateStart: number = 0;
+    filterDateEnd: number = 12;
+    filterTimePeriod: number = 60;
 
     shouldDisplay(transaction) {
         if (this.filterType === 'all') {
             return true;
-        } else if (this.filterType === 'my') {
-            if (transaction.currentUser) {
-                return transaction.currentUser.displayName === this.user.displayName;
-            }
+        } else if (this.filterType === 'my' && transaction.currentUser) {
+            return transaction.currentUser.displayName === this.user.displayName;
         } else if (this.filterType === 'range') {
-            const today = new Date();
-            let upperBound = new Date(today.valueOf());
-            let lowerBound = new Date(upperBound.valueOf());
-
-            upperBound = new Date(today.getTime() - this.filterDateStart * Number(this.filterTimePeriod) * 60 * 1000);
-            lowerBound = new Date(upperBound.getTime() - this.filterDateEnd * Number(this.filterTimePeriod) * 60 * 1000);
+            const upperBound = new Date(new Date().getTime() - this.filterDateStart * Number(this.filterTimePeriod) * 60 * 1000);
+            const lowerBound = new Date(new Date().getTime() - this.filterDateEnd   * Number(this.filterTimePeriod) * 60 * 1000);
 
             if (this.filterDateStart > this.filterDateEnd) {
                 this.filterDateEnd = this.filterDateStart;
             }
 
-            if (transaction.timeDate.getTime() <= upperBound.getTime() && transaction.timeDate.getTime() >= lowerBound.getTime()) {
-                return true;
-            }
+            return transaction.timeDate.getTime() <= upperBound.getTime()
+                && transaction.timeDate.getTime() >= lowerBound.getTime();
         } else {
             return this.filterType === transaction.transactionType.toLowerCase() || this.filterType === transaction.status.toLowerCase() ;
         }
-
-        return false;
     }
 
+    filterTransactions() {
+        this.filteredTransactions = [];
+        this.transactions.forEach(t => {
+            if (this.shouldDisplay(t)) {
+                this.filteredTransactions.push(t);
+            }
+        })
+    }
 
     getProfileLink(uid) {
         return `${environment.api}${environment.routes.getOneProfile(uid)}`;
@@ -137,14 +136,9 @@ export class OrganizationDashboardComponent implements OnInit, AfterContentCheck
         public tms: TransactionManagementService,
         public cdref: ChangeDetectorRef
     ) {
-        this.filterDateStart = 0;
-        this.filterDateEnd = 12;
-        this.filterTimePeriod = 60;
         this.auth.getCurrentUser().subscribe(async user => {
             this.user = user;
-            const org = this.userOrg.getCurrentOrganization();
-            this.org = org;
-            this.transactions = [];
+            this.org = this.userOrg.getCurrentOrganization();
             if (!this.org.photoURL) {
                 this.org.photoURL = 'assets/default-org-avatar.png';
             }
@@ -152,13 +146,11 @@ export class OrganizationDashboardComponent implements OnInit, AfterContentCheck
                 transactions.forEach(transaction => {
                     const timestamp = Date.parse(transaction.stringTime);
                     const transactionDate = !isNaN(timestamp) ? new Date(timestamp) : new Date();
-
-                    const transactionType = (transaction.oid_dest != this.org.oid) ? 'Incoming' : 'Outgoing';
-
+                    const transactionType = transaction.oid_dest != this.org.oid ? 'Incoming' : 'Outgoing';
                     this.transactions.push({timeDate: transactionDate, transactionType, ...transaction});
                 });
                 this.lastTransactionTime = this.transactions.length > 0 ?
-                    this.transactions[this.transactions.length - 1].timeDate : null;
+                this.transactions[this.transactions.length - 1].timeDate : null;
             });
         });
     }
@@ -168,5 +160,6 @@ export class OrganizationDashboardComponent implements OnInit, AfterContentCheck
 
     ngAfterContentChecked() {
         this.cdref.detectChanges();
+        this.filterTransactions();
     }
 }
