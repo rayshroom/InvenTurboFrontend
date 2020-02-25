@@ -51,7 +51,7 @@ import { AddExistingProductPaneComponent } from './components/views/add-product-
 import { ProductItemCardComponent } from './components/views/add-product-stock-page/add-existing-product-pane/product-item-card/product-item-card.component';
 import { CreateNewProductPaneComponent } from './components/views/add-product-stock-page/create-new-product-pane/create-new-product-pane.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { ColorPickerModule } from '@syncfusion/ej2-angular-inputs';
+import { ColorChromeModule } from 'ngx-color/chrome';
 import { InventoryDetailOverlayComponent } from './components/views/inventory-detail-overlay/inventory-detail-overlay.component';
 import { PersonalRegistrationPaneComponent } from './components/views/registration-page/personal-registration-pane/personal-registration-pane.component';
 import { OrganizationActivationPaneComponent } from './components/views/registration-page/organization-activation-pane/organization-activation-pane.component';
@@ -107,7 +107,7 @@ import { CreateOrganizationPageComponent } from './components/views/create-organ
         AngularFirestoreModule,
         AngularFireStorageModule,
         AngularFireAuthModule,
-        ColorPickerModule,
+        ColorChromeModule,
         NgbModule,
     ],
     providers: [

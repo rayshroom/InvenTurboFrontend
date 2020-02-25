@@ -1,20 +1,21 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { SafeResourceUrl } from '@angular/platform-browser';
 import { FileStorageService } from 'src/app/services/storage/file-storage.service';
 import { UserOrganizationService } from 'src/app/services/organization/user-organization.service';
 import { AuthService } from 'src/app/services/auth/auth.service';
-import { flatMap, mergeMap, last } from 'rxjs/operators';
+import { flatMap } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
 import { UserManagementService } from 'src/app/services/auth/uam.service';
 import { Router } from '@angular/router';
+import { ColorEvent } from 'ngx-color';
 
 @Component({
     selector: 'app-create-organization-page',
     templateUrl: './create-organization-page.component.html',
     styleUrls: ['./create-organization-page.component.scss']
 })
-export class CreateOrganizationPageComponent implements OnInit, AfterViewInit {
+export class CreateOrganizationPageComponent implements OnInit {
     public user: firebase.User;
 
     public ownerAccountForm: FormGroup;
@@ -42,6 +43,10 @@ export class CreateOrganizationPageComponent implements OnInit, AfterViewInit {
 
     get imageBackgroundColor() {
         return this.organizationProfileForm.get('photoBackground').value;
+    }
+
+    onPhotoBackgroundChange(event: ColorEvent) {
+        this.organizationProfileForm.get('photoBackground').setValue(event.color.hex);
     }
 
     onImageSelection(file: File) {
@@ -127,18 +132,6 @@ export class CreateOrganizationPageComponent implements OnInit, AfterViewInit {
             photoBackground: ['#d4d4d4', Validators.required],
             description: ['', [Validators.required, Validators.maxLength(500)]]
         });
-    }
-
-    ngAfterViewInit() {
-        let lookForTooltip = true;
-        for (let i = 0; lookForTooltip; i++) {
-            const tooltip = document.getElementById(`tooltip_${i}_content`);
-            if (tooltip) {
-                tooltip.style.left = '0';
-                tooltip.style.top = '0';
-                lookForTooltip = false;
-            }
-        }
     }
 
     ngOnInit() {}
