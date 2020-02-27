@@ -14,7 +14,7 @@ export class OrganizationDashboardComponent implements OnInit, AfterContentCheck
     user: firebase.User;
     org: UserOrganization;
     transactions: any[] = [];
-    filteredTransactions: Object[] = [];
+    filteredTransactions: any[] = [];
     lastTransactionTime: Date;
     filters = [
         {
@@ -136,22 +136,20 @@ export class OrganizationDashboardComponent implements OnInit, AfterContentCheck
         public tms: TransactionManagementService,
         public cdref: ChangeDetectorRef
     ) {
-        this.auth.getCurrentUser().subscribe(async user => {
-            this.user = user;
-            this.org = this.userOrg.getCurrentOrganization();
-            if (!this.org.photoURL) {
-                this.org.photoURL = 'assets/default-org-avatar.png';
-            }
-            this.tms.getAllOrganizationTransactions(this.org.oid).subscribe(transactions => {
-                transactions.forEach(transaction => {
-                    const timestamp = Date.parse(transaction.stringTime);
-                    const transactionDate = !isNaN(timestamp) ? new Date(timestamp) : new Date();
-                    const transactionType = transaction.oid_dest != this.org.oid ? 'Incoming' : 'Outgoing';
-                    this.transactions.push({timeDate: transactionDate, transactionType, ...transaction});
-                });
-                this.lastTransactionTime = this.transactions.length > 0 ?
-                this.transactions[this.transactions.length - 1].timeDate : null;
+        this.auth.getCurrentUser().subscribe(user => this.user = user);
+        this.org = this.userOrg.getCurrentOrganization();
+        if (!this.org.photoURL) {
+            this.org.photoURL = 'assets/default-org-avatar.png';
+        }
+        this.tms.getAllOrganizationTransactions(this.org.oid).subscribe(transactions => {
+            transactions.forEach(transaction => {
+                const timestamp = Date.parse(transaction.stringTime);
+                const transactionDate = !isNaN(timestamp) ? new Date(timestamp) : new Date();
+                const transactionType = transaction.oid_dest !== this.org.oid ? 'Incoming' : 'Outgoing';
+                this.transactions.push({timeDate: transactionDate, transactionType, ...transaction});
             });
+            this.lastTransactionTime = this.transactions.length > 0 ?
+            this.transactions[this.transactions.length - 1].timeDate : null;
         });
     }
 
