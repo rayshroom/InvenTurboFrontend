@@ -32,7 +32,6 @@ export class TransactionManagementService {
 
     getOtherOrganization() {
         const storedOtherTx = sessionStorage.getItem('tx_other_organization');
-        // console.log(storedOtherTx === "undefined");
         return storedOtherTx === "undefined" || storedOtherTx === undefined ? null : JSON.parse(storedOtherTx);
     }
 
@@ -109,5 +108,5 @@ export class TransactionManagementService {
         )
     }
 
-    
+
 }

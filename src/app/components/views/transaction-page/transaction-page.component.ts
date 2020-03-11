@@ -245,7 +245,6 @@ export class TransactionPageComponent implements OnInit, OnDestroy {
             })
         ).subscribe(
             result => {
-                console.log(result);
                 this.tms.approveTransaction(this.viewTxId)
                 .subscribe(ref => {
                     this.router.navigate(['/organization']);
@@ -336,7 +335,6 @@ export class TransactionPageComponent implements OnInit, OnDestroy {
     openDetailOverlay(product: ProductStock) {
         const modalRef = this.modalService.open(InventoryDetailOverlayComponent);
         modalRef.componentInstance.item = product;
-        console.log(product);
     }
 
     ngOnDestroy() {

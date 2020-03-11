@@ -72,7 +72,7 @@
                 </div>
             </div>
             <div class="row form-group">
-                <div class="col-md-7">
+                <div class="col-md-8">
                     <div class="preview-area">
                         <h4>Organization's Logo:</h4>
                         <div
@@ -85,10 +85,12 @@
                         <ng-template #emptyWrapper>
                             <div class="preview-image-wrapper empty-image-wrapper">
                                 <i class="fas fa-camera fa-3x"></i>
-                                <span>Select an image below</span>
+                                <span>Select an image on the right</span>
                             </div>
                         </ng-template>
                     </div>
+                </div>
+                <div class="col-md-4" style="padding-left: 0;">
                     <div class="custom-file">
                         <input
                             type="file"
@@ -99,15 +101,14 @@
                             id="imageFileInput"
                         />
                         <label class="custom-file-label" for="imageFileInput" style="overflow: hidden;">
-                            Organization's Logo
+                            Logo File
                         </label>
                     </div>
-                </div>
-                <div class="col-md-5 text-center">
-                    <input ejs-colorpicker type="color" id="colorpicker" formControlName="photoBackground"
-                        [inline]="true"
-                        [showButtons]="false"
-                    />
+                    <color-chrome
+                        [color]="imageBackgroundColor"
+                        (onChange)="onPhotoBackgroundChange($event)"
+                    ></color-chrome>
+                    <input type="color" id="colorpicker" formControlName="photoBackground" hidden />
                 </div>
             </div>
             <div class="form-group last-form-group">

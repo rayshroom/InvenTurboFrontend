@@ -1,5 +1,5 @@
 <div class="profile-wrapper shadow bg-white rounded mb-3">
-    <div class="row">
+    <div *ngIf="user; else loadingIcon" class="row">
         <div class="col-md-8">
             <h2 class="font-weight-bold">Hello, {{ this.user.displayName }}!</h2>
             <p class="profile-greeting-subtext">Last login: {{ this.user.metadata.lastSignInTime | date: 'short' }}</p>
@@ -9,4 +9,7 @@
             <img class="w-100 user-avatar" [src]="this.user.photoURL || 'assets/default-avatar.png'"/>
         </div>
     </div>
+    <ng-template #loadingIcon>
+        <app-loading-icon message="Loading user profile. Please wait..."></app-loading-icon>
+    </ng-template>
 </div>

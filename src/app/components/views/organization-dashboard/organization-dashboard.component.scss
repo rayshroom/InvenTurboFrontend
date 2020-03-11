@@ -90,6 +90,10 @@ h3 {
     cursor: not-allowed;
 }
 
+.dashboard-button-disabled:focus {
+    outline: none;
+}
+
 .view-pending-orders-icon::after {
     content: '🚚';
 }
@@ -102,8 +106,8 @@ h3 {
     content: '📋';
 }
 
-.view-analytics-icon::after {
-    content: '📈';
+.view-locations-icon::after {
+    content: '🗺️';
 }
 
 .add-personnel-icon::after {
@@ -134,6 +138,10 @@ hr {
     color: rgba(255, 255, 255, 0.1) !important;
     height: 0.25px !important;
     background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.pre-scrollable {
+    min-height: 21em;
 }
 
 .transaction-list-item {
@@ -175,6 +183,11 @@ hr {
 
 .transaction-time {
     font-size: 10px;
+}
+
+.no-item-found {
+    height: 100%;
+    text-align: center;
 }
 
 .orglink-item-photo-wrapper {
