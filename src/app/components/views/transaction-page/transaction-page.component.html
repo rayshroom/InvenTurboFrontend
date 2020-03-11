@@ -175,8 +175,11 @@
     <div *ngIf="this.openMode == 'Declined'" class="text-center ml-1 submitTransactionRight col-3 disabled">
       Declined
     </div>
-    <div *ngIf="this.openMode == 'Completed'" class="text-center submitTransactionRight col-3" (click)="reorderTransaction()">
+    <div *ngIf="this.openMode == 'Completed' && !this.fromCurrent" class="text-center submitTransactionRight col-3" (click)="reorderTransaction()">
       Re-order
+    </div>
+    <div *ngIf="this.openMode == 'Completed' && this.fromCurrent" class="text-center submitTransactionRight col-3 disabled">
+      Completed
     </div>
   </div>
 
