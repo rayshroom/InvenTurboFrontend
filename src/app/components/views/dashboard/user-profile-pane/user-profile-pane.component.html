@@ -3,7 +3,7 @@
         <div class="col-md-8">
             <h2 class="font-weight-bold">Hello, {{ this.user.displayName }}!</h2>
             <p class="profile-greeting-subtext">Last login: {{ this.user.metadata.lastSignInTime | date: 'short' }}</p>
-            <a routerLink="/account"><app-corner-edit-button></app-corner-edit-button></a>
+            <a routerLink="/account"><app-font-awesome-icon-wrapper faClass="fas fa-edit"></app-font-awesome-icon-wrapper></a>
         </div>
         <div class="col-md-4">
             <img class="w-100 user-avatar" [src]="this.user.photoURL || 'assets/default-avatar.png'"/>
