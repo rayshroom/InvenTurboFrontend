@@ -34,14 +34,14 @@ export class InventoryAdjustmentPaneComponent implements OnInit {
         this.currentOrg = this.orgSerivce.getCurrentOrganization();
     }
 
-    get inventoriesControls() {
-        return (this.inventoryAdjustmentForm.controls.inventories as FormArray).controls;
+    get inventories() {
+        return this.inventoryAdjustmentForm.get('inventories') as FormArray;
     }
 
     ngOnInit() {
         this.inventoryByLocations = this.product.inventoryByLocation;
         this.inventoryByLocations.forEach(location =>
-            this.inventoriesControls.push(
+            this.inventories.push(
                 this.fb.group({
                     locid: [location.locid],
                     name: [location.name],
@@ -71,7 +71,7 @@ export class InventoryAdjustmentPaneComponent implements OnInit {
     onChangeQuantity(invLoc: FormControl, index: number) {
         const newVal = invLoc.get('quantity').value;
         const oldVal = this.inventoryByLocations[index].quantity;
-        if (newVal > 0) {
+        if (newVal > -1) {
             invLoc.get('changedValue').setValue(newVal - oldVal);
         } else {
             invLoc.get('quantity').setValue(oldVal);
@@ -82,7 +82,9 @@ export class InventoryAdjustmentPaneComponent implements OnInit {
     onInventoryAdjust() {
         this.submitBtnMessage = 'Saving...';
         this.submitBtnClasses[4] = 'btn-warning';
-        const newInventoryData = this.inventoryAdjustmentForm.value.inventories.map(loc => ({ locid: loc.locid, quantity: loc.quantity }));
+        const newInventoryData = this.inventoryAdjustmentForm.value.inventories.map(invLoc => {
+            return { locid: invLoc.locid, quantity: invLoc.quantity };
+        });
         this.psService.updateOneProductStock(this.currentOrg.oid, this.product.pid, newInventoryData).subscribe(result => {
             this.submitBtnMessage = 'Inventory updated!';
             this.submitBtnClasses[4] = 'btn-success';

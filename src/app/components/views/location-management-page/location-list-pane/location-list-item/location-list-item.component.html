@@ -1,0 +1,17 @@
+<div class="item-wrapper" [ngClass]="location.selected ? 'selected' : 'not-selected'">
+    <div class="control-buttons-wrapper">
+        <app-font-awesome-icon-wrapper (click)="onEditClick($event)" faClass="fas fa-edit" hoverable style="margin-right: 12px;"></app-font-awesome-icon-wrapper>
+        <app-font-awesome-icon-wrapper *ngIf="!location.deleting; else deleting" (click)="onDeleteClick($event)" faClass="fas fa-trash-alt" hoverable></app-font-awesome-icon-wrapper>
+        <ng-template #deleting>
+            <span class="spinning">
+                <app-font-awesome-icon-wrapper faClass="fas fa-spinner"></app-font-awesome-icon-wrapper>
+            </span>
+        </ng-template>
+    </div>
+    <h4 class="location-name">{{ location.name }}</h4>
+    <p *ngIf="location.errorMsg" class="error-msg">
+        <strong>Deletion Failed:</strong><br>
+        {{ location.errorMsg }}
+    </p>
+    <p class="location-address" [innerHTML]="locationAddress"></p>
+</div>
