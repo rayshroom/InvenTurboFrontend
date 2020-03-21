@@ -38,7 +38,6 @@ import { UserOrganizationService } from './services/organization/user-organizati
 import { ProductDetailPageComponent } from './components/views/product-detail-page/product-detail-page.component';
 import { InventoryPanelHeaderComponent } from './components/common/inventory-panel-header/inventory-panel-header.component';
 import { ProductDetailPaneComponent } from './components/views/product-detail-page/product-detail-pane/product-detail-pane.component';
-import { CornerEditButtonComponent } from './components/common/corner-edit-button/corner-edit-button.component';
 import { InventoryAdjustmentPaneComponent } from './components/views/product-detail-page/inventory-adjustment-pane/inventory-adjustment-pane.component';
 import { UnverifiedEmailPageComponent } from './components/views/unverified-email-page/unverified-email-page.component';
 import { AccountSettingPageComponent } from './components/views/account-setting-page/account-setting-page.component';
@@ -52,12 +51,17 @@ import { ProductItemCardComponent } from './components/views/add-product-stock-p
 import { CreateNewProductPaneComponent } from './components/views/add-product-stock-page/create-new-product-pane/create-new-product-pane.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ColorChromeModule } from 'ngx-color/chrome';
+import { GoogleMapsModule } from '@angular/google-maps';
 import { InventoryDetailOverlayComponent } from './components/views/inventory-detail-overlay/inventory-detail-overlay.component';
 import { PersonalRegistrationPaneComponent } from './components/views/registration-page/personal-registration-pane/personal-registration-pane.component';
 import { OrganizationActivationPaneComponent } from './components/views/registration-page/organization-activation-pane/organization-activation-pane.component';
 import { CreateOrganizationPageComponent } from './components/views/create-organization-page/create-organization-page.component';
 import { LocationManagementPageComponent } from './components/views/location-management-page/location-management-page.component';
 import { PersonnelManagementPageComponent } from './components/views/personnel-management-page/personnel-management-page.component';
+import { LocationListPaneComponent } from './components/views/location-management-page/location-list-pane/location-list-pane.component';
+import { LocationListItemComponent } from './components/views/location-management-page/location-list-pane/location-list-item/location-list-item.component';
+import { LocationMapComponent } from './components/views/location-management-page/location-map/location-map.component';
+import { FontAwesomeIconWrapperComponent } from './components/common/font-awesome-icon-wrapper/font-awesome-icon-wrapper.component';
 
 @NgModule({
     declarations: [
@@ -82,7 +86,6 @@ import { PersonnelManagementPageComponent } from './components/views/personnel-m
         ProductDetailPageComponent,
         InventoryPanelHeaderComponent,
         ProductDetailPaneComponent,
-        CornerEditButtonComponent,
         InventoryAdjustmentPaneComponent,
         UnverifiedEmailPageComponent,
         AccountSettingPageComponent,
@@ -100,6 +103,10 @@ import { PersonnelManagementPageComponent } from './components/views/personnel-m
         CreateOrganizationPageComponent,
         LocationManagementPageComponent,
         PersonnelManagementPageComponent,
+        LocationListPaneComponent,
+        LocationListItemComponent,
+        LocationMapComponent,
+        FontAwesomeIconWrapperComponent,
     ],
     imports: [
         BrowserModule,
@@ -112,6 +119,7 @@ import { PersonnelManagementPageComponent } from './components/views/personnel-m
         AngularFireStorageModule,
         AngularFireAuthModule,
         ColorChromeModule,
+        GoogleMapsModule,
         NgbModule,
     ],
     providers: [
