@@ -27,13 +27,20 @@
     margin-bottom: 0;
 }
 
-.product-quantity {
+.product-quantity, .product-price {
     font-size: 2em;
 }
 
-.quantity-number {
+.quantity-number, .price-number {
     color: #bf202f;
     font-weight: bold;
+    width: 3em !important;
+}
+
+.price-number {
+    border: 1px dashed lightgray !important;
+    padding: 1px;
+    width: 35%;
 }
 
 .product-desc {
@@ -44,5 +51,16 @@
 .edit-btn {
     float: right;
     margin-top: -0.5em;
-    margin-right: -1em;
+    margin-right: -0.5em;
+}
+
+.save-btn {
+    cursor: pointer;
+}
+
+.price-saved-message {
+    font-size: 0.5em;
+    font-style: italic;
+    vertical-align: middle;
+    color: green;
 }

@@ -145,7 +145,7 @@ export class OrganizationDashboardComponent implements OnInit, AfterContentCheck
             transactions.forEach(transaction => {
                 const timestamp = Date.parse(transaction.stringTime);
                 const transactionDate = !isNaN(timestamp) ? new Date(timestamp) : new Date();
-                const transactionType = transaction.oid_dest !== this.org.oid ? 'Incoming' : 'Outgoing';
+                const transactionType = transaction.oid_dest === this.org.oid ? 'Incoming' : 'Outgoing';
                 this.transactions.push({timeDate: transactionDate, transactionType, ...transaction});
             });
             this.lastTransactionTime = this.transactions.length > 0 ?
