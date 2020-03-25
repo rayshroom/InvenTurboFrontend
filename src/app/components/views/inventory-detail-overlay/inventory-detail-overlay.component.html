@@ -1,10 +1,16 @@
 <div class="card">
 
-  <img class="card-img-top"  src="{{item.photoURL}}" alt="item.productID">
+  <img class="card-img-top" [src]="item.photoURL" [alt]="item.productID" onerror="this.src='assets/image-notfound.png';">
 
   <div class="card-body no-padding">
     <h5 class="card-title">{{item.name}}</h5>
-    <h6 class="card-subtitle">Qty: <span class="important-color">{{item.quantity}}</span></h6>
+    <h6 class="card-subtitle">
+        Price:
+            <span class="important-color" *ngIf="item.unit_price; else noPrice">{{item.unit_price | currency}}</span>
+            <ng-template #noPrice class="quantity-number">—</ng-template>
+            <br/>
+        Qty: <span class="important-color">{{item.quantity}}</span>
+    </h6>
     <p class="card-text">{{item.description}}</p>
   </div>
 </div>

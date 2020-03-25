@@ -1,13 +1,26 @@
 <div class="pane-wrapper shadow bg-white rounded login-for mb-3">
     <div class="product-photo-wrapper">
-        <img class="product-photo" src="{{ product.photoURL }}" alt="{{ product.name }}" />
+        <img class="product-photo" [src]="product.photoURL" [alt]="product.name" onerror="this.src='assets/image-notfound-wide.jpg';" />
     </div>
     <div class="pane-body">
         <h2 class="product-title">{{ product.name }}</h2>
-        <h3 class="product-quantity">Quantity: <span class="quantity-number">{{ product.total_quantity }}</span></h3>
-        <p class="product-desc">Desription: {{ product.description }}</p>
+        <h3 class="product-quantity">
+            Quantity: <span class="quantity-number">{{ product.total_quantity }}</span>
+        </h3>
+        <h3 class="product-price">
+            Price:
+            <span class="quantity-number">
+                $<input class="price-number" step="0.25" type="number" [(ngModel)]="product.unit_price" (change)="toggleSavePriceButton(true)"/>&nbsp;
+                <i *ngIf="displaySavePriceButton" (click)="savePrice()" class="fa fa-save save-btn"></i>
+            </span>
+            <span class="price-saved-message">{{ priceSavedMessage }}</span>
+        </h3>
+        <p class="product-desc">Description: {{ product.description }}</p>
     </div>
-    <a routerLink="/notfound" class="edit-btn">
-        <app-corner-edit-button></app-corner-edit-button>
-    </a>
+    <app-font-awesome-icon-wrapper
+        class="edit-btn"
+        (click)="removeProductStock()"
+        faClass="fas fa-trash-alt"
+        hoverable
+    ></app-font-awesome-icon-wrapper>
 </div>
