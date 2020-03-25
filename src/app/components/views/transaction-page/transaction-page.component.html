@@ -83,7 +83,7 @@
         <li class="list-group-item d-flex justify-content-around">
 
           <div class="p-2 clickable" (click)="openDetailOverlay(item)">Name: {{item.name}}</div>
-          <div class="p-2">Qty: <input class="correct" type="number" min="0" max="{{item.total_quantity}}" name={{item.name}} [(ngModel)]="items[index].quantity"/></div>
+          <div class="p-2">Qty: <input class="correct" type="number" min="0" max="{{item.total_quantity}}" name={{item.name}} [(ngModel)]="this.items[index].quantity"/></div>
           <div class="p-2">Price: <span class="correct">{{item.unit_price | currency}}</span></div>
           <div class="p-2 clickable correct" *ngIf="openMode == 'new' || openMode == 'Pending'" (click)="removeItem(item)"><i class="fas fa-times-circle"></i></div>
 
