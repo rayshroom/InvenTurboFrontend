@@ -40,6 +40,8 @@ export class TransactionPageComponent implements OnInit, OnDestroy {
     shippingForm: FormGroup;
     currentUser: any;
 
+    deadTx = false;
+
     private httpOptions = {
         headers: new HttpHeaders({
             'Content-Type': 'application/json',
@@ -142,7 +144,6 @@ export class TransactionPageComponent implements OnInit, OnDestroy {
     }
 
     setCurrentPartner(org) {
-
         this.tms.setOtherOrganization(org);
         this.currentPartner = org;
         this.showSelectionMenu = false;
@@ -169,6 +170,7 @@ export class TransactionPageComponent implements OnInit, OnDestroy {
     }
 
     goback() {
+        this.deadTx = true;
         this.router.navigate(['/organization']);
     }
 
@@ -338,8 +340,10 @@ export class TransactionPageComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
-        this.m.saveItems([]);
         this.m.saveItemsExisting([]);
-        this.tms.setOtherOrganization(null);
+        if (this.deadTx) {
+            this.m.saveItems([]);
+            this.tms.setOtherOrganization(null);
+        }
     }
 }
