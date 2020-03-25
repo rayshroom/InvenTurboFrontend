@@ -180,10 +180,11 @@ export class TransactionPageComponent implements OnInit, OnDestroy {
             stringTime: (new Date()).toString(),
             oid_source: this.tms.getOtherOrganization().oid,
             oid_dest: this.orgCurrent.oid,
-            items: this.m.getItems(),
+            items: this.items,
             currentUser: this.currentUser,
             totalPrice: this.getTotalPrice(),
         }).subscribe(ref => {
+            this.deadTx = true;
             this.router.navigate(['/organization']);
         });
     }
@@ -208,6 +209,7 @@ export class TransactionPageComponent implements OnInit, OnDestroy {
         const items = this.mergeItems();
         this.tms.updateTransaction(this.viewTxId, items, this.currentUser, this.getTotalPrice())
             .subscribe(ref => {
+                this.deadTx = true;
                 this.router.navigate(['/organization']);
             });
     }
@@ -218,6 +220,7 @@ export class TransactionPageComponent implements OnInit, OnDestroy {
         const items = this.mergeItems();
         this.tms.orderTransaction(this.viewTxId, items, this.currentUser, this.getTotalPrice())
           .subscribe(ref => {
+            this.deadTx = true;
               this.router.navigate(['/organization']);
           });
     }
@@ -249,6 +252,7 @@ export class TransactionPageComponent implements OnInit, OnDestroy {
             result => {
                 this.tms.approveTransaction(this.viewTxId)
                 .subscribe(ref => {
+                    this.deadTx = true;
                     this.router.navigate(['/organization']);
                 });
             }
@@ -285,6 +289,7 @@ export class TransactionPageComponent implements OnInit, OnDestroy {
             result =>
             this.tms.acceptTransaction(this.viewTxId)
             .subscribe(ref => {
+                this.deadTx = true;
                 this.router.navigate(['/organization']);
             })
         );
@@ -293,6 +298,7 @@ export class TransactionPageComponent implements OnInit, OnDestroy {
     declineTransaction() {
         this.tms.declineTransaction(this.viewTxId)
           .subscribe(ref => {
+              this.deadTx = true;
               this.router.navigate(['/organization']);
           });
     }
@@ -305,6 +311,7 @@ export class TransactionPageComponent implements OnInit, OnDestroy {
             oid_dest: this.orgCurrent.oid,
             items: this.m.getItemsExisting(),
         }).subscribe(ref => {
+            this.deadTx = true;
             this.router.navigate(['/organization']);
         });
     }
@@ -341,6 +348,7 @@ export class TransactionPageComponent implements OnInit, OnDestroy {
 
     ngOnDestroy() {
         this.m.saveItemsExisting([]);
+        console.log(this.items_shipping);
         if (this.deadTx) {
             this.m.saveItems([]);
             this.tms.setOtherOrganization(null);
