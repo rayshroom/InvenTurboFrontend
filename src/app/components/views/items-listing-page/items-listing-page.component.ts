@@ -46,7 +46,7 @@ export class ItemsListingPageComponent implements OnInit {
                     description: p.description,
                     photoURL: p.photoURL,
                     unit_price: p.unit_price || 0,
-                    quantity: 1,
+                    quantity: 0,
                     total_quantity: p.total_quantity,
                     isSelected: this.selectedItems.map(tp => tp.name).includes(p.name)
                 }

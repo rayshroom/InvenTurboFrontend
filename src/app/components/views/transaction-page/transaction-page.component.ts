@@ -38,7 +38,9 @@ export class TransactionPageComponent implements OnInit, OnDestroy {
     thisTx: any;
     errorMessage: string;
     shippingForm: FormGroup;
-    currentUser: any;
+    currentUser: firebase.User;
+
+    deadTx = false;
 
     private httpOptions = {
         headers: new HttpHeaders({
@@ -78,7 +80,7 @@ export class TransactionPageComponent implements OnInit, OnDestroy {
                     this.tms.getOneTransaction(this.viewTxId).subscribe(tx => {
                         this.thisTx = tx;
                         this.openMode = tx.status;
-                        if (this.items_existing.length == 0) {
+                        if (this.items_existing.length === 0) {
                             this.items_existing = tx.items;
                             this.items_existing.sort((a, b) => a.pid > b.pid ? 1 : -1);
                             this.m.saveItemsExisting(this.items_existing);
@@ -142,7 +144,6 @@ export class TransactionPageComponent implements OnInit, OnDestroy {
     }
 
     setCurrentPartner(org) {
-
         this.tms.setOtherOrganization(org);
         this.currentPartner = org;
         this.showSelectionMenu = false;
@@ -169,6 +170,7 @@ export class TransactionPageComponent implements OnInit, OnDestroy {
     }
 
     goback() {
+        this.deadTx = true;
         this.router.navigate(['/organization']);
     }
 
@@ -178,10 +180,14 @@ export class TransactionPageComponent implements OnInit, OnDestroy {
             stringTime: (new Date()).toString(),
             oid_source: this.tms.getOtherOrganization().oid,
             oid_dest: this.orgCurrent.oid,
-            items: this.m.getItems(),
-            currentUser: this.currentUser,
+            items: this.items,
+            currentUser: {
+                uid: this.currentUser.uid,
+                displayName: this.currentUser.displayName,
+            },
             totalPrice: this.getTotalPrice(),
         }).subscribe(ref => {
+            this.deadTx = true;
             this.router.navigate(['/organization']);
         });
     }
@@ -206,6 +212,7 @@ export class TransactionPageComponent implements OnInit, OnDestroy {
         const items = this.mergeItems();
         this.tms.updateTransaction(this.viewTxId, items, this.currentUser, this.getTotalPrice())
             .subscribe(ref => {
+                this.deadTx = true;
                 this.router.navigate(['/organization']);
             });
     }
@@ -216,6 +223,7 @@ export class TransactionPageComponent implements OnInit, OnDestroy {
         const items = this.mergeItems();
         this.tms.orderTransaction(this.viewTxId, items, this.currentUser, this.getTotalPrice())
           .subscribe(ref => {
+            this.deadTx = true;
               this.router.navigate(['/organization']);
           });
     }
@@ -247,6 +255,7 @@ export class TransactionPageComponent implements OnInit, OnDestroy {
             result => {
                 this.tms.approveTransaction(this.viewTxId)
                 .subscribe(ref => {
+                    this.deadTx = true;
                     this.router.navigate(['/organization']);
                 });
             }
@@ -283,6 +292,7 @@ export class TransactionPageComponent implements OnInit, OnDestroy {
             result =>
             this.tms.acceptTransaction(this.viewTxId)
             .subscribe(ref => {
+                this.deadTx = true;
                 this.router.navigate(['/organization']);
             })
         );
@@ -291,6 +301,7 @@ export class TransactionPageComponent implements OnInit, OnDestroy {
     declineTransaction() {
         this.tms.declineTransaction(this.viewTxId)
           .subscribe(ref => {
+              this.deadTx = true;
               this.router.navigate(['/organization']);
           });
     }
@@ -303,6 +314,7 @@ export class TransactionPageComponent implements OnInit, OnDestroy {
             oid_dest: this.orgCurrent.oid,
             items: this.m.getItemsExisting(),
         }).subscribe(ref => {
+            this.deadTx = true;
             this.router.navigate(['/organization']);
         });
     }
@@ -338,8 +350,11 @@ export class TransactionPageComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
-        this.m.saveItems([]);
         this.m.saveItemsExisting([]);
-        this.tms.setOtherOrganization(null);
+        console.log(this.items_shipping);
+        if (this.deadTx) {
+            this.m.saveItems([]);
+            this.tms.setOtherOrganization(null);
+        }
     }
 }
