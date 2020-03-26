@@ -1,0 +1,15 @@
+<div class="h-75 d-flex justify-content-center align-items-center" *ngIf="this.orgName; else loadingIcon">
+    <p>You have been invited to join {{this.orgName}}</p>
+    <div >
+        <button
+            *ngFor="let button of this.buttons"
+            [ngClass]="button.classes"
+            [innerHTML]="button.title"
+            (click)="button.click()"
+        ></button>
+    </div>
+</div>
+
+<ng-template #loadingIcon>
+    <app-loading-icon></app-loading-icon>
+</ng-template>
