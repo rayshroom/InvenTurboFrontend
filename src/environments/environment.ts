@@ -44,6 +44,13 @@ export const environment = {
         getOneTransaction(tid) { return `/transaction/${tid}`; },
         addSimpleTransaction: `/transaction/create`,
         orderTransaction(tid) { return `/transaction/update/${tid}`; },
+
+        getOrganizationEmployees(oid) { return `/organization/${oid}/employees`; },
+        fireOneEmployee(oid, uid) { return `/organization/${oid}/employees/fire/${uid}`; },
+        organizationInviteRequestCreate: `/requests/organization/create`,
+        organizationInviteRequestGetone(rid) {return `/requests/organization/${rid}`; },
+        organizationInviteRequestHandle(rid) { return `/requests/organization/${rid}`; },
+        organizationInviteRequestAutoAccept(email) { return `/requests/organization/auto/${email}`; }
     },
 };
 
