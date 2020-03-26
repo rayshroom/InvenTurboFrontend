@@ -19,14 +19,18 @@ export class AcceptInviteComponent implements OnInit {
         title: 'Accept',
         classes: 'control-btn btn btn-success m-2',
         click: () => {
-          this.personnelService.acceptInviteToOrganization(this.requestid)
+          this.personnelService.acceptInviteToOrganization(this.requestid).subscribe(data => {
+            this.router.navigate(['/organization']);
+          });
         }
     },
     {
         title: 'Decline',
         classes: 'control-btn btn btn-danger m-2',
         click: () => {
-          this.personnelService.declineInviteToOrganization(this.requestid)
+          this.personnelService.declineInviteToOrganization(this.requestid).subscribe(data => {
+            this.router.navigate(['/organization']);
+          });
         }
     }
   ]
@@ -34,10 +38,16 @@ export class AcceptInviteComponent implements OnInit {
   constructor(
     public personnelService: PersonnelService,
     private activatedRoute: ActivatedRoute,
+    private router: Router,
   )
   { 
     this.requestid = this.activatedRoute.snapshot.paramMap.get('rid');
-    this.personnelService.getOneOrganizationInvite(this.requestid).subscribe(data => {this.orgName = data.orgName});
+    this.personnelService.getOneOrganizationInvite(this.requestid).subscribe(data => {
+      this.orgName = data.orgName;
+      if (!this.orgName) {
+        this.router.navigate(['/organization']);
+      }
+    });
   }
 
   ngOnInit(): void {
