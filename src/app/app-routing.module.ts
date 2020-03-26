@@ -25,7 +25,6 @@ import { LocationManagementPageComponent } from './components/views/location-man
 import { PersonnelManagementPageComponent } from './components/views/personnel-management-page/personnel-management-page.component';
 import { OrganizationGuard } from './services/organization/organization.guard';
 import { OrganizationRoleGuard } from './services/organization/organization-role.guard';
-import { AcceptInviteComponent } from './components/views/personnel-management-page/accept-invite/accept-invite.component';
 
 const routes: Routes = [
     // DEV ROUTES STARTS
@@ -126,12 +125,6 @@ const routes: Routes = [
     {
         path: 'organization/transaction/items/add/:oid',
         component: ItemsListingPageComponent,
-        pathMatch: 'full',
-        canActivate: [AuthVerifyGuard]
-    },
-    {
-        path: 'personnel/request/:rid',
-        component: AcceptInviteComponent,
         pathMatch: 'full',
         canActivate: [AuthVerifyGuard]
     },

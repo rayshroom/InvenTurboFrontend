@@ -62,7 +62,6 @@ import { LocationListPaneComponent } from './components/views/location-managemen
 import { LocationListItemComponent } from './components/views/location-management-page/location-list-pane/location-list-item/location-list-item.component';
 import { LocationMapComponent } from './components/views/location-management-page/location-map/location-map.component';
 import { FontAwesomeIconWrapperComponent } from './components/common/font-awesome-icon-wrapper/font-awesome-icon-wrapper.component';
-import { AcceptInviteComponent } from './components/views/personnel-management-page/accept-invite/accept-invite.component';
 
 @NgModule({
     declarations: [
@@ -108,7 +107,6 @@ import { AcceptInviteComponent } from './components/views/personnel-management-p
         LocationListItemComponent,
         LocationMapComponent,
         FontAwesomeIconWrapperComponent,
-        AcceptInviteComponent,
     ],
     imports: [
         BrowserModule,
