@@ -42,8 +42,11 @@ export class PersonalRegistrationPaneComponent implements OnInit {
         const formData = this.registerFormPersonal.value;
         this.uam.doRegister(formData).subscribe(
             () => {
-                this.personnelService.autoAcceptUser(formData.email);
-                this.router.navigate(['/welcome']);
+                this.personnelService.autoAcceptUser(formData.email).subscribe(data => {
+                    this.router.navigate(['/welcome']);
+                }, err => {
+                    this.router.navigate(['/welcome']);
+                });
             },
             (err: HttpErrorResponse) => {
                 this.errorMessage = err.message;
