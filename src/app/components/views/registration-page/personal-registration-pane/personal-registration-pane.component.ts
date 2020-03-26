@@ -5,6 +5,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { UserManagementService } from 'src/app/services/auth/uam.service';
+import { PersonnelService } from 'src/app/services/personnel/personnel.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -24,6 +25,7 @@ export class PersonalRegistrationPaneComponent implements OnInit {
         public uam: UserManagementService,
         private router: Router,
         private fb: FormBuilder,
+        private personnelService: PersonnelService
     ) {
         this.registerFormPersonal = this.fb.group({
             title: [null, Validators.required],
@@ -40,6 +42,7 @@ export class PersonalRegistrationPaneComponent implements OnInit {
         const formData = this.registerFormPersonal.value;
         this.uam.doRegister(formData).subscribe(
             () => {
+                this.personnelService.autoAcceptUser(formData.email);
                 this.router.navigate(['/welcome']);
             },
             (err: HttpErrorResponse) => {
