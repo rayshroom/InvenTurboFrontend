@@ -56,8 +56,6 @@ import { InventoryDetailOverlayComponent } from './components/views/inventory-de
 import { PersonalRegistrationPaneComponent } from './components/views/registration-page/personal-registration-pane/personal-registration-pane.component';
 import { OrganizationActivationPaneComponent } from './components/views/registration-page/organization-activation-pane/organization-activation-pane.component';
 import { CreateOrganizationPageComponent } from './components/views/create-organization-page/create-organization-page.component';
-import { LocationManagementPageComponent } from './components/views/location-management-page/location-management-page.component';
-import { PersonnelManagementPageComponent } from './components/views/personnel-management-page/personnel-management-page.component';
 
 @NgModule({
     declarations: [
@@ -98,8 +96,6 @@ import { PersonnelManagementPageComponent } from './components/views/personnel-m
         PersonalRegistrationPaneComponent,
         OrganizationActivationPaneComponent,
         CreateOrganizationPageComponent,
-        LocationManagementPageComponent,
-        PersonnelManagementPageComponent,
     ],
     imports: [
         BrowserModule,

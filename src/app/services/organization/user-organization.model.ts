@@ -5,7 +5,6 @@ export class UserOrganization {
     uid: string;
     position?: string;
     status: boolean;
-    claims: any;
     photoURL?: string;
     photoBackground?: string;
 }

@@ -1,10 +1,6 @@
 <div class="inventory-card">
     <div class="inventory-card-photo-wrapper">
-        <img
-            class="inventory-card-photo"
-            [src]="productItem.photoURL"
-            [alt]="productItem.name"
-            onerror="this.src='assets/image-notfound.png';" />
+        <img class="inventory-card-photo" src="{{ productItem.photoURL }}" alt="{{ productItem.name }}" />
     </div>
     <div class="inventory-card-body">
         <span class="inventory-card-name">{{ productItem.name }}</span>

@@ -35,35 +35,27 @@
         <div class="col-lg-5 col-md-5 col-sm-12 mx-auto">
             <div routerLink="/notfound" class="dashboard-button view-pending-orders-icon row profile-wrapper shadow bg-white rounded-pill login-for mb-3">
                 <h3 class="col-12 mx-auto text-center font-weight-bold">
-                    View Pending Orders
+                    View pending orders
                 </h3>
             </div>
             <div routerLink="/organization/transaction/new" class="dashboard-button create-transaction-icon row profile-wrapper shadow bg-white rounded-pill login-for mb-3">
                 <h3 class="col-12 mx-auto text-center font-weight-bold">
-                    Start a Transaction
+                    Create transaction
                 </h3>
             </div>
             <div routerLink="/organization/inventory" class="dashboard-button view-inventory-icon row profile-wrapper shadow bg-white rounded-pill login-for mb-3">
                 <h3 class="col-12 mx-auto text-center font-weight-bold">
-                    Manage Inventories
+                    View inventory
                 </h3>
             </div>
-            <div
-                [routerLink]="org.claims.isManager ? '/organization/location' : '.'"
-                [ngClass]="!org.claims.isManager ? 'dashboard-button-disabled' : ''"
-                class="dashboard-button view-locations-icon row profile-wrapper shadow bg-white rounded-pill login-for mb-3"
-            >
+            <div class="dashboard-button dashboard-button-disabled view-analytics-icon row profile-wrapper shadow bg-white rounded-pill login-for mb-3">
                 <h3 class="col-12 mx-auto text-center font-weight-bold">
-                    Manage Locations
+                    View analytics
                 </h3>
             </div>
-            <div
-                [routerLink]="org.claims.isManager ? '/organization/personnel' : '.'"
-                [ngClass]="!org.claims.isManager ? 'dashboard-button-disabled' : ''"
-                class="dashboard-button add-personnel-icon row profile-wrapper shadow bg-white rounded-pill login-for mb-3"
-            >
+            <div class="dashboard-button dashboard-button-disabled add-personnel-icon row profile-wrapper shadow bg-white rounded-pill login-for mb-3">
                 <h3 class="col-12 mx-auto text-center font-weight-bold">
-                    Manage Human Resources
+                    Add personnel
                 </h3>
             </div>
         </div>
@@ -114,7 +106,7 @@
                             <a *ngIf="transaction.currentUser" href="{{this.getProfileLink(transaction.currentUser.uid)}}" class="transaction-link" style="float: left;">{{transaction.currentUser.displayName}}</a>
                         </div>
                     </div>
-                    <div *ngIf="!filteredTransactions.length" class="no-item-found">No transactions found</div>
+                    <div *ngIf="!filteredTransactions.length">No transactions found</div>
                 </div>
             </div>
         </div>

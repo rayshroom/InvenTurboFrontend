@@ -90,10 +90,6 @@ h3 {
     cursor: not-allowed;
 }
 
-.dashboard-button-disabled:focus {
-    outline: none;
-}
-
 .view-pending-orders-icon::after {
     content: '🚚';
 }
@@ -106,8 +102,8 @@ h3 {
     content: '📋';
 }
 
-.view-locations-icon::after {
-    content: '🗺️';
+.view-analytics-icon::after {
+    content: '📈';
 }
 
 .add-personnel-icon::after {
@@ -141,7 +137,7 @@ hr {
 }
 
 .pre-scrollable {
-    min-height: 21em;
+    min-height: 22em;
 }
 
 .transaction-list-item {
@@ -183,11 +179,6 @@ hr {
 
 .transaction-time {
     font-size: 10px;
-}
-
-.no-item-found {
-    height: 100%;
-    text-align: center;
 }
 
 .orglink-item-photo-wrapper {

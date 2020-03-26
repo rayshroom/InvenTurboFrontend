@@ -1,6 +1,6 @@
 <div class="product-card">
     <div class="product-photo-wrapper">
-        <img class="product-photo" [src]="product.photoURL" [alt]="product.name" onerror="this.src='assets/image-notfound.png';" />        />
+        <img class="product-photo" src="{{ product.photoURL }}" alt="{{ product.name }}" />
     </div>
     <div class="product-card-body">
         <span class="product-name">{{ product.name }}</span>

@@ -21,10 +21,6 @@ import { EmailVerifiedGuard } from './services/auth/email-verified.guard';
 import { AccountSettingPageComponent } from './components/views/account-setting-page/account-setting-page.component';
 import { AddProductStockPageComponent } from './components/views/add-product-stock-page/add-product-stock-page.component';
 import { CreateOrganizationPageComponent } from './components/views/create-organization-page/create-organization-page.component';
-import { LocationManagementPageComponent } from './components/views/location-management-page/location-management-page.component';
-import { PersonnelManagementPageComponent } from './components/views/personnel-management-page/personnel-management-page.component';
-import { OrganizationGuard } from './services/organization/organization.guard';
-import { OrganizationRoleGuard } from './services/organization/organization-role.guard';
 
 const routes: Routes = [
     // DEV ROUTES STARTS
@@ -71,7 +67,7 @@ const routes: Routes = [
         path: 'organization',
         component: OrganizationDashboardComponent,
         pathMatch: 'full',
-        canActivate: [AuthVerifyGuard, OrganizationGuard]
+        canActivate: [AuthVerifyGuard]
     },
     {
         path: 'organization/create',
@@ -82,39 +78,25 @@ const routes: Routes = [
         path: 'organization/inventory/add-product',
         component: AddProductStockPageComponent,
         pathMatch: 'full',
-        canActivate: [AuthVerifyGuard, OrganizationGuard]
+        canActivate: [AuthVerifyGuard]
     },
     {
         path: 'organization/inventory/:pid',
         component: ProductDetailPageComponent,
         pathMatch: 'full',
-        canActivate: [AuthVerifyGuard, OrganizationGuard]
+        canActivate: [AuthVerifyGuard]
     },
     {
         path: 'organization/inventory',
         component: InventoryPanelComponent,
         pathMatch: 'full',
-        canActivate: [AuthVerifyGuard, OrganizationGuard]
-    },
-    {
-        path: 'organization/location',
-        component: LocationManagementPageComponent,
-        pathMatch: 'full',
-        canActivate: [AuthVerifyGuard, OrganizationGuard, OrganizationRoleGuard],
-        data: { requiredClaims: ['isManager'] }
-    },
-    {
-        path: 'organization/personnel',
-        component: PersonnelManagementPageComponent,
-        pathMatch: 'full',
-        canActivate: [AuthVerifyGuard, OrganizationGuard, OrganizationRoleGuard],
-        data: { requiredClaims: ['isManager'] }
+        canActivate: [AuthVerifyGuard]
     },
     {
         path: 'organization/transaction/new',
         component: TransactionPageComponent,
         pathMatch: 'full',
-        canActivate: [AuthVerifyGuard, OrganizationGuard]
+        canActivate: [AuthVerifyGuard]
     },
     {
         path: 'organization/transaction/view/:txid',
