@@ -14,12 +14,6 @@ export class ProductItemCardComponent implements OnInit {
     public existed: boolean;
 
     @Input()
-    public filtered: boolean;
-
-    @Input()
-    public hidden: boolean;
-
-    @Input()
     public selected: boolean;
 
     constructor() {}

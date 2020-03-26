@@ -28,9 +28,7 @@ export class LocationListItemComponent implements OnInit {
 
     onDeleteClick(event: Event) {
         event.stopPropagation();
-        if (confirm(`Are you sure you want to remove ${this.location.name} location?`)) {
-            this.deleteButtonClick.emit(this.location);
-        }
+        this.deleteButtonClick.emit(this.location);
     }
 
     constructor() {}

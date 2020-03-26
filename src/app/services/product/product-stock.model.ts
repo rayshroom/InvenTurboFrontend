@@ -12,7 +12,5 @@ export class ProductStock {
     description: string;
     photoURL?: string;
     total_quantity: number;
-    unit_price: number;
     inventoryByLocation?: LocationInventory[];
-    hidden: boolean = false;
 }

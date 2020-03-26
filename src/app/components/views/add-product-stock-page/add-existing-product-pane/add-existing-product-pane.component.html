@@ -14,8 +14,7 @@
         <div class="search-result pre-scrollable">
             <ng-container *ngFor="let item of productItems">
                 <app-product-item-card
-                    [filtered]="!item.filtered"
-                    [hidden]="item.hidden"
+                    [hidden]="!item.filtered"
                     [product]="item.product"
                     [existed]="item.existed"
                     [selected]="item.selected"

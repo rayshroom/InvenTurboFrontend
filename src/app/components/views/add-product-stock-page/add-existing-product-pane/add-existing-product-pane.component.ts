@@ -14,7 +14,6 @@ class ProductItem {
     }
 
     existed = false;
-    hidden = false;
     selected = false;
     filtered = true;
     product: Product;
@@ -53,14 +52,9 @@ export class AddExistingProductPaneComponent implements OnInit {
             })
         ).subscribe(invItems => {
             this.productItems.forEach(prodItem => {
-                invItems.forEach(invItem => {
-                    if (invItem.pid === prodItem.product.pid) {
-                        prodItem.existed = true;
-                        if (invItem.hidden) {
-                            prodItem.hidden = true;
-                        }
-                    }
-                })
+                if (invItems.some(invItem => invItem.pid === prodItem.product.pid)) {
+                    prodItem.existed = true;
+                }
             });
         });
     }

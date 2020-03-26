@@ -31,8 +31,8 @@ export class InventoryPanelComponent implements OnInit {
         });
         const thisorg = this.userOrg.getCurrentOrganization();
         this.prodStock.getAllOrganizationProductStock(thisorg.oid).subscribe(prod => {
-            this.products = prod.filter(p => !p.hidden);
-            this.filteredProducts = prod.filter(p => !p.hidden);
+            this.products = prod;
+            this.filteredProducts = prod;
         });
     }
 
@@ -46,7 +46,6 @@ export class InventoryPanelComponent implements OnInit {
         } else {
             this.filteredProducts = this.products;
         }
-        this.filteredProducts = this.filteredProducts.filter(prod => !prod.hidden);
     }
 
     ngOnInit() {

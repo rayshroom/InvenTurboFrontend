@@ -1,4 +1,4 @@
-<div *ngIf="!filtered" class="product-card">
+<div class="product-card">
     <div class="product-photo-wrapper">
         <img class="product-photo" [src]="product.photoURL" [alt]="product.name" onerror="this.src='assets/image-notfound.png';" />        />
     </div>
@@ -6,10 +6,7 @@
         <span class="product-name">{{ product.name }}</span>
     </div>
     <div *ngIf="existed" class="existed-overlay">
-        <div class="existed-overlay-content">
-            <span *ngIf="!hidden; else hiddenItem">This item is already in your inventory</span>
-            <ng-template #hiddenItem>This item has been discontinued.</ng-template>
-        </div>
+        <div class="existed-overlay-content">This item is already in your inventory</div>
     </div>
     <div *ngIf="selected" class="selected-overlay">
         <div class="selected-overlay-content">Selected</div>

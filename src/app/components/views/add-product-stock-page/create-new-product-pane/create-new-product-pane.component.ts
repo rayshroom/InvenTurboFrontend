@@ -39,8 +39,7 @@ export class CreateNewProductPaneComponent implements OnInit {
         this.addForm = this.fb.group({
             name: ['', Validators.required],
             description: ['', Validators.required],
-            image: ['', Validators.required],
-            unit_price: ['']
+            image: ['', Validators.required]
         });
     }
 
@@ -59,8 +58,8 @@ export class CreateNewProductPaneComponent implements OnInit {
         let newProduct;
         this.fs.uploadFile(file, '/images/products/').pipe(
             flatMap(url => {
-                const { name, description, unit_price } = this.addForm.value;
-                newProduct = { name, description, unit_price, photoURL: url};
+                const { name, description } = this.addForm.value;
+                newProduct = { name, description, photoURL: url};
                 this.submitBtn.message = 'Creating new product...';
                 return this.prodService.addNewProduct(newProduct);
             }),

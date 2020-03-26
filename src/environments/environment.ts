@@ -26,20 +26,14 @@ export const environment = {
         createProduct: `/product/create`,
 
         getUserOrganizations(uid) { return `/profile/${uid}/organization`; },
-
         getOrganizationProductStocks(oid) { return `/organization/${oid}/product`; },
         getOneProductStock(oid, pid) { return `/organization/${oid}/product/${pid}`; },
         addOneProductStock(oid) { return `/organization/${oid}/product/add/`; },
         updateOneProductStock(oid, pid) { return `/organization/${oid}/product/update/${pid}`; },
-        updateProductStockPrice(oid, pid) { return `/organization/${oid}/product/update/${pid}/price`; },
-        removeProductStock(oid, pid) { return `/organization/${oid}/product/remove/${pid}`; },
-        hideProductStock(oid, pid) { return `/organization/${oid}/product/hide/${pid}`; },
-
         getOrganizationLocations(oid) { return `/organization/${oid}/location`; },
         createOrganizationLocation(oid) { return `/organization/${oid}/location/create`; },
         updateOrganizationLocation(oid, locid) { return `/organization/${oid}/location/update/${locid}`; },
         deleteOrganizationLocation(oid, locid) { return `/organization/${oid}/location/delete/${locid}`; },
-
         getOrganizationTransactions(oid) { return `/organization/${oid}/transaction`; },
         getOneTransaction(tid) { return `/transaction/${tid}`; },
         addSimpleTransaction: `/transaction/create`,
