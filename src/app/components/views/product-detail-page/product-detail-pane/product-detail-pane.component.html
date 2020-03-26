@@ -1,6 +1,6 @@
 <div class="pane-wrapper shadow bg-white rounded login-for mb-3">
     <div class="product-photo-wrapper">
-        <img class="product-photo" [src]="product.photoURL" [alt]="product.name" onerror="this.src='assets/image-notfound-wide.jpg';" />
+        <img class="product-photo" src="{{ product.photoURL }}" alt="{{ product.name }}" />
     </div>
     <div class="pane-body">
         <h2 class="product-title">{{ product.name }}</h2>
@@ -8,6 +8,6 @@
         <p class="product-desc">Desription: {{ product.description }}</p>
     </div>
     <a routerLink="/notfound" class="edit-btn">
-        <app-font-awesome-icon-wrapper faClass="fas fa-edit"></app-font-awesome-icon-wrapper>
+        <app-corner-edit-button></app-corner-edit-button>
     </a>
 </div>
