@@ -1,4 +1,10 @@
-# InvenTurboFrontend
+# InvenTurbo Frontend
+
+## Note
+
+This repository is only the frontend codebase for InvenTurbo written in Angular. For the backend codebase (Node.js), visit [this repository](https://github.com/vitokhangnguyen/InvenTurbo-backend) instead.
+
+## Description
 
 All components are under `src/app/components`  
 
@@ -6,21 +12,11 @@ Components are grouped into `common` and `views`(as subfolders):
 - `common` is for shared components such as `nav` `header` or `footer`
 - `views` is for functional components (register, login, dashboard, inventory, etc.)
 
-
 Shared styles are in `src/styles/main.scss`, such as the theme color ![#BF202F](https://placehold.it/15/BF202F/000000?text=+)
-
 
 Data services are under `src/services`, currently there's an auth guard implemented using Firebase.auth to keep track of logged-in user as auth guard
 
 Please add firebase connection config into `environment.ts`, also the routes + backend url that are used
-
-
-
-
-
-
-
-
 
 ## Development server
 
